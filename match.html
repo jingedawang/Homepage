@@ -341,8 +341,28 @@
       section { padding: 5rem 6vw; }
       .divider { margin: 0 6vw; }
       footer { padding: 2rem 6vw; }
-      .photo-row--portrait { grid-template-columns: repeat(2, 1fr); }
-      .photo-row--landscape { grid-template-columns: 1fr; }
+
+      /* 横向滑动轮播 */
+      .photo-grid {
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 0;
+        margin-left: -6vw;
+        margin-right: -6vw;
+        padding-left: 6vw;
+        padding-right: 6vw;
+      }
+      .photo-grid::-webkit-scrollbar { display: none; }
+      .photo-row { display: contents; }
+      .photo-grid img {
+        flex-shrink: 0;
+        width: 75vw;
+        aspect-ratio: 3 / 4;
+        scroll-snap-align: center;
+      }
     }
   </style>
 </head>
@@ -708,6 +728,19 @@
         if (e.key === 'Escape') closeLightbox();
         if (e.key === 'ArrowLeft') showPrev();
         if (e.key === 'ArrowRight') showNext();
+      });
+
+      // 触摸左右滑动
+      var touchStartX = 0;
+      lightbox.addEventListener('touchstart', function (e) {
+        touchStartX = e.changedTouches[0].clientX;
+      }, { passive: true });
+      lightbox.addEventListener('touchend', function (e) {
+        var diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) showNext();
+          else showPrev();
+        }
       });
     })();
   </script>

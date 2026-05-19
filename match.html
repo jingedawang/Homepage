@@ -287,15 +287,42 @@
       align-items: center;
       justify-content: center;
       cursor: zoom-out;
+      overflow: hidden;
     }
 
     .lightbox.open { display: flex; }
 
-    .lightbox-img {
+    /* 三槽轨道：prev(-100vw) / cur(0) / next(+100vw) 紧挨排列，整体平移 */
+    .lightbox-track {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .lightbox-slot {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .lightbox-slot:nth-child(1) { transform: translateX(-100vw); }
+    .lightbox-slot:nth-child(2) { transform: translateX(0);      }
+    .lightbox-slot:nth-child(3) { transform: translateX(100vw);  }
+
+    .lightbox-slot img {
       max-width: 90vw;
       max-height: 90vh;
       object-fit: contain;
-      cursor: default;
+      display: block;
+      pointer-events: auto;
+      -webkit-user-drag: none;
+      user-select: none;
     }
 
     .lightbox-close {
@@ -333,6 +360,49 @@
     @media (max-width: 640px) {
       .lightbox-nav--prev { left: 0.4rem; }
       .lightbox-nav--next { right: 0.4rem; }
+    }
+
+    /* ── Lightbox counter ──────────────────────────────────── */
+    .lightbox-counter {
+      position: absolute;
+      bottom: 1.6rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    /* ── Photo dots ─────────────────────────────────────────── */
+    .photo-dots {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 640px) {
+      .photo-dots { display: flex; }
+    }
+
+    .photo-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: none;
+      background: var(--border);
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+      transition: background 0.25s, transform 0.25s;
+    }
+
+    .photo-dot.active {
+      background: var(--accent);
+      transform: scale(1.4);
     }
 
     /* ── Responsive ───────────────────────────────────────────── */
@@ -641,10 +711,17 @@
         <img src="me-5.jpg" alt="王金戈" loading="lazy" />
       </div>
     </div>
+    <div class="photo-dots" id="photo-dots" aria-hidden="true"></div>
   </section>
 
   <!-- Lightbox overlay -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="图片预览">
+    <!-- 三槽轨道，整体平移实现连续滑动 -->
+    <div class="lightbox-track" id="lightbox-track">
+      <div class="lightbox-slot"><img src="" alt="" /></div>
+      <div class="lightbox-slot"><img src="" alt="" /></div>
+      <div class="lightbox-slot"><img src="" alt="" /></div>
+    </div>
     <button class="lightbox-close" id="lightbox-close" aria-label="关闭">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
         <path d="M4 4l14 14M18 4L4 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
@@ -655,7 +732,7 @@
         <path d="M18 5L9 14l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
-    <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+    <div class="lightbox-counter" id="lightbox-counter" aria-live="polite"></div>
     <button class="lightbox-nav lightbox-nav--next" id="lightbox-next" aria-label="下一张">
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
         <path d="M10 5l9 9-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -678,20 +755,84 @@
 
   <script>
     (function () {
-      var lightbox = document.getElementById('lightbox');
-      var lightboxImg = document.getElementById('lightbox-img');
-      var lightboxClose = document.getElementById('lightbox-close');
-      var lightboxPrev = document.getElementById('lightbox-prev');
-      var lightboxNext = document.getElementById('lightbox-next');
-      var imgs = Array.from(document.querySelectorAll('.photo-grid img'));
-      var currentIndex = 0;
 
-      function openLightbox(index) {
-        currentIndex = index;
-        lightboxImg.src = imgs[currentIndex].src;
-        lightboxImg.alt = imgs[currentIndex].alt;
+      // ── Photo dots ────────────────────────────────────────────────
+      var gridImgs  = Array.from(document.querySelectorAll('.photo-grid img'));
+      var dotsEl    = document.getElementById('photo-dots');
+      var photoGrid = document.querySelector('.photo-grid');
+
+      if (dotsEl && gridImgs.length) {
+        gridImgs.forEach(function (_, i) {
+          var btn = document.createElement('button');
+          btn.className = 'photo-dot' + (i === 0 ? ' active' : '');
+          btn.setAttribute('aria-label', '第' + (i + 1) + '张照片');
+          btn.addEventListener('click', function () {
+            gridImgs[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          });
+          dotsEl.appendChild(btn);
+        });
+
+        var dotBtns = Array.from(dotsEl.querySelectorAll('.photo-dot'));
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+              var idx = gridImgs.indexOf(entry.target);
+              if (idx !== -1) {
+                dotBtns.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+              }
+            }
+          });
+        }, { root: photoGrid, threshold: 0.5 });
+
+        gridImgs.forEach(function (img) { io.observe(img); });
+      }
+
+      // ── Lightbox（三槽轨道）────────────────────────────────────────
+      // slots[0]=prev(-100vw)  slots[1]=cur(0)  slots[2]=next(+100vw)
+      // 滑动时整条轨道平移，三图始终紧挨，视觉连续
+      var lightbox  = document.getElementById('lightbox');
+      var lbTrack   = document.getElementById('lightbox-track');
+      var lbSlots   = Array.from(lbTrack.querySelectorAll('.lightbox-slot'));
+      var lbImgs    = lbSlots.map(function (s) { return s.querySelector('img'); });
+      var lbClose   = document.getElementById('lightbox-close');
+      var lbPrev    = document.getElementById('lightbox-prev');
+      var lbNext    = document.getElementById('lightbox-next');
+      var lbCounter = document.getElementById('lightbox-counter');
+      var imgs      = gridImgs;
+      var cur       = 0;
+      var busy      = false;
+
+      function setCounter() {
+        if (lbCounter) lbCounter.textContent = (cur + 1) + ' / ' + imgs.length;
+      }
+
+      // 按 cur 填充三个槽（边界处对应槽留空）
+      function loadSlots() {
+        [-1, 0, 1].forEach(function (offset, i) {
+          var idx = cur + offset;
+          if (idx >= 0 && idx < imgs.length) {
+            lbImgs[i].src = imgs[idx].src;
+            lbImgs[i].alt = imgs[idx].alt;
+          } else {
+            lbImgs[i].src = '';
+            lbImgs[i].alt = '';
+          }
+        });
+      }
+
+      function setTrack(x, easing) {
+        lbTrack.style.transition = easing || 'none';
+        lbTrack.style.transform  = 'translateX(' + x + 'px)';
+      }
+
+      function openLightbox(i) {
+        cur = i;
+        setTrack(0);
+        loadSlots();
+        setCounter();
         lightbox.classList.add('open');
         document.body.style.overflow = 'hidden';
+        busy = false;
       }
 
       imgs.forEach(function (img, i) {
@@ -701,47 +842,96 @@
       function closeLightbox() {
         lightbox.classList.remove('open');
         document.body.style.overflow = '';
+        setTrack(0);
+        busy = false;
       }
 
-      function showPrev() {
-        currentIndex = (currentIndex - 1 + imgs.length) % imgs.length;
-        lightboxImg.src = imgs[currentIndex].src;
-        lightboxImg.alt = imgs[currentIndex].alt;
+      // dir: 1=next（轨道左移），-1=prev（轨道右移）
+      function slide(dir) {
+        if (busy) return;
+        var atEdge = (dir === 1 && cur === imgs.length - 1) || (dir === -1 && cur === 0);
+        if (atEdge) {
+          // 到头了：弹一下
+          setTrack(dir * -20, 'transform 0.1s ease-out');
+          setTimeout(function () {
+            setTrack(0, 'transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1)');
+          }, 100);
+          return;
+        }
+        busy = true;
+        setTrack(dir * -window.innerWidth, 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)');
+        setTimeout(function () {
+          cur += dir;
+          setCounter();
+          setTrack(0);
+          loadSlots();
+          busy = false;
+        }, 300);
       }
 
-      function showNext() {
-        currentIndex = (currentIndex + 1) % imgs.length;
-        lightboxImg.src = imgs[currentIndex].src;
-        lightboxImg.alt = imgs[currentIndex].alt;
-      }
-
+      // 点击暗色背景关闭（IMG 和按钮除外）
       lightbox.addEventListener('click', function (e) {
-        if (e.target === lightbox) closeLightbox();
+        if (e.target.tagName === 'IMG' || e.target.closest('button')) return;
+        closeLightbox();
       });
 
-      lightboxClose.addEventListener('click', closeLightbox);
-      lightboxPrev.addEventListener('click', function (e) { e.stopPropagation(); showPrev(); });
-      lightboxNext.addEventListener('click', function (e) { e.stopPropagation(); showNext(); });
+      lbClose.addEventListener('click', closeLightbox);
+      lbPrev.addEventListener('click', function (e) { e.stopPropagation(); slide(-1); });
+      lbNext.addEventListener('click', function (e) { e.stopPropagation(); slide( 1); });
 
       document.addEventListener('keydown', function (e) {
         if (!lightbox.classList.contains('open')) return;
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') showPrev();
-        if (e.key === 'ArrowRight') showNext();
+        if (e.key === 'Escape')     closeLightbox();
+        if (e.key === 'ArrowLeft')  slide(-1);
+        if (e.key === 'ArrowRight') slide( 1);
       });
 
-      // 触摸左右滑动
-      var touchStartX = 0;
+      // 触摸：整条轨道跟随手指，超阈值提交，未超回弹
+      var tx0      = 0;
+      var dragging = false;
+
       lightbox.addEventListener('touchstart', function (e) {
-        touchStartX = e.changedTouches[0].clientX;
+        if (busy) return;
+        tx0 = e.changedTouches[0].clientX;
+        dragging = true;
+        lbTrack.style.transition = 'none';
       }, { passive: true });
+
+      lightbox.addEventListener('touchmove', function (e) {
+        if (!dragging) return;
+        e.preventDefault();
+        var dx     = e.changedTouches[0].clientX - tx0;
+        var atEdge = (cur === 0 && dx > 0) || (cur === imgs.length - 1 && dx < 0);
+        lbTrack.style.transform = 'translateX(' + (atEdge ? dx * 0.15 : dx) + 'px)';
+      }, { passive: false });
+
       lightbox.addEventListener('touchend', function (e) {
-        var diff = touchStartX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) {
-          if (diff > 0) showNext();
-          else showPrev();
+        if (!dragging) return;
+        dragging = false;
+        var dx        = e.changedTouches[0].clientX - tx0;
+        var threshold = window.innerWidth * 0.28;
+        if (Math.abs(dx) > threshold) {
+          var dir    = dx < 0 ? 1 : -1;
+          var atEdge = (dir === 1 && cur === imgs.length - 1) || (dir === -1 && cur === 0);
+          if (atEdge) {
+            setTrack(0, 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)');
+            return;
+          }
+          busy = true;
+          // 从手指松开的位置继续滑完
+          setTrack(dir * -window.innerWidth, 'transform 0.2s ease-out');
+          setTimeout(function () {
+            cur += dir;
+            setCounter();
+            setTrack(0);
+            loadSlots();
+            busy = false;
+          }, 200);
+        } else {
+          setTrack(0, 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)');
         }
       });
+
     })();
   </script>
 </body>

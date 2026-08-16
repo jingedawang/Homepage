@@ -205,6 +205,55 @@
       .night-cover { flex: 0 0 auto; width: 100%; }
       .hero-cover img { max-width: 100%; }
     }
+    .ai-badge {
+      position: relative;
+      display: inline-block;
+      margin-left: 0.4em;
+      cursor: help;
+      vertical-align: middle;
+    }
+    .ai-badge svg {
+      width: 0.9em;
+      height: 0.9em;
+      color: var(--accent);
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .ai-badge:hover svg { opacity: 1; }
+    .tooltip {
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.35rem 0.7rem;
+      background: var(--ink);
+      color: var(--bg);
+      font-size: 0.75rem;
+      font-family: var(--sans);
+      font-weight: 400;
+      white-space: nowrap;
+      border-radius: 4px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s;
+      pointer-events: none;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+    }
+    .tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid transparent;
+      border-top-color: var(--ink);
+    }
+    .ai-badge:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+
   </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8PB3QS33YB"></script>
   <script>
@@ -222,7 +271,13 @@
 
   <section class="hero">
     <p class="hero-kicker">AI 十日谈 · 第二届屏南数字游民生活周</p>
-    <h1 class="hero-title">龙潭 AI 十日谈<br>AI 安全三部曲</h1>
+    <h1 class="hero-title">
+      龙潭 AI 十日谈<br>AI 安全三部曲
+      <span class="ai-badge" aria-label="本文由AI生成">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M5 16l1 3 3-1-3-1-1 3z"/><path d="M19 16l-1 3-3-1 3-1 1 3z"/></svg>
+        <span class="tooltip">本文由AI生成</span>
+      </span>
+    </h1>
     <p class="hero-sub">福建屏南龙潭村 · 2026 年 8 月<br>从个人价值到文明风险，再到前沿治理——三夜围炉追问</p>
   </section>
 

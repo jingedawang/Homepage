@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>诗 | 王金戈</title>
+  <meta name="description" content="王金戈的诗，写于不同时期，不同心境。" />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #F7F4EF;
+      --surface:  #FFFFFF;
+      --ink:      #2A2522;
+      --ink-soft: #7A6F68;
+      --accent:   #8B6540;
+      --border:   #E8E2D9;
+      --serif:    'Noto Serif SC', Georgia, serif;
+      --sans:     'Noto Sans SC', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(247, 244, 239, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 10vw;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 56px;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-logo:hover { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.active { color: var(--accent); }
+
+    /* ── Hero ────────────────────────────────────────────── */
+    .hero {
+      padding: 10rem 10vw 6rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      color: var(--ink-soft);
+      max-width: 30em;
+      margin: 0 auto;
+    }
+
+    /* ── Poems ───────────────────────────────────────────── */
+    .poems-container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 10vw 8rem;
+    }
+
+    .poem {
+      margin-bottom: 5rem;
+      padding-bottom: 5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .poem:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .poem-header {
+      margin-bottom: 2rem;
+    }
+
+    .poem-title {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+
+    .poem-subtitle {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      font-style: italic;
+    }
+
+    .poem-body {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      line-height: 2.2;
+      color: var(--ink);
+      white-space: pre-wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .poem-date {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      font-style: italic;
+    }
+
+    /* ── Footer ──────────────────────────────────────────── */
+    footer {
+      padding: 2rem 10vw;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* ── Responsive ──────────────────────────────────────── */
+    @media (max-width: 640px) {
+      nav { padding: 0 6vw; }
+      .hero { padding: 9rem 6vw 4rem; }
+      .poems-container { padding: 0 6vw 6rem; }
+      .nav-links { gap: 1.2rem; }
+      footer { padding: 2rem 6vw; }
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8PB3QS33YB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8PB3QS33YB');
+  </script>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">王金戈</a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="poems.html" class="active">诗</a></li>
+        <li><a href="index.html#works">探索</a></li>
+        <li><a href="index.html#links">联系</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>诗</h1>
+    <p>写于不同时期，不同心境。</p>
+  </section>
+
+  <div class="poems-container">
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">十一月十日登岳阳楼感怀</h2>
+      </div>
+      <div class="poem-body">千里驱车路，辗转到高楼。
+寒衣湿暮雨，孤影洞庭秋。
+肝胆犹存热，行藏岂逐流。
+范公今已矣，谁解此中忧？</div>
+      <p class="poem-date">2025 年 11 月 10 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">你好，王小波</h2>
+      </div>
+      <div class="poem-body">在古今中外数不胜数的文学作品中，
+我最钟意的那些，
+并非出自你的手笔。
+
+在众多针砭时弊的杂谈文章中，
+最振聋发聩的，
+鲜有你之所为。
+
+人们喜欢你的风趣，
+可论诙谐与幽默，
+我更爱钱钟书的那种笑里藏刀。
+
+人们喜欢你的洒脱，
+但说潇洒与自由，
+我还是喜欢三毛的灵魂。
+
+但这封信只写给你，
+不是因为我喜欢你，
+只是在你身上，
+我看到过内心的自己。
+
+在我二十一岁的黄金时代，
+功课和竞赛压得我喘不过气。
+我没有时间去爱，
+也没有能力去爱。
+
+但我内心如朝阳般火热，
+美好的未来向我频频招手，
+身处大城市的盛宴，
+我只需要偏坐一隅，静待花开。
+
+然而如今我三十岁，
+牛马已经做了六年。
+我看到身边的人都在沉默，
+公寓的隔间传不出心碎的声音。
+
+我常常在深夜想起你，
+想起你目空一切的气魄，
+与现实抗争的勇气，
+还有坦然面对真相的决心。
+
+可惜这个时代不需要你，
+就像现在的课本不需要鲁迅。
+做一只特立独行的猪，
+终究落不得什么好下场。
+
+继续默默无闻，
+在壮年时奉献自己的大脑和身体，
+老了荣归故里，随风而逝，
+命运的齿轮没有尽头。
+
+格子间的窗外绿意盎然，
+生命的活力离我这么近，又那么远。
+此刻我又开始怀念你，
+在属于我的精神家园。</div>
+      <p class="poem-date">2024 年 8 月 31 日，杭州</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">在麦家理想谷</h2>
+      </div>
+      <div class="poem-body">闹市中央
+西溪近旁
+酷热笼罩着的
+不止夏日的漫长
+
+蝉儿在鸣叫
+风划过树梢
+红墙绿竹之下
+藏着几人的寂寥
+
+忘了人生如海
+别谈理想与怀抱
+放轻松吧
+无关明日，且度今宵</div>
+      <p class="poem-date">2024 年 7 月 19 日，杭州麦家理想谷</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">端午 · 其一</h2>
+      </div>
+      <div class="poem-body">暖风拂袖过，夏日绿荫浓。
+得闲三日半，彼岸见苏翁。</div>
+      <p class="poem-date">2023 年 6 月 24 日，海淀南路</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">端午 · 其二</h2>
+      </div>
+      <div class="poem-body">平地一声吼，拳打两喵喵。
+若在此间住，何日不撸猫？</div>
+      <p class="poem-date">2023 年 6 月 24 日，海淀南路</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">端午 · 其三</h2>
+      </div>
+      <div class="poem-body">长歌送风月，长发遇知交。
+不惧身困顿，行止两逍遥。</div>
+      <p class="poem-date">2023 年 6 月 24 日，海淀南路</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">倾听</h2>
+      </div>
+      <div class="poem-body">暗自发过的誓
+深思熟虑的决定
+终敌不过霎那情绪的爆发
+无声无息，却杀人于无形
+
+我没有想象般坚强
+她也没有那么脆弱
+都不过是平凡人
+
+收起我高傲的自负
+做一个简单的倾听者</div>
+      <p class="poem-date">2022 年 9 月 17 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">今天依然最爱你</h2>
+      </div>
+      <div class="poem-body">早上刷牙的时候爱你
+路上骑车的时候爱你
+在公司拉屎的时候也爱你</div>
+      <p class="poem-date">2022 年 8 月 5 日，上午</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">再见</h2>
+      </div>
+      <div class="poem-body">地铁入口
+一声再见
+世界安静了下来
+只剩心碎的余音</div>
+      <p class="poem-date">2022 年 8 月 5 日，晚上</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">致一帆</h2>
+      </div>
+      <div class="poem-body">似乎已过了写情书的年纪，
+落笔总觉矫情。
+可太多话涌上心头，
+相处虽有别离，
+爱你却难言尽。
+
+爱你的容颜，
+胜于刘亦菲、gakki的美貌，
+一颦一笑都教我倾倒。
+爱你的可爱，
+甜过手畔的迪奥，
+晚风中轻嗅你的味道。
+
+和你秉烛夜谈，
+是我度过最美妙的夜晚。
+与你漫步领展，
+万家灯火见证我们的相伴。
+
+即使明日不再，
+我只要这段刻骨铭心的恋爱。
+也不管未来漂泊何方，
+梦里有你清晰的模样。</div>
+      <p class="poem-date">2022 年 8 月 2 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">笑看风云</h2>
+      </div>
+      <div class="poem-body">自古柔情须断肠，我把壮志洒三江。
+敢上九天揽星月，欲纵四海擒帝王。
+过尽千帆俱不见，取次花丛何以伤。
+借得湘君一壶酒，谈笑风云别日狂。</div>
+      <p class="poem-date">2022 年 2 月 13 日，小南庄</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">无题</h2>
+      </div>
+      <div class="poem-body">又是失眠夜
+从卧室到厕所
+来回跑了两遍
+时钟已过三点
+思绪翻腾，越是夜深
+越停不下想象
+工作，留学，读书，音乐，爱情
+嗐
+大哥你想它有啥用呢
+明日依旧，未来不来
+终是难掩唏嘘
+回忆是甜蜜的哀悼
+脊背隐隐作痛
+现实掐了我的肩膀
+接下来又是美好的一天
+请微笑面对
+迎接这日复一日的幸福生活</div>
+      <p class="poem-date">2021 年 4 月 26 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">灯会秦淮</h2>
+      </div>
+      <div class="poem-body">月下上元夜，灯火醉金陵。
+浮生观掠影，帘举动心旌。
+舞罢难消受，未酌不复醒。
+客居少闲月，愁止今夜明。</div>
+      <p class="poem-date">2016 年 2 月 23 日，南京</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">纪念824股市大跌</h2>
+      </div>
+      <div class="poem-body">千股跌停今日现，空仓观望惹人嫌。
+抱定慢牛难撒手，一片痴心有谁怜？</div>
+      <p class="poem-date">2015 年 8 月 24 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">哲兄令尊抱恙感怀</h2>
+      </div>
+      <div class="poem-body">病来如山倒，判若天地间。
+偏逢连夜雨，愁苦莫堪言。
+兄亦无姐妹，我当作兄弟。
+赴汤且蹈火，但为家父痊。
+早经世无常，逼迫兼苍天。
+人已多艰难，缘何苛复悭。</div>
+      <p class="poem-date">2015 年 8 月 24 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">太湖</h2>
+        <p class="poem-subtitle">——致太叔</p>
+      </div>
+      <div class="poem-body">碧波三万顷，潮生一方镜。
+湖畔多潇洒，柳下常留情。
+凭思无限美，未至神游胜。
+尝闻太叔好，相见会有期？</div>
+      <p class="poem-date">2015 年 1 月 12 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">龙潭峡</h2>
+      </div>
+      <div class="poem-body">早行山中道，日居峡谷间。
+云掩千仞壁，雾归一线天。
+潭深蓄暗涌，林静育鸣禽。
+造化钟灵物，唯美空废言。</div>
+      <p class="poem-date">2014 年 11 月</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">致黄浅</h2>
+      </div>
+      <div class="poem-body">浔阳江畔黄氏女，高贵冷艳人不识。
+事事皆因菲故起，种种因缘令我识。
+浅斟低唱醉有以，酒酣胸胆遽猖狂。
+相逢会当相对笑，志在青云岂蓬蒿。</div>
+      <p class="poem-date">2014 年 8 月 18 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">记姥姥逝世二周年</h2>
+      </div>
+      <div class="poem-body">二月初八，云消雨霁。
+雪化遍野，日从东起。
+谓我前路，南山陵园。
+我骑飞奔，思姥先物。
+彼时彼行，未敢忘怀。
+今日今刻，唯雪皑皑。
+先念惠德，又铭泽恩。
+感之泪下，动觉失声。
+长眠于此，永绝尘埃。
+愿长相守，平安如昨。</div>
+      <p class="poem-date">2014 年 2 月 7 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">13年末作</h2>
+      </div>
+      <div class="poem-body">我住北京城，居久不顺心。
+晨起雾遮面，驱车尘满襟。
+未雪三分恨，迎风泪点睛。
+唯愿归故里，南下有乡音。</div>
+      <p class="poem-date">2013 年 12 月</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">相思成灾</h2>
+      </div>
+      <div class="poem-body">昨夜思三姐，梦里寻芳踪。踏遍京城独不见，蓦然回首觅双眸。相思惹人瘦。
+今晨闻红豆，菲语绕耳柔。想象更无开唱日，忘掉天地歌声留。此生又何求？</div>
+      <p class="poem-date">2013 年 11 月 14 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">传奇</h2>
+        <p class="poem-subtitle">——致王菲</p>
+      </div>
+      <div class="poem-body">故事从一零年开始，
+歌声仿佛天上人间。
+那一夜
+敲开了少男的心扉，
+魂牵梦绕的是
+一个叫王菲的女人。
+她是有
+传奇的一般的容颜，
+传奇一般的声音，
+传奇一般的心灵。
+台上浅唱低吟，
+台下一切随心。
+我恋上了她，
+哪怕走遍万水千山，
+只愿途中能与你相见。
+
+文字是苍白的工具，
+天籁之音，
+也许是最好的形容。
+你口中吐出的每一个字，
+如含苞待放的花儿，
+温柔、细腻
+又绽满清香。
+我小心翼翼地捧在手中，
+生怕漏掉那一点一滴，
+怕都是无尽的失落、惆怅。
+
+歌声在我耳中暗涌、回荡，
+说着那爱的冰凉，
+说着那情的忧伤。
+在山水之间，
+翻转、跳跃着
+我的爱，
+不再冰凉。
+在佛塔之间，
+呼吸、盛开着
+我的情，
+不再忧伤。
+只为那一阵夙愿，
+尘世不过过眼云烟。
+还有那永不逝去的声线，
+陪我看细水长流、世事变迁。
+
+生日快乐！
+在八月八日这个美好的日子。
+感谢一路上有你，
+传奇仍在延续……</div>
+      <p class="poem-date">2013 年 8 月 27 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">绝美</h2>
+      </div>
+      <div class="poem-body">凝似三春愁，艳压五湖瘦。
+人间几时有，欲语先绸缪。</div>
+      <p class="poem-date">2013 年 8 月</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">山居</h2>
+      </div>
+      <div class="poem-body">飞鸟渡山林，劳人归蔽间。
+昼夜长交替，唯有此山闲。</div>
+      <p class="poem-date">2013 年 8 月</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">入学有感</h2>
+      </div>
+      <div class="poem-body">常闻大学里，逍遥自在地。
+今在北理工，愁绪已月余。
+高数非吾愿，线代竟无语。
+日日无穷事，高四有何异？</div>
+      <p class="poem-date">2011 年 10 月 26 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">北理倾向</h2>
+      </div>
+      <div class="poem-body">东西南北中，万里赴京城。
+八月相聚日，情系北理工。
+读遍图书馆，踏罢北湖青。
+归来更何事？倾向文学风。</div>
+      <p class="poem-date">2011 年 9 月</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">江城子 · 高考</h2>
+      </div>
+      <div class="poem-body">十年辛苦不寻常，
+不思量，自难忘。
+心有千结，不曾尽猖狂。
+佳节假日寻常去，怎奈何，多惆怅。
+
+一朝步入高考场，
+心荡漾，也无妨。
+下笔无言，惟有字千行。
+常言此中多磨难，依我看，似平常。</div>
+      <p class="poem-date">2011 年 6 月 12 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">夜愁</h2>
+      </div>
+      <div class="poem-body">常年劳苦几多时，积怨成愁病亦迟。
+哀风呓语呼号处，白炽留伤痛难持。
+膑脚为兵宫为史，囚秦孤愤明国语。
+欲求圣明知我意，苦中作乐寻欢娱。</div>
+      <p class="poem-date">2011 年 5 月 23 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">又入考场也</h2>
+      </div>
+      <div class="poem-body">又入考场也，此情几回休。
+汗溢盈泉涌，手中碧水流。
+心倦空腹口，信笔亦难求。
+一点窗外雨，平添几分愁。</div>
+      <p class="poem-date">2011 年 5 月 18 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">三周有感</h2>
+      </div>
+      <div class="poem-body">日复一日近高考，一心一意刻苦心。
+满打满算几天练？三周过后最悠闲。</div>
+      <p class="poem-date">2011 年 5 月 16 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">赠张辉</h2>
+      </div>
+      <div class="poem-body">辉也真风流，张弛亦有度。
+风中飘飖舞，雨里踱轻步。
+花容似月貌，才气满腹足。
+不堪回首望，目目似珍珠。</div>
+      <p class="poem-date">2011 年 4 月 26 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">赠邢亚桐</h2>
+      </div>
+      <div class="poem-body">四月春意浓，为君谱歌声。
+万分离别意，总是校友情。
+学得千般成，岁末取真经。
+鲲鹏高飞尽，适君始启程。
+浮云难遮眼，跌宕亦前行。
+折桂步蟾宫，明朝是亚桐。</div>
+      <p class="poem-date">2011 年 4 月 26 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">清明雨下</h2>
+      </div>
+      <div class="poem-body">万里云共雨，天边飘雪归。
+昨夜大风起，今晨寒气催。
+润得万物生，草木始展眉。
+清明知时节，当春了人味。</div>
+      <p class="poem-date">2011 年 4 月 2 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">赠韩漪磊</h2>
+      </div>
+      <div class="poem-body">两岁同窗日，别离今悄至。
+不堪此盛情，下笔飞纷字。
+友谊清且远，欲别去难遣。
+愿君功成时，莫忘少年事。</div>
+      <p class="poem-date">2011 年 3 月 24 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">寄友人</h2>
+        <p class="poem-subtitle">——写在三模后</p>
+      </div>
+      <div class="poem-body">艳阳天，花开日，难消几多愁。
+斜晖里，茅檐下，抚案泪泉流。
+去日茫茫堆笑语，岁月一任竞风流。
+不堪回首，纷繁考场，下笔梦魂丢。
+曾记否，多少次，誓言出此口。
+头悬梁，锥刺股，不许稍绸缪。
+也曾山重疑无路，但求明朝功成就。
+待从头，壮志豪情，阔步登云楼。</div>
+      <p class="poem-date">2011 年 3 月 10 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">人生路上波折多</h2>
+      </div>
+      <div class="poem-body">人生路上波折多，沟壑纵横难把握。
+幸福路上有隐患，厄运背后能洒脱。
+最美刺绣明花朵，暗淡背景可衬托。
+今生如梦多坎坷，坚韧前方立巍峨。</div>
+      <p class="poem-date">2011 年 3 月 2 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">赠友人</h2>
+      </div>
+      <div class="poem-body">杨柳春先发，丹蕾破嫩芽。此中欣欣意，欲语缘是她。
+为君寄真言，良久续佳话。昔念六中时，你我同校园。
+日日身边过，岁岁睹芳颜。非是同路人，三年无一言。
+一朝腾空去，一中共团圆。高二颇有缘，辗转聚一班。
+虽无长交谈，往来带笑颜。知尔善排球，余亦试一玩。
+哪像晨光赛，英姿展非凡。后值前后位，也曾一排前。
+最爱张杰女，一曲动红颜。可怜近高考，也当勤苦练。
+莫负平生志，懊恼夏日天。祝愿学业成，才华大展现。
+碣石潇湘处，别有王孙面。自此奔前途，明朝更好看。</div>
+      <p class="poem-date">2011 年 2 月 28 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">校中春雨</h2>
+      </div>
+      <div class="poem-body">今夜校园漫飞花，淅淅沥沥轻似纱。
+衣沾月落非难过，但使新生溢嫩芽。</div>
+      <p class="poem-date">2011 年 2 月 25 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">元宵夜</h2>
+      </div>
+      <div class="poem-body">轰然动地响，繁星漫夜空。
+纷纷元宵夜，簌簌礼花重。
+熙熙踱步走，唧唧笑语声。
+往来无不乐，唯美此升平。
+花气夜袭人，春夜益阑珊。
+淅淅凉风过，飘飘欲为仙。
+久久不能寐，落落晚景间。
+元是如花夜，今宵梦入天。</div>
+      <p class="poem-date">2011 年 2 月 17 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">咏党如潮</h2>
+      </div>
+      <div class="poem-body">如潮同志嗓门大，一声怒吼满天下。
+棍棒在手心气足，说打就打人人怕。
+讲课好似在吵架，说话犹如醉里骂。
+一身功夫无敌手，一中老师数你飒。</div>
+      <p class="poem-date">2011 年 2 月 14 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">浩气今发</h2>
+      </div>
+      <div class="poem-body">昔时视高考，意懒心闲暇。
+一如水中月，疑似镜中花。
+不料光阴逝，无奈日月滑。
+诸君快苦战，浩气今当发。</div>
+      <p class="poem-date">2011 年 2 月 11 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">开学</h2>
+      </div>
+      <div class="poem-body">年外佳节终消褪，校里春风扑面迎。
+昂首阔步还校日，笑语欢声同学情。
+韶华易逝春常在，高三学子心澎湃。
+百日高考今咫尺，雄心壮志荡天外。</div>
+      <p class="poem-date">2011 年 2 月 10 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">回家</h2>
+      </div>
+      <div class="poem-body">风停日暖益思家，心远地偏急欲假。
+奈何楼高飞难去，此刻有心学不下。
+明日即当离校走，飞奔十里望爹妈。
+不用车丛迤逦行，山南一角是我家。</div>
+      <p class="poem-date">2011 年 1 月 24 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">二模总结</h2>
+      </div>
+      <div class="poem-body">二模已结束，成绩早公布。物理不争气，怎能拿第一。
+虽说有进步，进步不足谈。若看缺点处，依稀有帮助。
+有时做题慢，有时不认真。慢时做不完，大意总失算。
+分分皆吾爱，逝去不复返。不必怨题难，功到自简单。
+今已近寒假，家中当苦练。数学与理综，用心莫嫌烦。
+今日加倍苦，明朝更好看。但愿高考日，倾心夺桂冠。</div>
+      <p class="poem-date">2011 年 1 月 19 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">考试有感</h2>
+      </div>
+      <div class="poem-body">考场心惊肉跳，考完有说有笑。
+不知今宵梦好，还是功夫未到。</div>
+      <p class="poem-date">2011 年 1 月 12 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">代人赋</h2>
+      </div>
+      <div class="poem-body">初见芳华时，心已生波澜。
+悠悠梳晓鬟，袅袅云鬓端。
+心既寻她去，情又何以堪。
+不若红豆苦，问情与谁专。</div>
+      <p class="poem-date">2010 年 11 月 30 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">秋日</h2>
+      </div>
+      <div class="poem-body">秋寒本无意，何自兀侵人。
+西风凋素叶，落日映黄昏。
+灯火校园路，书声寒夜深。
+岂无勤努力，但为明年春。</div>
+      <p class="poem-date">2010 年 11 月 12 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">光棍颂</h2>
+      </div>
+      <div class="poem-body">光棍多，光棍好，光棍自古是年少。
+无人怜兮无人爱，无人追兮无人睬。
+光棍不需金缕衣，甜啊蜜啊随意弃。
+光棍有力腾青云，老大家小不在意。
+五花马，千金裘，不用媳妇换衣绸。
+闻鸡舞，带月归，一分耕耘一滴泪。
+少时还需勤努力，七情六欲皆抛弃。
+待到十八学业成，光棍化蝶犹有期。</div>
+      <p class="poem-date">2010 年 11 月 11 日</p>
+    </article>
+    <article class="poem">
+      <div class="poem-header">
+        <h2 class="poem-title">园中独看</h2>
+      </div>
+      <div class="poem-body">明月何时圆，明月何时满。
+圆时大如磐，满处辉光现。
+与君赏此月，共解心中烦。
+待到中秋日，园中只独看。</div>
+      <p class="poem-date">2010 年 9 月 23 日</p>
+    </article>
+  </div>
+
+  <footer>
+    <span>王金戈 · Jinge Wang</span>
+    <span>平顶山 · 北京 · 杭州 · 黄山 · 2026</span>
+  </footer>
+
+</body>
+</html>

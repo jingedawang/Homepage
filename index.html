@@ -39,6 +39,56 @@
       text-autospace: normal;
     }
 
+    /* ── Nav ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(247, 244, 239, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 10vw;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 56px;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-logo:hover { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.active { color: var(--accent); }
+
     /* ── Hero─────────────────────────────────────────────── */
     .hero {
       min-height: 100svh;
@@ -301,6 +351,19 @@
 </head>
 <body>
 
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">王金戈</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">首页</a></li>
+        <li><a href="poems.html">诗</a></li>
+        <li><a href="#works">探索</a></li>
+        <li><a href="#links">联系</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <!-- Hero -->
   <section class="hero">
     <h1 class="hero-name">王金戈</h1>
@@ -317,7 +380,7 @@
   <hr class="divider" />
 
   <!-- Works -->
-  <section>
+  <section id="works">
     <p class="section-label">近期探索</p>
     <div class="works-grid">
       <!-- Longtan Trilogy -->
@@ -371,7 +434,7 @@
   <hr class="divider" />
 
   <!-- Links -->
-  <section class="links-section">
+  <section class="links-section" id="links">
     <p class="section-label">找到我</p>
     <ul class="links-list">
       <li>

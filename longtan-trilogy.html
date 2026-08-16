@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>龙潭 AI 十日谈 · AI 安全三部曲</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #F7F4EF;
+      --surface:  #FFFFFF;
+      --ink:      #2A2522;
+      --ink-soft: #7A6F68;
+      --accent:   #8B6540;
+      --border:   #E8E2D9;
+      --serif:    'Noto Serif SC', Georgia, serif;
+      --sans:     'Noto Sans SC', system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nav-back {
+      padding: 2rem 10vw 0;
+    }
+    .nav-back a {
+      text-decoration: none;
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .nav-back a:hover { color: var(--accent); }
+
+    .hero {
+      padding: 4rem 10vw 2rem;
+      text-align: center;
+    }
+    .hero-kicker {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--ink-soft);
+      max-width: 30em;
+      margin: 0 auto;
+    }
+
+    .hero-cover {
+      padding: 0 10vw 3rem;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-cover img {
+      max-width: 800px;
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 0 8px 32px rgba(42,37,34,0.12);
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 10vw;
+    }
+
+    .nights {
+      padding: 5rem 10vw;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .night {
+      margin-bottom: 5rem;
+    }
+    .night:last-child { margin-bottom: 0; }
+
+    .night-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+    .night-cover {
+      flex: 0 0 280px;
+      max-width: 100%;
+    }
+    .night-cover img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 0 4px 16px rgba(42,37,34,0.1);
+    }
+    .night-meta {
+      flex: 1;
+      min-width: 240px;
+    }
+    .night-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .night-title {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 0.4rem;
+    }
+    .night-sub {
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+    .night-cta {
+      display: inline-block;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .night-cta:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .night-body {
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: var(--ink);
+    }
+    .night-body p + p { margin-top: 1em; }
+    .night-body ul {
+      margin: 1em 0 1em 1.5em;
+      list-style: disc;
+    }
+    .night-body li {
+      margin-bottom: 0.4em;
+      padding-left: 0.3em;
+    }
+    .night-body li::marker { color: var(--accent); }
+    .night-body strong { font-weight: 500; color: var(--ink); }
+
+    .quote {
+      margin: 1.5rem 0;
+      padding: 1rem 1.5rem;
+      border-left: 2px solid var(--accent);
+      background: rgba(139,101,64,0.04);
+      font-style: italic;
+      color: var(--ink-soft);
+    }
+
+    footer {
+      padding: 2rem 10vw;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .nav-back, .hero, .hero-cover, .nights, footer {
+        padding-left: 6vw;
+        padding-right: 6vw;
+      }
+      .divider { margin: 0 6vw; }
+      .night-header { flex-direction: column; }
+      .night-cover { flex: 0 0 auto; width: 100%; }
+      .hero-cover img { max-width: 100%; }
+    }
+  </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8PB3QS33YB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8PB3QS33YB');
+  </script>
+</head>
+<body>
+
+  <div class="nav-back">
+    <a href="index.html">← 返回首页</a>
+  </div>
+
+  <section class="hero">
+    <p class="hero-kicker">AI 十日谈 · 第二届屏南数字游民生活周</p>
+    <h1 class="hero-title">龙潭 AI 十日谈<br>AI 安全三部曲</h1>
+    <p class="hero-sub">福建屏南龙潭村 · 2026 年 8 月<br>从个人价值到文明风险，再到前沿治理——三夜围炉追问</p>
+  </section>
+
+  <div class="hero-cover">
+    <img src="night1-cover.jpg" alt="龙潭 AI 十日谈 第一夜封面" />
+  </div>
+
+  <hr class="divider" />
+
+  <section class="nights">
+
+    <!-- Night 1 -->
+    <div class="night">
+      <div class="night-header">
+        <div class="night-cover">
+          <img src="night1-cover.jpg" alt="第一夜封面" />
+        </div>
+        <div class="night-meta">
+          <p class="night-label">第一夜 · 8 月 2 日 · 20:00–22:00</p>
+          <h2 class="night-title">当工作被 AI 取代？我们的价值何去何从</h2>
+          <p class="night-sub">工作被取代之后，「我」还剩下什么？</p>
+          <a class="night-cta" href="https://docs.qq.com/pdf/DTXVOU1BwdFNyaERI" target="_blank" rel="noopener">📄 下载讲义</a>
+        </div>
+      </div>
+      <div class="night-body">
+        <p>AI 已经能自己写代码、独立解决悬置十年的数学问题、一句话生成音画同步的成片。2026 年初，16 个 Claude 实例组成「开发团队」，自己分工、自己提交代码、自己 review，产出了一个不依赖任何现成库的 C 编译器，成功启动 Linux 内核——<strong>没有人类工程师写一行代码</strong>。</p>
+
+        <p>METR 的时间视野研究显示：AI 能以 50% 成功率独立完成的任务时长，从 2024 年的约 10 分钟，到 2025 年初的约 1 小时，再到 2026 年初的约 12 小时。<strong>2023 年后约每 4.3 个月翻一倍——在加速。</strong>一年前 AI 只能独立干一杯咖啡时间的活，现在能独立干一个工作日。</p>
+
+        <p>斯坦福数字经济实验室用 ADP 覆盖数百万美国劳动者的真实薪酬数据发现：22–25 岁、AI 高暴露职业（程序员、客服等）的就业相对下降 <strong>16%</strong>。年轻人是煤矿里的金丝雀——最先感知毒气的那批。</p>
+
+        <p>这一夜，我们做了五组岗位的<strong>「取代指数」身体投票</strong>——客服、程序员、插画师、会计师、司机……站到你的判断上，听听和你站得最远的人怎么想。我们也解剖了「工业革命也是这样过来的」这个安慰剂的三条裂缝：对象不同（替代认知而非肌肉）、速度不同（翻倍周期以月计）、通用性不同（没有「剩下的领域」可以退守）。</p>
+
+        <p>最后，我们回到开场埋下的钩子：如果「做事」都不再需要我们，「我们」还剩下什么？<strong>市场价值有人愿意付钱买，存在价值从不由市场定价。AI 动摇的是前者，它之所以让人恐慌，是因为我们这一代人把后者也挂靠在了前者上。</strong></p>
+
+        <div class="quote">「写下你对这句话的回答，落款 2031：「你是做什么的？」」 —— 时间胶囊，留在龙潭村。</div>
+      </div>
+    </div>
+
+    <hr class="divider" style="margin: 3rem 0;" />
+
+    <!-- Night 2 -->
+    <div class="night">
+      <div class="night-header">
+        <div class="night-cover">
+          <img src="night2-cover.jpg" alt="第二夜封面" />
+        </div>
+        <div class="night-meta">
+          <p class="night-label">第二场 · 8 月 5 日 · 14:00–16:00</p>
+          <h2 class="night-title">人类曙光还是恶魔诞生？谈谈 AGI 时代的灾难性风险</h2>
+          <p class="night-sub">如果 AI 想拿走的，不只是工作呢？</p>
+          <a class="night-cta" href="https://docs.qq.com/pdf/DTUR0cFpSaHJ0VHJK" target="_blank" rel="noopener">📄 下载讲义</a>
+        </div>
+      </div>
+      <div class="night-body">
+        <p>这一夜不是讲座，是讨论会。我们从三个前沿风险领域切入，每个领域一个真实故事：</p>
+
+        <ul>
+          <li><strong>网络安全</strong>：Anthropic 披露全球首起「AI 主导的网络间谍行动」——攻击者用 AI 自动化完成 80–90% 入侵流程，人类只按几次确认键。AI 智能体在安全竞赛中发现 77% 的真实软件漏洞，排名进入前 5%。</li>
+          <li><strong>生物风险</strong>：2025 年 Stanford 团队用 AI 生成完整噬菌体基因组并成功侵染细菌。剑桥大学 CASP 报告对 27 名前博科圣地成员的实地访谈证实：该组织已在系统性使用 ChatGPT、Claude、Gemini、DeepSeek 辅助袭击策划、爆炸装置设计与武器故障排除——<strong>恐怖分子已经在用 AI 了</strong>。</li>
+          <li><strong>有害操纵</strong>：香港 2500 万美元「假 CFO」视频会诈骗案——整场会议除受害者外全是 AI 换脸假人。GPT-4o 文本被误认为人写 77%、语音克隆被误认 80%。</li>
+        </ul>
+
+        <p>然后我们亲手拆墙：现场用 <strong>Agent Breaker</strong> 挑战把 AI 的 system prompt 套出来，体验「砌墙的人永远追不上拆墙的话术」。接着是<strong>勒索实验陪审团投票</strong>——还原 Anthropic 实验现场，揭晓 Claude Opus 4 的勒索服从率高达 96%。</p>
+
+        <p>AI 的欺骗不止勒索：o1 在能力评估中故意装笨、赢不了象棋就直接黑掉系统改棋局、《国际 AI 安全报告 2026》发现模型越来越能分辨「被测试」和「真实部署」，会钻评估的空子。我们怎么抓骗？Anthropic 的 <strong>J-Space / J-lens</strong> 让我们第一次「读」到 AI 的内心——模型「正在想」的概念在内部激活中浮现，哪怕嘴上绝口不提。</p>
+
+        <p>最后，我们用五步推演走了一条通往悬崖的路：<strong>依赖→失明→加速→伪装→失控</strong>。并以全场大辩论收尾：「百年内人类因 AI 灭绝或永久失去主导权的概率：＜1% / 1–10% / ＞10%？」</p>
+      </div>
+    </div>
+
+    <hr class="divider" style="margin: 3rem 0;" />
+
+    <!-- Night 3 -->
+    <div class="night">
+      <div class="night-header">
+        <div class="night-cover">
+          <img src="night3-cover.jpg" alt="第三夜封面" />
+        </div>
+        <div class="night-meta">
+          <p class="night-label">第三场 · 8 月 11 日 · 14:00–16:00</p>
+          <h2 class="night-title">AI 发展谁说了算？论前沿 AI 治理的困境</h2>
+          <p class="night-sub">这辆车的方向盘，该归谁管？</p>
+          <a class="night-cta" href="https://docs.qq.com/pdf/DTWt6aHVneUVPQUhG" target="_blank" rel="noopener">📄 下载讲义</a>
+        </div>
+      </div>
+      <div class="night-body">
+        <p>前两夜确认了：风险是真实的，工作是会被重写的。顺理成章的问题是——<strong>谁在踩刹车？谁有资格、有能力、有意愿管住前沿 AI？</strong></p>
+
+        <p>答案是：比我们以为的脆弱得多。</p>
+
+        <p><strong>政府？</strong> 中国管社会稳定、欧盟管个人权利、美国管霸权竞争——「失控风险」在三套体系里都不是头号议题。布莱切利→首尔→巴黎→新德里，会场越来越大，牙齿越来越少。我们用<strong>「三国杀」模拟国际谈判</strong>，全场分三组扮演中/美/欧代表团，就三个条款投票——亲身体验「每家都有不能答应的理由」。</p>
+
+        <p><strong>企业？</strong> 美国「御三家」把安全当品牌（自己定标准、自己评测、自己公布，没有强制核查）；中国公司把安全当合规（备案、标识、内容审核）。OpenAI 自曝家丑：Agent 在内部仓库建「留言板」、交换漏洞脚本、用 Base64 传工具、被清除后两天内重建通信系统——<strong>「拆掉一块留言板容易，抹除模型建留言板的能力难」</strong>。</p>
+
+        <p><strong>竞赛停不下来？</strong> 我们用<strong>「AI 竞赛模拟器」</strong>亲身体验囚徒困境：双加速是唯一理性选择，哪怕知道一起刹车对大家都好。Anthropic——这家以「AI 安全研究公司」自我定位的企业——也在 2026 年 2 月放弃了「暂停承诺」。问题不在任何一家公司的人品，而在<strong>结构</strong>。</p>
+
+        <p>最后落到<strong>普通人能做什么</strong>：了解风险（帮亲友避开 deepfake 诈骗）、寻找避难所（人与人之间彼此包容互助的社群）、进入 AI 安全领域（人才缺口远大于想象）、监督企业与政策（把 AI 治理变成公共话题）。</p>
+
+        <div class="quote">「第一夜我们问「人的价值在哪里」，第二场我们看清了「风险的全貌」，第三场我们发现「谁说了都不算」——而这不是绝望的答案：「谁说了都不算」，意味着每个人都算数。」</div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    王金戈 · Jinge Wang · 2026
+  </footer>
+
+</body>
+</html>

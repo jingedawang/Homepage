@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>王金戈</title>
+  <title>王金戈 | AI 安全研究者 · 写作者 · 探索者</title>
+  <meta name="description" content="王金戈，AI 安全治理研究者、科普作者。AI 安全开放社区联合创始人，TutorialLLM 开源教程作者。关注 AI 安全、AGI 风险与前沿治理。" />
+  <link rel="icon" href="favicon.ico" />
+  <meta property="og:title" content="王金戈 | AI 安全研究者 · 写作者 · 探索者" />
+  <meta property="og:description" content="王金戈，AI 安全治理研究者、科普作者。AI 安全开放社区联合创始人，TutorialLLM 开源教程作者。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://wangjinge.me" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -225,6 +231,14 @@
       .divider { margin: 0 6vw; }
       footer { padding: 2rem 6vw; }
     }
+    .ext-icon {
+      margin-left: 0.35em;
+      opacity: 0.5;
+      vertical-align: middle;
+      transition: opacity 0.2s;
+    }
+    a:hover .ext-icon { opacity: 1; }
+
   </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8PB3QS33YB"></script>
@@ -257,6 +271,13 @@
   <section>
     <p class="section-label">近期探索</p>
     <div class="works-grid">
+      <!-- Longtan Trilogy -->
+      <a class="work-card" href="longtan-trilogy.html">
+        <span class="work-tag">讲座 · AI Safety</span>
+        <h2 class="work-title">龙潭 AI 十日谈 · AI 安全三部曲</h2>
+        <p class="work-desc">福建屏南龙潭村，三夜围炉夜谈：从个人价值到文明风险，再到前沿治理——谁说了都不算，意味着每个人都算数。</p>
+        <span class="work-link">查看回顾 →</span>
+      </a>
 
       <!-- Match -->
       <a class="work-card" href="match.html">
@@ -271,7 +292,7 @@
         <span class="work-tag">社区 · AI Safety</span>
         <h2 class="work-title">AI安全开放社区</h2>
         <p class="work-desc">为了促进中国AI安全事业的发展，我在2025年创办了AI安全开放社区。</p>
-        <span class="work-link">官网 →</span>
+        <span class="work-link">官网 →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
       </a>
 
       <!-- TutorialLLM -->
@@ -279,7 +300,7 @@
         <span class="work-tag">开源 · 教程</span>
         <h2 class="work-title">TutorialLLM</h2>
         <p class="work-desc">写给每个人的大模型教程。从预训练到微调再到对齐完整走一遍，小白也能理解AI的底层原理。</p>
-        <span class="work-link">前往GitHub →</span>
+        <span class="work-link">前往GitHub →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
       </a>
 
       <!-- Novel -->
@@ -350,7 +371,7 @@
 
   <footer>
     <span>王金戈 · Jinge Wang</span>
-    <span>北京 · 杭州 · 平顶山 · 2026</span>
+    <span>平顶山 · 北京 · 杭州 · 黄山 · 2026</span>
   </footer>
 
 </body>

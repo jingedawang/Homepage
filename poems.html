@@ -113,6 +113,7 @@
     }
 
     .poem {
+      scroll-margin-top: 80px;
       margin-bottom: 5rem;
       padding-bottom: 5rem;
       border-bottom: 1px solid var(--border);
@@ -158,6 +159,117 @@
       font-style: italic;
     }
 
+    /* ── TOC (collapsible) ───────────────────────────────── */
+    .toc {
+      position: fixed;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 60;
+      display: flex;
+      align-items: stretch;
+    }
+
+    /* handle — blends into the background, but hints clickability */
+    .toc-handle {
+      writing-mode: vertical-rl;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      letter-spacing: 0.35em;
+      color: var(--ink-soft);
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid var(--border);
+      border-right: none;
+      border-radius: 8px 0 0 8px;
+      padding: 1.1rem 0.45rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      user-select: none;
+    }
+
+    .toc-handle:hover,
+    .toc-handle:focus-visible {
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--accent);
+      box-shadow: -4px 0 12px rgba(42, 37, 34, 0.08);
+      outline: none;
+    }
+
+    .toc-handle .toc-arrow {
+      writing-mode: horizontal-tb;
+      letter-spacing: 0;
+      font-size: 0.75rem;
+      transition: transform 0.25s ease;
+    }
+
+    .toc.expanded .toc-handle .toc-arrow {
+      transform: rotate(180deg);
+    }
+
+    /* panel — hidden by default, slides out */
+    .toc-panel {
+      width: 0;
+      opacity: 0;
+      overflow: hidden;
+      max-height: 72vh;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-right: none;
+      border-radius: 8px 0 0 8px;
+      box-shadow: -8px 0 24px rgba(42, 37, 34, 0.10);
+      transition: width 0.28s ease, opacity 0.22s ease, padding 0.28s ease;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .toc.expanded .toc-panel {
+      width: 230px;
+      opacity: 1;
+      overflow-y: auto;
+      padding: 1.1rem 0.8rem 1.1rem 0;
+    }
+
+    .toc-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 0 0 0.6rem 1rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .toc-list {
+      list-style: none;
+    }
+
+    .toc-link {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      text-decoration: none;
+      line-height: 1.5;
+      padding: 0.28rem 0.8rem 0.28rem 1rem;
+      border-left: 2px solid transparent;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+    }
+
+    .toc-link:hover { color: var(--accent); }
+
+    .toc-link.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: rgba(139, 101, 64, 0.07);
+    }
+
     /* ── Footer ──────────────────────────────────────────── */
     footer {
       padding: 2rem 10vw;
@@ -172,6 +284,10 @@
     }
 
     /* ── Responsive ──────────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .toc { display: none; }
+    }
+
     @media (max-width: 640px) {
       nav { padding: 0 6vw; }
       .hero { padding: 9rem 6vw 4rem; }
@@ -209,7 +325,46 @@
   </section>
 
   <div class="poems-container">
-    <article class="poem">
+    <article class="poem" id="poem-1">
+      <div class="poem-header">
+        <h2 class="poem-title">避难所</h2>
+      </div>
+      <div class="poem-body">春天
+我在教室埋头苦学
+他们说移动互联网时代到了
+外面似乎有赚不完的钱
+我没能上车北京的房子
+也不认为这里是我的归处
+
+夏天
+我跌跌撞撞误入技术的深渊
+把生命献给一场伟大的事业
+公司给了太多
+十二点的地铁是城市的谢幕
+凌晨的 on-call 不是我的极限
+
+秋天
+我看到 GPT 写出更漂亮的代码
+十分钟读了上百篇论文
+相亲对象问我怎么养龙虾
+OPC 会场被围得水泄不通
+
+冬天
+实验室的玩具长出了手脚
+Token 比话费更先透支
+文章不是由人来写也不由人来读
+我们对着屏幕许愿
+新的神迹不需要香火
+
+四季结束了
+我回到乡村静候结局
+星河依然辽阔
+蛙声震耳欲聋
+旧时代的旧人寻得一处庇护所
+新时代的公民从这里诞生</div>
+      <p class="poem-date">2026 年 9 月 14 日</p>
+    </article>
+    <article class="poem" id="poem-2">
       <div class="poem-header">
         <h2 class="poem-title">十一月十日登岳阳楼感怀</h2>
       </div>
@@ -219,7 +374,7 @@
 范公今已矣，谁解此中忧？</div>
       <p class="poem-date">2025 年 11 月 10 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-3">
       <div class="poem-header">
         <h2 class="poem-title">你好，王小波</h2>
       </div>
@@ -280,7 +435,7 @@
 在属于我的精神家园。</div>
       <p class="poem-date">2024 年 8 月 31 日，杭州</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-4">
       <div class="poem-header">
         <h2 class="poem-title">在麦家理想谷</h2>
       </div>
@@ -300,7 +455,7 @@
 无关明日，且度今宵</div>
       <p class="poem-date">2024 年 7 月 19 日，杭州麦家理想谷</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-5">
       <div class="poem-header">
         <h2 class="poem-title">端午 · 其一</h2>
       </div>
@@ -308,7 +463,7 @@
 得闲三日半，彼岸见苏翁。</div>
       <p class="poem-date">2023 年 6 月 24 日，海淀南路</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-6">
       <div class="poem-header">
         <h2 class="poem-title">端午 · 其二</h2>
       </div>
@@ -316,7 +471,7 @@
 若在此间住，何日不撸猫？</div>
       <p class="poem-date">2023 年 6 月 24 日，海淀南路</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-7">
       <div class="poem-header">
         <h2 class="poem-title">端午 · 其三</h2>
       </div>
@@ -324,7 +479,7 @@
 不惧身困顿，行止两逍遥。</div>
       <p class="poem-date">2023 年 6 月 24 日，海淀南路</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-8">
       <div class="poem-header">
         <h2 class="poem-title">倾听</h2>
       </div>
@@ -341,7 +496,7 @@
 做一个简单的倾听者</div>
       <p class="poem-date">2022 年 9 月 17 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-9">
       <div class="poem-header">
         <h2 class="poem-title">今天依然最爱你</h2>
       </div>
@@ -350,7 +505,7 @@
 在公司拉屎的时候也爱你</div>
       <p class="poem-date">2022 年 8 月 5 日，上午</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-10">
       <div class="poem-header">
         <h2 class="poem-title">再见</h2>
       </div>
@@ -360,7 +515,7 @@
 只剩心碎的余音</div>
       <p class="poem-date">2022 年 8 月 5 日，晚上</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-11">
       <div class="poem-header">
         <h2 class="poem-title">致一帆</h2>
       </div>
@@ -388,7 +543,7 @@
 梦里有你清晰的模样。</div>
       <p class="poem-date">2022 年 8 月 2 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-12">
       <div class="poem-header">
         <h2 class="poem-title">笑看风云</h2>
       </div>
@@ -398,7 +553,7 @@
 借得湘君一壶酒，谈笑风云别日狂。</div>
       <p class="poem-date">2022 年 2 月 13 日，小南庄</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-13">
       <div class="poem-header">
         <h2 class="poem-title">无题</h2>
       </div>
@@ -421,7 +576,7 @@
 迎接这日复一日的幸福生活</div>
       <p class="poem-date">2021 年 4 月 26 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-14">
       <div class="poem-header">
         <h2 class="poem-title">灯会秦淮</h2>
       </div>
@@ -431,7 +586,7 @@
 客居少闲月，愁止今夜明。</div>
       <p class="poem-date">2016 年 2 月 23 日，南京</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-15">
       <div class="poem-header">
         <h2 class="poem-title">纪念824股市大跌</h2>
       </div>
@@ -439,7 +594,7 @@
 抱定慢牛难撒手，一片痴心有谁怜？</div>
       <p class="poem-date">2015 年 8 月 24 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-16">
       <div class="poem-header">
         <h2 class="poem-title">哲兄令尊抱恙感怀</h2>
       </div>
@@ -451,7 +606,7 @@
 人已多艰难，缘何苛复悭。</div>
       <p class="poem-date">2015 年 8 月 24 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-17">
       <div class="poem-header">
         <h2 class="poem-title">太湖</h2>
         <p class="poem-subtitle">——致太叔</p>
@@ -462,7 +617,7 @@
 尝闻太叔好，相见会有期？</div>
       <p class="poem-date">2015 年 1 月 12 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-18">
       <div class="poem-header">
         <h2 class="poem-title">龙潭峡</h2>
       </div>
@@ -472,7 +627,7 @@
 造化钟灵物，唯美空废言。</div>
       <p class="poem-date">2014 年 11 月</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-19">
       <div class="poem-header">
         <h2 class="poem-title">致黄浅</h2>
       </div>
@@ -482,7 +637,7 @@
 相逢会当相对笑，志在青云岂蓬蒿。</div>
       <p class="poem-date">2014 年 8 月 18 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-20">
       <div class="poem-header">
         <h2 class="poem-title">记姥姥逝世二周年</h2>
       </div>
@@ -498,7 +653,7 @@
 愿长相守，平安如昨。</div>
       <p class="poem-date">2014 年 2 月 7 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-21">
       <div class="poem-header">
         <h2 class="poem-title">13年末作</h2>
       </div>
@@ -508,7 +663,7 @@
 唯愿归故里，南下有乡音。</div>
       <p class="poem-date">2013 年 12 月</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-22">
       <div class="poem-header">
         <h2 class="poem-title">相思成灾</h2>
       </div>
@@ -516,7 +671,7 @@
 今晨闻红豆，菲语绕耳柔。想象更无开唱日，忘掉天地歌声留。此生又何求？</div>
       <p class="poem-date">2013 年 11 月 14 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-23">
       <div class="poem-header">
         <h2 class="poem-title">传奇</h2>
         <p class="poem-subtitle">——致王菲</p>
@@ -570,7 +725,7 @@
 传奇仍在延续……</div>
       <p class="poem-date">2013 年 8 月 27 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-24">
       <div class="poem-header">
         <h2 class="poem-title">绝美</h2>
       </div>
@@ -578,7 +733,7 @@
 人间几时有，欲语先绸缪。</div>
       <p class="poem-date">2013 年 8 月</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-25">
       <div class="poem-header">
         <h2 class="poem-title">山居</h2>
       </div>
@@ -586,7 +741,7 @@
 昼夜长交替，唯有此山闲。</div>
       <p class="poem-date">2013 年 8 月</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-26">
       <div class="poem-header">
         <h2 class="poem-title">入学有感</h2>
       </div>
@@ -596,7 +751,7 @@
 日日无穷事，高四有何异？</div>
       <p class="poem-date">2011 年 10 月 26 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-27">
       <div class="poem-header">
         <h2 class="poem-title">北理倾向</h2>
       </div>
@@ -606,7 +761,7 @@
 归来更何事？倾向文学风。</div>
       <p class="poem-date">2011 年 9 月</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-28">
       <div class="poem-header">
         <h2 class="poem-title">江城子 · 高考</h2>
       </div>
@@ -621,7 +776,7 @@
 常言此中多磨难，依我看，似平常。</div>
       <p class="poem-date">2011 年 6 月 12 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-29">
       <div class="poem-header">
         <h2 class="poem-title">夜愁</h2>
       </div>
@@ -631,7 +786,7 @@
 欲求圣明知我意，苦中作乐寻欢娱。</div>
       <p class="poem-date">2011 年 5 月 23 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-30">
       <div class="poem-header">
         <h2 class="poem-title">又入考场也</h2>
       </div>
@@ -641,7 +796,7 @@
 一点窗外雨，平添几分愁。</div>
       <p class="poem-date">2011 年 5 月 18 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-31">
       <div class="poem-header">
         <h2 class="poem-title">三周有感</h2>
       </div>
@@ -649,7 +804,7 @@
 满打满算几天练？三周过后最悠闲。</div>
       <p class="poem-date">2011 年 5 月 16 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-32">
       <div class="poem-header">
         <h2 class="poem-title">赠张辉</h2>
       </div>
@@ -659,7 +814,7 @@
 不堪回首望，目目似珍珠。</div>
       <p class="poem-date">2011 年 4 月 26 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-33">
       <div class="poem-header">
         <h2 class="poem-title">赠邢亚桐</h2>
       </div>
@@ -671,7 +826,7 @@
 折桂步蟾宫，明朝是亚桐。</div>
       <p class="poem-date">2011 年 4 月 26 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-34">
       <div class="poem-header">
         <h2 class="poem-title">清明雨下</h2>
       </div>
@@ -681,7 +836,7 @@
 清明知时节，当春了人味。</div>
       <p class="poem-date">2011 年 4 月 2 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-35">
       <div class="poem-header">
         <h2 class="poem-title">赠韩漪磊</h2>
       </div>
@@ -691,7 +846,7 @@
 愿君功成时，莫忘少年事。</div>
       <p class="poem-date">2011 年 3 月 24 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-36">
       <div class="poem-header">
         <h2 class="poem-title">寄友人</h2>
         <p class="poem-subtitle">——写在三模后</p>
@@ -706,7 +861,7 @@
 待从头，壮志豪情，阔步登云楼。</div>
       <p class="poem-date">2011 年 3 月 10 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-37">
       <div class="poem-header">
         <h2 class="poem-title">人生路上波折多</h2>
       </div>
@@ -716,7 +871,7 @@
 今生如梦多坎坷，坚韧前方立巍峨。</div>
       <p class="poem-date">2011 年 3 月 2 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-38">
       <div class="poem-header">
         <h2 class="poem-title">赠友人</h2>
       </div>
@@ -731,7 +886,7 @@
 碣石潇湘处，别有王孙面。自此奔前途，明朝更好看。</div>
       <p class="poem-date">2011 年 2 月 28 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-39">
       <div class="poem-header">
         <h2 class="poem-title">校中春雨</h2>
       </div>
@@ -739,7 +894,7 @@
 衣沾月落非难过，但使新生溢嫩芽。</div>
       <p class="poem-date">2011 年 2 月 25 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-40">
       <div class="poem-header">
         <h2 class="poem-title">元宵夜</h2>
       </div>
@@ -753,7 +908,7 @@
 元是如花夜，今宵梦入天。</div>
       <p class="poem-date">2011 年 2 月 17 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-41">
       <div class="poem-header">
         <h2 class="poem-title">咏党如潮</h2>
       </div>
@@ -763,7 +918,7 @@
 一身功夫无敌手，一中老师数你飒。</div>
       <p class="poem-date">2011 年 2 月 14 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-42">
       <div class="poem-header">
         <h2 class="poem-title">浩气今发</h2>
       </div>
@@ -773,7 +928,7 @@
 诸君快苦战，浩气今当发。</div>
       <p class="poem-date">2011 年 2 月 11 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-43">
       <div class="poem-header">
         <h2 class="poem-title">开学</h2>
       </div>
@@ -783,7 +938,7 @@
 百日高考今咫尺，雄心壮志荡天外。</div>
       <p class="poem-date">2011 年 2 月 10 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-44">
       <div class="poem-header">
         <h2 class="poem-title">回家</h2>
       </div>
@@ -793,7 +948,7 @@
 不用车丛迤逦行，山南一角是我家。</div>
       <p class="poem-date">2011 年 1 月 24 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-45">
       <div class="poem-header">
         <h2 class="poem-title">二模总结</h2>
       </div>
@@ -805,7 +960,7 @@
 今日加倍苦，明朝更好看。但愿高考日，倾心夺桂冠。</div>
       <p class="poem-date">2011 年 1 月 19 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-46">
       <div class="poem-header">
         <h2 class="poem-title">考试有感</h2>
       </div>
@@ -813,7 +968,7 @@
 不知今宵梦好，还是功夫未到。</div>
       <p class="poem-date">2011 年 1 月 12 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-47">
       <div class="poem-header">
         <h2 class="poem-title">代人赋</h2>
       </div>
@@ -823,7 +978,7 @@
 不若红豆苦，问情与谁专。</div>
       <p class="poem-date">2010 年 11 月 30 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-48">
       <div class="poem-header">
         <h2 class="poem-title">秋日</h2>
       </div>
@@ -833,7 +988,7 @@
 岂无勤努力，但为明年春。</div>
       <p class="poem-date">2010 年 11 月 12 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-49">
       <div class="poem-header">
         <h2 class="poem-title">光棍颂</h2>
       </div>
@@ -847,7 +1002,7 @@
 待到十八学业成，光棍化蝶犹有期。</div>
       <p class="poem-date">2010 年 11 月 11 日</p>
     </article>
-    <article class="poem">
+    <article class="poem" id="poem-50">
       <div class="poem-header">
         <h2 class="poem-title">园中独看</h2>
       </div>
@@ -859,10 +1014,125 @@
     </article>
   </div>
 
+  <!-- Collapsible TOC -->
+  <aside class="toc" id="toc" aria-label="目录">
+    <div class="toc-panel">
+      <p class="toc-label">目录</p>
+      <ul class="toc-list">
+          <li><a class="toc-link" href="#poem-1">避难所</a></li>
+          <li><a class="toc-link" href="#poem-2">十一月十日登岳阳楼感怀</a></li>
+          <li><a class="toc-link" href="#poem-3">你好，王小波</a></li>
+          <li><a class="toc-link" href="#poem-4">在麦家理想谷</a></li>
+          <li><a class="toc-link" href="#poem-5">端午 · 其一</a></li>
+          <li><a class="toc-link" href="#poem-6">端午 · 其二</a></li>
+          <li><a class="toc-link" href="#poem-7">端午 · 其三</a></li>
+          <li><a class="toc-link" href="#poem-8">倾听</a></li>
+          <li><a class="toc-link" href="#poem-9">今天依然最爱你</a></li>
+          <li><a class="toc-link" href="#poem-10">再见</a></li>
+          <li><a class="toc-link" href="#poem-11">致一帆</a></li>
+          <li><a class="toc-link" href="#poem-12">笑看风云</a></li>
+          <li><a class="toc-link" href="#poem-13">无题</a></li>
+          <li><a class="toc-link" href="#poem-14">灯会秦淮</a></li>
+          <li><a class="toc-link" href="#poem-15">纪念824股市大跌</a></li>
+          <li><a class="toc-link" href="#poem-16">哲兄令尊抱恙感怀</a></li>
+          <li><a class="toc-link" href="#poem-17">太湖</a></li>
+          <li><a class="toc-link" href="#poem-18">龙潭峡</a></li>
+          <li><a class="toc-link" href="#poem-19">致黄浅</a></li>
+          <li><a class="toc-link" href="#poem-20">记姥姥逝世二周年</a></li>
+          <li><a class="toc-link" href="#poem-21">13年末作</a></li>
+          <li><a class="toc-link" href="#poem-22">相思成灾</a></li>
+          <li><a class="toc-link" href="#poem-23">传奇</a></li>
+          <li><a class="toc-link" href="#poem-24">绝美</a></li>
+          <li><a class="toc-link" href="#poem-25">山居</a></li>
+          <li><a class="toc-link" href="#poem-26">入学有感</a></li>
+          <li><a class="toc-link" href="#poem-27">北理倾向</a></li>
+          <li><a class="toc-link" href="#poem-28">江城子 · 高考</a></li>
+          <li><a class="toc-link" href="#poem-29">夜愁</a></li>
+          <li><a class="toc-link" href="#poem-30">又入考场也</a></li>
+          <li><a class="toc-link" href="#poem-31">三周有感</a></li>
+          <li><a class="toc-link" href="#poem-32">赠张辉</a></li>
+          <li><a class="toc-link" href="#poem-33">赠邢亚桐</a></li>
+          <li><a class="toc-link" href="#poem-34">清明雨下</a></li>
+          <li><a class="toc-link" href="#poem-35">赠韩漪磊</a></li>
+          <li><a class="toc-link" href="#poem-36">寄友人</a></li>
+          <li><a class="toc-link" href="#poem-37">人生路上波折多</a></li>
+          <li><a class="toc-link" href="#poem-38">赠友人</a></li>
+          <li><a class="toc-link" href="#poem-39">校中春雨</a></li>
+          <li><a class="toc-link" href="#poem-40">元宵夜</a></li>
+          <li><a class="toc-link" href="#poem-41">咏党如潮</a></li>
+          <li><a class="toc-link" href="#poem-42">浩气今发</a></li>
+          <li><a class="toc-link" href="#poem-43">开学</a></li>
+          <li><a class="toc-link" href="#poem-44">回家</a></li>
+          <li><a class="toc-link" href="#poem-45">二模总结</a></li>
+          <li><a class="toc-link" href="#poem-46">考试有感</a></li>
+          <li><a class="toc-link" href="#poem-47">代人赋</a></li>
+          <li><a class="toc-link" href="#poem-48">秋日</a></li>
+          <li><a class="toc-link" href="#poem-49">光棍颂</a></li>
+          <li><a class="toc-link" href="#poem-50">园中独看</a></li>
+      </ul>
+    </div>
+    <button class="toc-handle" id="toc-handle" aria-expanded="false" aria-controls="toc-panel">
+      <span class="toc-text">目录</span>
+      <span class="toc-arrow">◂</span>
+    </button>
+  </aside>
+
   <footer>
     <span>王金戈 · Jinge Wang</span>
     <span>平顶山 · 北京 · 杭州 · 黄山 · 2026</span>
   </footer>
 
+  <script>
+    (function () {
+      var toc = document.getElementById('toc');
+      var handle = document.getElementById('toc-handle');
+
+      // Toggle on handle click
+      handle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var expanded = toc.classList.toggle('expanded');
+        handle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      });
+
+      // Close when clicking outside
+      document.addEventListener('click', function (e) {
+        if (toc.classList.contains('expanded') && !toc.contains(e.target)) {
+          toc.classList.remove('expanded');
+          handle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Close on Escape
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && toc.classList.contains('expanded')) {
+          toc.classList.remove('expanded');
+          handle.setAttribute('aria-expanded', 'false');
+          handle.focus();
+        }
+      });
+
+      // Scroll-spy
+      var poems = document.querySelectorAll('.poem');
+      var links = document.querySelectorAll('.toc-link');
+      if (poems.length && links.length) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var id = '#' + entry.target.id;
+              links.forEach(function (link) {
+                link.classList.toggle('active', link.getAttribute('href') === id);
+              });
+              var active = document.querySelector('.toc-link.active');
+              if (active && active.scrollIntoView) {
+                active.scrollIntoView({ block: 'nearest' });
+              }
+            }
+          });
+        }, { rootMargin: '-25% 0px -65% 0px' });
+
+        poems.forEach(function (p) { observer.observe(p); });
+      }
+    })();
+  </script>
 </body>
 </html>

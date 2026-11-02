@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>明日的「事故」？——AI 与近未来危机 | 北京中间美术馆</title>
+  <meta name="description" content="2026年10月25日，北京中间美术馆展览「事故」闭幕活动。大模型安全研究工程师王金戈主讲「明日的『事故』？——AI 与近未来危机」，从 AI 安全研究一线出发，讨论风险如何被识别与应对。" />
+  <link rel="icon" href="favicon.ico" />
+  <meta property="og:title" content="明日的「事故」？——AI 与近未来危机" />
+  <meta property="og:description" content="北京中间美术馆展览「事故」闭幕讲座 · 2026年10月25日 · 主讲：王金戈 · 主持：乌兰托雅" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://wangjinge.me/tomorrows-crash.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #F7F4EF;
+      --surface:  #FFFFFF;
+      --ink:      #2A2522;
+      --ink-soft: #7A6F68;
+      --accent:   #8B6540;
+      --border:   #E8E2D9;
+      --serif:    'Noto Serif SC', Georgia, serif;
+      --sans:     'Noto Sans SC', system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nav-back {
+      padding: 2rem 10vw 0;
+    }
+    .nav-back a {
+      text-decoration: none;
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .nav-back a:hover { color: var(--accent); }
+
+    .hero {
+      padding: 4rem 10vw 2rem;
+      text-align: center;
+    }
+    .hero-kicker {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--ink-soft);
+      max-width: 32em;
+      margin: 0 auto;
+    }
+    .hero-cta {
+      margin-top: 1.8rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .cta-btn {
+      display: inline-block;
+      padding: 0.55rem 1.4rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .cta-btn:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .hero-cover {
+      padding: 0 10vw 3rem;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-cover img {
+      max-width: 800px;
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 0 8px 32px rgba(42,37,34,0.12);
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 10vw;
+    }
+
+    .content {
+      padding: 5rem 10vw;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .block { margin-bottom: 4rem; }
+    .block:last-child { margin-bottom: 0; }
+
+    .block-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .block-title {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 1.2rem;
+    }
+    .block-body {
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: var(--ink);
+    }
+    .block-body p + p { margin-top: 1em; }
+    .block-body ul {
+      margin: 1em 0 1em 1.5em;
+      list-style: disc;
+    }
+    .block-body li {
+      margin-bottom: 0.4em;
+      padding-left: 0.3em;
+    }
+    .block-body li::marker { color: var(--accent); }
+    .block-body strong { font-weight: 500; color: var(--ink); }
+    .block-body a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .block-body a:hover { border-bottom-color: var(--accent); }
+
+    .quote {
+      margin: 1.5rem 0;
+      padding: 1rem 1.5rem;
+      border-left: 2px solid var(--accent);
+      background: rgba(139,101,64,0.04);
+      font-style: italic;
+      color: var(--ink-soft);
+    }
+
+    /* ── Gallery ─────────────────────────────────────────── */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+    .gallery figure { margin: 0; }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 0 4px 16px rgba(42,37,34,0.1);
+      display: block;
+    }
+    .gallery figcaption {
+      margin-top: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      text-align: center;
+    }
+    .gallery .wide { grid-column: 1 / -1; }
+
+    .credit {
+      margin-top: 1.2rem;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      text-align: right;
+    }
+
+    footer {
+      padding: 2rem 10vw;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .nav-back, .hero, .hero-cover, .content, footer {
+        padding-left: 6vw;
+        padding-right: 6vw;
+      }
+      .divider { margin: 0 6vw; }
+      .hero-cover img { max-width: 100%; }
+      .gallery { grid-template-columns: 1fr; }
+    }
+
+    .ai-badge {
+      position: relative;
+      display: inline-block;
+      margin-left: 0.4em;
+      cursor: help;
+      vertical-align: middle;
+    }
+    .ai-badge svg {
+      width: 0.9em;
+      height: 0.9em;
+      color: var(--accent);
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .ai-badge:hover svg { opacity: 1; }
+    .tooltip {
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.35rem 0.7rem;
+      background: var(--ink);
+      color: var(--bg);
+      font-size: 0.75rem;
+      font-family: var(--sans);
+      font-weight: 400;
+      white-space: nowrap;
+      border-radius: 4px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s;
+      pointer-events: none;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+    }
+    .tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid transparent;
+      border-top-color: var(--ink);
+    }
+    .ai-badge:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+  </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8PB3QS33YB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8PB3QS33YB');
+  </script>
+</head>
+<body>
+
+  <div class="nav-back">
+    <a href="index.html">← 返回首页</a>
+  </div>
+
+  <section class="hero">
+    <p class="hero-kicker">讲座 · 北京中间美术馆 · 展览「事故」闭幕活动</p>
+    <h1 class="hero-title">
+      明日的「事故」？<br>——AI 与近未来危机
+      <span class="ai-badge" aria-label="本文由AI生成">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M5 16l1 3 3-1-3-1-1 3z"/><path d="M19 16l-1 3-3-1 3-1 1 3z"/></svg>
+        <span class="tooltip">本文由AI生成</span>
+      </span>
+    </h1>
+    <p class="hero-sub">2026 年 10 月 25 日 · 主讲：王金戈 · 主持：乌兰托雅<br>当 AI 日益深入日常生活，它会成为我们明天的「事故」吗？</p>
+    <div class="hero-cta">
+      <a class="cta-btn" href="https://docs.qq.com/pdf/DTUJySUNtbnFQeFht" target="_blank" rel="noopener">📄 查看讲座 PPT</a>
+    </div>
+  </section>
+
+  <div class="hero-cover">
+    <img src="inside-out-cover.jpg" alt="讲座现场：王金戈与主持人乌兰托雅对谈，及活动后合影" />
+  </div>
+
+  <hr class="divider" />
+
+  <section class="content">
+
+    <!-- 缘起 -->
+    <div class="block">
+      <p class="block-label">缘起</p>
+      <h2 class="block-title">为什么是「事故」？</h2>
+      <div class="block-body">
+        <p>中间美术馆的展览「事故」呈现了年轻一代对当下的体感与观察，也尝试追问这种现实感受的来源。过去几年，AI 已成为讨论现实变化时无法绕开的议题：它的快速迭代让讨论所依据的前提不断更新，接连出现的 AI 事故也让人们在享受技术便利的同时，愈发担忧其后果。在展览闭幕之际，美术馆邀请我——一名大模型安全研究工程师——从 AI 安全研究的一线出发，讨论风险如何被识别与应对，以及现有安全措施的局限。</p>
+        <p>AI 的影响早已超出直接使用者的范围，其安全问题需要进入更广泛的公共讨论。把一线工作者的观察与经验带进当代艺术的语境，也期待艺术家、艺术从业者与观众从各自的经验出发，为这一讨论带来不同的视角与诠释。</p>
+      </div>
+    </div>
+
+    <hr class="divider" style="margin: 0 0 4rem;" />
+
+    <!-- 内容 -->
+    <div class="block">
+      <p class="block-label">讲座内容</p>
+      <h2 class="block-title">两类风险，与「如何完成」的问题</h2>
+      <div class="block-body">
+        <p>短短几年间，AI 已介入我们工作和生活的方方面面。伴随这些变化，关于它是否可能带来毁灭性风险的讨论也层出不穷。发布于 2026 年 2 月的《2026 年国际人工智能安全报告》（由图灵奖得主约书亚·本吉奥牵头、国际专家团队独立编写）将风险分为滥用、故障与系统性风险三类，涵盖网络攻击、生化领域滥用、系统可靠性与潜在失控，以及对就业和人类自主性的影响。这些风险正逐渐被更多人认识，但相较于推动技术进步的投入，我们对其后果的理解与准备仍显不足。</p>
+        <p>结合网络攻击等一线案例，我把 AI 的风险归为两类：</p>
+        <ul>
+          <li><strong>人利用 AI</strong>：借助 AI 实施诈骗、网络攻击等行为——风险的源头是人，AI 是放大器；</li>
+          <li><strong>AI 自行越权</strong>：AI 为完成任务，自行采取超出人类授权的行动——风险的源头是系统本身。</li>
+        </ul>
+        <p>因此，评估 AI 既要关注它<strong>能完成什么</strong>，也要关注它<strong>会如何完成</strong>。同样的能力，完成方式不同，风险完全不同。我也介绍了研究者如何测试模型在网络、生物等领域的能力，追踪模型更新带来的风险变化，为安全措施与治理提供依据——这些能力及其风险在日常使用中未必可见，而一旦风险转化为事故，后果或将不堪设想。</p>
+      </div>
+    </div>
+
+    <hr class="divider" style="margin: 0 0 4rem;" />
+
+    <!-- 人的价值 -->
+    <div class="block">
+      <p class="block-label">讨论</p>
+      <h2 class="block-title">工作被自动化之后，人还剩下什么？</h2>
+      <div class="block-body">
+        <p>讲座还讨论了工作被自动化之后，人的价值如何被理解。我提出三个值得思考的方向：</p>
+        <ul>
+          <li><strong>需要亲身在场的行动</strong>——有些事情的价值，恰恰在于「你必须在那里」；</li>
+          <li><strong>长期建立的人际关系</strong>——信任与羁绊无法在对话框里速成；</li>
+          <li><strong>源于个人经历的表达</strong>——你的经历独一无二，因此你的表达无法被平均化地替代。</li>
+        </ul>
+        <p>现场从事翻译、影像制作与策展等工作的参与者，分享了使用 AI 的便利、技能被替代的危机感，以及重新理解创作意义的尝试。讨论还涉及 AI 是否具有意识、如何判断其道德地位等问题——AI 运行于机器，也呈现出人类的智慧、偏见与好恶，技术创造背后的思维方式、价值判断与未来想象，同样有待不同视角的审视。</p>
+        <div class="quote">不断叠加的「事故」在各自的身体、劳动与日常生活中留下痕迹。讨论最终回到：人在今天的位置，以及我们如何参与对现实变化的判断与回应。</div>
+      </div>
+    </div>
+
+    <hr class="divider" style="margin: 0 0 4rem;" />
+
+    <!-- 现场照片 -->
+    <div class="block">
+      <p class="block-label">现场</p>
+      <h2 class="block-title">活动现场</h2>
+      <div class="gallery">
+        <figure class="wide">
+          <img src="inside-out-1.jpg" alt="讲座现场全景，投影上呈现 CRASH / CRUSH 幻灯片" />
+          <figcaption>从「Crash」到「Crush」：事故与迷恋之间</figcaption>
+        </figure>
+        <figure>
+          <img src="inside-out-2.jpg" alt="王金戈手持话筒演讲" />
+          <figcaption>主讲 · 王金戈</figcaption>
+        </figure>
+        <figure>
+          <img src="inside-out-3.jpg" alt="王金戈与主持人乌兰托雅对谈，背景为讲座标题幻灯片" />
+          <figcaption>与主持人乌兰托雅对谈</figcaption>
+        </figure>
+        <figure class="wide">
+          <img src="inside-out-4.jpg" alt="观众提问" />
+          <figcaption>现场观众提问</figcaption>
+        </figure>
+      </div>
+      <p class="credit">摄影：刘芳彤 · 图片来源：中间美术馆</p>
+    </div>
+
+    <hr class="divider" style="margin: 0 0 4rem;" />
+
+    <!-- 资料 -->
+    <div class="block">
+      <p class="block-label">资料</p>
+      <h2 class="block-title">讲座资料与相关报道</h2>
+      <div class="block-body">
+        <ul>
+          <li><a href="https://docs.qq.com/pdf/DTUJySUNtbnFQeFht" target="_blank" rel="noopener">讲座 PPT（腾讯文档）</a></li>
+          <li><a href="https://mp.weixin.qq.com/s/NCtJ7oj3oP7IBOgzr3y01w" target="_blank" rel="noopener">活动预告｜中间美术馆「事故」闭幕活动</a></li>
+          <li><a href="https://mp.weixin.qq.com/s/Wf1DKy8UgkDoVxEhzZ2NIw" target="_blank" rel="noopener">活动回顾｜「事故」闭幕活动</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    王金戈 · Jinge Wang · 2026
+  </footer>
+
+</body>
+</html>

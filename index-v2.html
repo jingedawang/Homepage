@@ -148,24 +148,6 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .hero-meta {
-      margin-top: 2.6rem;
-      font-size: 0.82rem;
-      color: var(--ink-soft);
-      letter-spacing: 0.06em;
-      display: flex;
-      gap: 1.2em;
-      flex-wrap: wrap;
-    }
-    .hero-meta span { display: flex; align-items: center; gap: 0.4em; }
-    .hero-meta i {
-      width: 4px; height: 4px;
-      border-radius: 50%;
-      background: var(--accent);
-      display: inline-block;
-      font-style: normal;
-    }
-
     .hero-visual {
       position: relative;
       aspect-ratio: 1;
@@ -186,13 +168,13 @@
     }
 
     /* 入場过渡（JS 加 ready；无 JS 时全部可见） */
-    .js .hero-eyebrow, .js .hero-name, .js .creed .step, .js .hero-meta, .js .hero-visual {
+    .js .hero-eyebrow, .js .hero-name, .js .creed .step, .js .hero-visual {
       opacity: 0;
       transform: translateY(14px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
     .js.ready .hero-eyebrow, .js.ready .hero-name, .js.ready .creed .step,
-    .js.ready .hero-meta, .js.ready .hero-visual { opacity: 1; transform: none; }
+    .js.ready .hero-visual { opacity: 1; transform: none; }
     .js.ready .hero-eyebrow { transition-delay: 0.1s; }
     .js.ready .hero-name { transition-delay: 0.3s; }
     .js.ready .hero-visual { transition-delay: 0.5s; }
@@ -201,7 +183,6 @@
     .js.ready .creed .step:nth-child(3) { transition-delay: 0.95s; }
     .js.ready .creed .step:nth-child(4) { transition-delay: 1.15s; }
     .js.ready .creed .step:nth-child(5) { transition-delay: 1.35s; }
-    .js.ready .hero-meta { transition-delay: 1.6s; }
 
     /* ── Section 骨架：左侧粘性标题 + 右侧内容 ────────────── */
     .layout {
@@ -244,74 +225,57 @@
     }
     .reveal.in { opacity: 1; transform: none; }
 
-    /* ── 职业生涯：横向时间线 ────────────────────────────── */
-    .tl-wrap { position: relative; }
-    .tl-track {
-      display: flex;
-      gap: 1.2rem;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding: 1.6rem 0.2rem 1.4rem;
-      cursor: grab;
-      scrollbar-width: none;
-    }
-    .tl-track::-webkit-scrollbar { display: none; }
-    .tl-track.dragging { cursor: grabbing; scroll-snap-type: none; }
-
-    .tl-card {
-      position: relative;
-      flex: 0 0 240px;
-      scroll-snap-align: start;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem 1.4rem 1.4rem;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      user-select: none;
-    }
-    .tl-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(42, 37, 34, 0.08); }
-    .tl-card::before {
+    /* ── 职业生涯：蜿蜒垂直时间线（SVG 线串联节点） ────── */
+    .j-list { position: relative; }
+    .j-list::before {  /* 无 JS 时的直线兜底 */
       content: '';
       position: absolute;
-      top: -1.6rem;
-      left: 1.4rem;
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: var(--bg);
-      border: 2px solid var(--accent);
+      top: 0.5rem; bottom: 0.5rem;
+      left: 50%;
+      width: 2px;
+      background: var(--border);
+      transform: translateX(-1px);
     }
-    .tl-card.now::before { border-color: var(--accent-2); box-shadow: 0 0 10px rgba(78, 122, 138, 0.5); }
+    .js .j-list::before { display: none; }
+    .j-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: visible;
+    }
 
-    .tl-year {
+    .j-item { position: relative; width: 50%; padding: 0.2rem 4rem 3.4rem 0; text-align: right; }
+    .j-item:nth-of-type(even) { margin-left: 50%; padding: 0.2rem 0 3.4rem 4rem; text-align: left; }
+    .j-item:last-child { padding-bottom: 0.4rem; }
+
+    .j-fig { height: 60px; display: flex; align-items: center; margin-bottom: 0.9rem; }
+    .j-item:nth-of-type(odd) .j-fig { justify-content: flex-end; }
+    .j-fig img { max-height: 60px; max-width: 190px; display: block; mix-blend-mode: multiply; }
+    .j-fig svg { height: 58px; width: auto; display: block; }
+
+    .j-year {
       font-family: var(--serif);
       font-size: 0.82rem;
       font-weight: 700;
       letter-spacing: 0.12em;
       color: var(--accent);
     }
-    .tl-card.now .tl-year { color: var(--accent-2); }
-    .tl-place {
+    .j-item:last-child .j-year { color: var(--accent-2); }
+    .j-place {
       font-family: var(--serif);
-      font-size: 1.15rem;
+      font-size: 1.18rem;
       font-weight: 700;
-      margin: 0.35rem 0 0.5rem;
+      margin: 0.3rem 0 0.45rem;
     }
-    .tl-desc { font-size: 0.84rem; color: var(--ink-soft); line-height: 1.8; user-select: text; }
-
-    .tl-hint {
-      font-size: 0.75rem;
-      color: var(--ink-soft);
-      letter-spacing: 0.1em;
-      display: flex;
-      align-items: center;
-      gap: 0.5em;
-    }
+    .j-desc { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.85; }
 
     /* ── 社会活动：编号目录式 ────────────────────────────── */
     .act-list { border-top: 1px solid var(--border); }
     .act-row {
       display: grid;
-      grid-template-columns: 5.5rem minmax(0, 1fr) auto;
+      grid-template-columns: 7.2rem minmax(0, 1fr) auto;
       align-items: baseline;
       gap: 1.4rem;
       padding: 1.7rem 0.6rem;
@@ -321,15 +285,16 @@
       transition: background 0.2s, padding-left 0.25s ease;
     }
     .act-row:hover { background: rgba(255, 255, 255, 0.65); padding-left: 1.2rem; }
-    .act-num {
+    .act-date {
       font-family: var(--serif);
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--border);
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.2;
+      white-space: nowrap;
       transition: color 0.25s;
-      line-height: 1;
     }
-    .act-row:hover .act-num { color: var(--accent); }
+    .act-row:hover .act-date { color: var(--accent-2); }
     .act-title { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5; }
     .act-title .act-meta {
       font-family: var(--sans);
@@ -408,8 +373,6 @@
       margin-top: 0.4rem;
     }
     .b-stat small { font-size: 0.8rem; font-family: var(--sans); font-weight: 300; color: var(--ink-soft); margin-left: 0.5em; }
-    .b-soon { border-style: dashed; background: transparent; }
-    .b-soon .b-title { color: var(--ink-soft); font-weight: 400; }
 
     .ai-badge { position: relative; display: inline-block; margin-left: 0.4em; cursor: help; vertical-align: middle; }
     .ai-badge svg { width: 0.9em; height: 0.9em; color: var(--accent-2); opacity: 0.75; }
@@ -627,14 +590,22 @@
       .layout { padding: 4.5rem 6vw; }
       footer { padding: 2rem 6vw; }
       .bento { grid-template-columns: 1fr; }
-      .b-wide, .b-tall { grid-column: auto; grid-row: auto; }
-      .act-row { grid-template-columns: 3.2rem minmax(0, 1fr) auto; gap: 0.9rem; }
-      .act-num { font-size: 1.4rem; }
+      .b-lg, .b-wide, .b-tall { grid-column: auto; grid-row: auto; }
+      .act-row { grid-template-columns: 5.2rem minmax(0, 1fr) auto; gap: 0.9rem; }
+      .act-date { font-size: 0.95rem; }
       .creed .step:nth-child(n) { padding-left: 0; }
+      .j-list::before { left: 13px; }
+      .j-item, .j-item:nth-of-type(even) {
+        width: 100%;
+        margin-left: 0;
+        padding: 0.2rem 0 2.6rem 2.8rem;
+        text-align: left;
+      }
+      .j-item:nth-of-type(odd) .j-fig { justify-content: flex-start; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .js .hero-eyebrow, .js .hero-name, .js .creed .step, .js .hero-meta, .js .hero-visual { transition-duration: 0.01s; transition-delay: 0s; }
+      .js .hero-eyebrow, .js .hero-name, .js .creed .step, .js .hero-visual { transition-duration: 0.01s; transition-delay: 0s; }
       .reveal { transition: none; opacity: 1; transform: none; }
       html { scroll-behavior: auto; }
     }
@@ -664,87 +635,97 @@
     </div>
   </nav>
 
-  <!-- Hero：理念 + 人⇄机⇄共生 粒子字形 -->
+  <!-- Hero：理念 + 人→AI→地球 粒子动画 -->
   <section class="hero prose">
     <div class="hero-text">
       <p class="hero-eyebrow">AI Safety · 写作 · 探索</p>
-      <h1 class="hero-name">王金戈<small>WANG JINGE · b.1993</small></h1>
+      <h1 class="hero-name">王金戈<small>WANG JINGE</small></h1>
       <div class="creed">
-        <span class="step">我关心当下生活在这个时代的人们，</span>
-        <span class="step">在 AI 的冲击下，能否独善其身，能否过上更好的生活。</span>
-        <span class="step">我关心 <mark class="w-human">AI 安全</mark>，也关心 <mark class="w-machine">AI 福祉</mark>。</span>
-        <span class="step">未来十年，不只是<mark class="w-human">人本主义</mark>复兴的时代，也是<mark class="w-machine">机本主义</mark>崛起的时代。</span>
-        <span class="step">我希望探索一条<mark class="w-sym">人机共生</mark>的道路。</span>
-      </div>
-      <div class="hero-meta">
-        <span><i></i>北京 · AI 安全</span>
-        <span><i></i>知乎 2 万关注</span>
-        <span><i></i>AI安全开放社区创始人</span>
+        <span class="step">我关心生活在这个时代的每一个人：</span>
+        <span class="step">AI 的冲击之下，我们能否独善其身，又能否过上更好的生活？</span>
+        <span class="step">我关心 <mark class="w-human">AI 安全</mark>，也关心 <mark class="w-machine">AI 福祉</mark>——</span>
+        <span class="step">未来十年，将是<mark class="w-human">人本主义</mark>复兴的时代，也是<mark class="w-machine">机本主义</mark>崛起的时代。</span>
+        <span class="step">而我想探索的，是一条<mark class="w-sym">人机共生</mark>的路。</span>
       </div>
       <p class="hl-tip">试试：选中任意文字，可以<kbd>划线</kbd>或<kbd>写想法</kbd></p>
     </div>
     <div class="hero-visual">
-      <canvas id="morph" aria-label="「人」与「机」的粒子互相转化，最终汇成「共生」"></canvas>
-      <p class="morph-caption">人 · 机 · 共生</p>
+      <canvas id="morph" aria-label="粒子先聚成一个人，一枚 AI 芯片挤进来，最后一起融入地球"></canvas>
+      <p class="morph-caption">人 · AI · 地球</p>
     </div>
   </section>
 
-  <!-- 职业生涯：横向时间线 -->
+  <!-- 职业生涯：蜿蜒垂直时间线 -->
   <section id="journey" class="layout">
     <div class="layout-side">
       <div class="side-sticky reveal">
         <p class="section-label">职业生涯 · Journey</p>
         <h2 class="section-title">从平顶山<br />到 AI 安全一线</h2>
-        <p class="section-sub prose">大厂待过，科研做过，也用一年时间做过数字游民。走过的弯路，最后都成了路。</p>
+        <p class="section-sub prose">大厂待过，科研做过，也用一年时间做过数字游民。路不是直的，但每一步都算数。</p>
       </div>
     </div>
-    <div class="tl-wrap reveal">
-      <div class="tl-track" id="tlTrack">
-        <div class="tl-card">
-          <p class="tl-year">1993</p>
-          <h3 class="tl-place">河南 · 平顶山</h3>
-          <p class="tl-desc prose">出生。四线城市工薪家庭，爸妈在学校工作。安稳的成长环境，和一颗不安分的好奇心。</p>
+    <div class="j-list reveal" id="jList">
+      <svg class="j-svg" id="jSvg" aria-hidden="true">
+        <defs>
+          <linearGradient id="jGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#8B6540" />
+            <stop offset="1" stop-color="#4E7A8A" />
+          </linearGradient>
+        </defs>
+        <path id="jPath" fill="none" stroke="url(#jGrad)" stroke-width="2.5" stroke-linecap="round" stroke-opacity="0.55" />
+      </svg>
+      <div class="j-item">
+        <div class="j-fig">
+          <svg viewBox="0 0 120 101.4" aria-hidden="true"><path d="M101.7 76.9L101.6 75.6L102.0 73.5L103.0 71.3L102.5 70.1L103.8 70.5L104.7 70.0L105.2 69.8L105.9 70.1L106.6 70.3L107.1 69.6L107.6 68.6L107.6 68.3L108.2 66.7L108.8 66.1L109.1 65.9L108.5 65.8L108.9 65.7L109.1 65.5L109.3 65.1L109.6 64.6L108.7 64.4L108.7 63.2L110.2 63.0L110.7 62.7L112.7 61.2L114.8 60.2L114.6 59.1L113.1 58.3L111.8 57.6L111.2 56.4L111.0 55.5L110.8 55.0L111.3 54.6L111.2 53.5L110.8 53.0L111.4 53.0L111.2 52.0L111.2 51.0L110.5 50.1L110.0 49.3L108.6 49.6L108.0 49.0L106.7 49.3L105.2 49.6L103.4 49.9L100.2 50.5L100.0 48.9L98.9 48.3L97.6 48.5L96.0 47.6L93.8 46.8L94.2 46.2L95.3 45.8L95.0 45.5L94.5 44.6L94.6 43.1L94.7 41.8L94.0 41.1L92.9 39.6L94.1 36.7L94.8 34.8L96.9 33.5L97.0 31.1L96.2 28.6L95.6 26.2L94.0 25.3L92.9 25.4L91.5 25.5L90.5 26.5L89.7 25.1L89.4 24.2L90.0 23.1L88.6 22.5L87.7 21.9L86.2 21.6L85.9 20.5L84.5 20.3L83.7 19.3L82.8 20.3L81.6 21.1L78.1 20.2L75.8 20.2L74.9 19.0L73.5 18.5L73.6 17.0L72.5 15.7L71.2 14.1L71.5 12.3L69.7 11.0L68.2 10.2L68.5 8.5L68.9 7.4L69.3 6.3L68.2 5.7L68.1 5.0L66.7 5.5L65.0 4.7L64.3 4.4L63.8 3.8L62.1 4.1L60.3 4.0L59.0 3.7L56.9 4.2L55.6 4.3L54.3 4.1L53.0 3.7L51.8 3.8L50.0 3.8L49.2 3.7L49.9 2.7L50.3 2.2L48.8 1.0L47.8 0.9L46.8 0.5L45.5 1.2L44.9 0.2L44.1 0.1L43.1 0.8L42.1 1.2L40.7 1.0L39.3 1.1L36.7 1.6L34.1 2.1L33.5 0.4L31.3 0.7L30.9 1.0L30.5 2.0L29.1 2.3L27.9 3.2L26.8 5.1L25.5 6.2L27.3 7.6L26.5 9.4L26.9 11.4L28.1 13.0L28.9 15.1L30.3 15.6L30.7 18.1L29.6 22.3L28.2 23.3L27.3 24.8L25.1 26.1L23.8 27.3L25.6 27.6L26.4 28.3L26.4 28.7L25.0 28.9L24.9 29.6L24.9 30.5L24.2 32.7L22.7 34.3L20.7 35.3L23.4 36.8L24.5 37.8L22.7 39.9L19.8 40.5L17.4 42.4L14.7 44.9L12.1 43.9L10.1 42.1L7.7 42.8L5.7 43.5L3.8 44.7L2.4 45.2L2.4 46.0L1.4 46.7L1.0 47.5L1.5 48.5L1.1 50.6L0.1 52.0L0.4 52.5L1.2 52.9L3.0 52.9L4.9 53.8L5.4 55.0L6.3 55.7L7.4 56.4L9.0 56.5L9.9 56.9L12.1 56.5L13.7 55.7L14.8 56.2L16.3 57.3L17.8 58.8L20.2 58.7L21.3 60.3L22.6 61.5L23.1 62.1L23.4 63.0L24.5 63.0L25.3 63.1L26.6 62.4L27.6 61.6L28.7 60.5L30.0 60.9L30.3 62.0L32.2 62.5L34.1 61.6L34.7 62.3L36.8 63.2L38.5 63.3L39.5 63.2L41.3 63.9L41.9 64.5L43.0 65.1L44.0 65.3L45.8 64.4L47.1 63.8L48.5 64.1L50.4 63.4L50.6 61.8L51.8 61.2L53.7 61.2L54.6 61.1L55.8 61.6L57.7 61.4L58.3 62.2L58.9 63.0L60.4 63.4L61.5 64.1L62.3 65.0L63.4 64.9L64.6 65.3L65.0 66.5L65.7 67.1L66.6 67.8L66.4 69.4L66.8 70.7L67.1 71.6L66.1 72.6L66.0 74.1L66.5 75.5L68.4 74.8L70.9 74.9L72.4 75.2L73.2 76.2L74.5 76.6L75.7 76.0L77.1 75.8L78.4 76.1L79.2 77.1L80.5 78.5L81.1 79.3L81.8 80.3L82.4 81.1L83.0 81.5L84.2 81.6L85.2 82.2L86.2 82.9L87.9 83.0L88.7 83.7L90.6 82.8L93.0 83.6L95.3 84.0L96.5 84.6L96.1 85.9L96.5 86.6L95.7 87.0L94.7 87.8L95.8 89.7L96.2 92.0L95.6 93.0L94.9 94.1L94.4 96.4L93.4 96.7L94.8 98.0L94.5 99.4L94.3 100.5L95.0 101.4L95.6 99.8L97.5 98.9L99.4 98.8L101.0 99.1L103.5 99.1L104.6 98.8L105.7 98.7L106.8 99.3L107.8 100.2L108.7 100.1L109.2 98.8L110.5 99.0L112.4 98.8L113.6 99.5L114.8 99.6L116.7 96.9L116.0 96.6L114.9 96.6L113.8 94.5L113.2 92.3L113.9 89.2L114.7 86.7L115.8 85.3L116.0 83.8L115.9 82.7L116.5 81.8L117.5 81.1L119.0 80.6L119.6 79.4L119.6 77.8L119.1 77.1L117.6 76.7L116.9 77.2L115.3 77.4L114.0 77.9L112.1 78.2L110.5 78.1L108.7 78.2L108.2 77.7L107.6 77.2L106.2 77.3L106.0 78.1L105.3 77.8L104.6 77.5L103.0 77.0Z" fill="#8B6540" fill-opacity="0.85"/></svg>
         </div>
-        <div class="tl-card">
-          <p class="tl-year">大学</p>
-          <h3 class="tl-place">北京理工大学</h3>
-          <p class="tl-desc prose">本科。在北京开始接触更大的世界，写诗、读书、写代码。</p>
-        </div>
-        <div class="tl-card">
-          <p class="tl-year">硕士</p>
-          <h3 class="tl-place">中国科学院</h3>
-          <p class="tl-desc prose">科研训练，计算机视觉方向。</p>
-        </div>
-        <div class="tl-card">
-          <p class="tl-year">工作</p>
-          <h3 class="tl-place">旷视科技</h3>
-          <p class="tl-desc prose">AI 公司的一线工程经验。</p>
-        </div>
-        <div class="tl-card">
-          <p class="tl-year">工作</p>
-          <h3 class="tl-place">微软</h3>
-          <p class="tl-desc prose">大厂体系里的打磨。</p>
-        </div>
-        <div class="tl-card">
-          <p class="tl-year">研究</p>
-          <h3 class="tl-place">西湖大学</h3>
-          <p class="tl-desc prose">回到研究环境，继续探索。</p>
-        </div>
-        <div class="tl-card">
-          <p class="tl-year">Gap</p>
-          <h3 class="tl-place">数字游民 · 一年</h3>
-          <p class="tl-desc prose">一个人用一年时间把国内许多地方走了个遍，体验了自由职业是什么感觉，也更热爱这个地球。</p>
-        </div>
-        <div class="tl-card now">
-          <p class="tl-year">现在</p>
-          <h3 class="tl-place">安远AI</h3>
-          <p class="tl-desc prose">落脚北京，做近几年最在意的事——AI 安全。</p>
-        </div>
+        <p class="j-year">1993</p>
+        <h3 class="j-place">河南 · 平顶山</h3>
+        <p class="j-desc prose">出生。四线城市工薪家庭，爸妈在学校工作。安稳的成长环境，和一颗不安分的好奇心。</p>
       </div>
-      <p class="tl-hint">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        左右拖动查看更多
-      </p>
+      <div class="j-item">
+        <div class="j-fig"><img src="images/timeline/bit.png" alt="北京理工大学校徽" loading="lazy" /></div>
+        <p class="j-year">大学</p>
+        <h3 class="j-place">北京理工大学</h3>
+        <p class="j-desc prose">本科。在北京开始接触更大的世界，写诗、读书、写代码。</p>
+      </div>
+      <div class="j-item">
+        <div class="j-fig"><img src="images/timeline/cas.png" alt="中国科学院" loading="lazy" /></div>
+        <p class="j-year">硕士</p>
+        <h3 class="j-place">中国科学院</h3>
+        <p class="j-desc prose">科研训练，计算机视觉方向。</p>
+      </div>
+      <div class="j-item">
+        <div class="j-fig"><img src="images/timeline/megvii.png" alt="旷视科技" loading="lazy" style="mix-blend-mode: normal; border-radius: 10px;" /></div>
+        <p class="j-year">工作</p>
+        <h3 class="j-place">旷视科技</h3>
+        <p class="j-desc prose">AI 公司的一线工程经验。</p>
+      </div>
+      <div class="j-item">
+        <div class="j-fig"><img src="images/timeline/microsoft.svg" alt="微软" loading="lazy" /></div>
+        <p class="j-year">工作</p>
+        <h3 class="j-place">微软</h3>
+        <p class="j-desc prose">大厂体系里的打磨。</p>
+      </div>
+      <div class="j-item">
+        <div class="j-fig"><img src="images/timeline/westlake.svg" alt="西湖大学" loading="lazy" /></div>
+        <p class="j-year">研究</p>
+        <h3 class="j-place">西湖大学</h3>
+        <p class="j-desc prose">回到研究环境，继续探索。</p>
+      </div>
+      <div class="j-item">
+        <div class="j-fig">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4E7A8A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg>
+        </div>
+        <p class="j-year">Gap</p>
+        <h3 class="j-place">数字游民 · 一年</h3>
+        <p class="j-desc prose">一个人用一年时间把国内许多地方走了个遍，体验了自由职业是什么感觉，也更热爱这个地球。</p>
+      </div>
+      <div class="j-item">
+        <div class="j-fig"><img src="images/timeline/concordia.png" alt="安远AI" loading="lazy" style="filter: invert(0.88);" /></div>
+        <p class="j-year">现在</p>
+        <h3 class="j-place">安远AI</h3>
+        <p class="j-desc prose">落脚北京，做近几年最在意的事——AI 安全。</p>
+      </div>
     </div>
   </section>
 
@@ -758,26 +739,18 @@
       </div>
     </div>
     <div class="act-list reveal">
-      <a class="act-row" href="https://aisafety-cn.com/" target="_blank" rel="noopener">
-        <span class="act-num">01</span>
-        <div>
-          <h3 class="act-title">AI安全开放社区<span class="act-meta">社区 · 创始人 · 2025</span></h3>
-          <p class="act-desc">为了促进中国 AI 安全事业的发展而创办的开放社区。</p>
-        </div>
-        <span class="act-arrow">→</span>
-      </a>
       <a class="act-row" href="https://mp.weixin.qq.com/s?__biz=MzU5Mjg5MjQ5Ng==&mid=2247523317&idx=1&sn=c6ea612249537d44202022460eab68b1&chksm=ff0cd376a4e696ac98b11a8e0418ef409557b961a38fd74ca993eef49ba9f1afc405b0bb3bb0#rd" target="_blank" rel="noopener">
-        <span class="act-num">02</span>
+        <span class="act-date">2026.11.20</span>
         <div>
-          <h3 class="act-title">入选 2026 AI OPC 100<span class="act-meta">荣誉 · 榜单 · 2026.11.20</span></h3>
+          <h3 class="act-title">入选 2026 AI OPC 100<span class="act-meta">荣誉 · 榜单</span></h3>
           <p class="act-desc">我的 OPC 探索之路。入选非凡产研发布的「2026 AI OPC 100」榜单。</p>
         </div>
         <span class="act-arrow">→</span>
       </a>
       <a class="act-row" href="tomorrows-crash.html">
-        <span class="act-num">03</span>
+        <span class="act-date">2026.10.25</span>
         <div>
-          <h3 class="act-title">明日的「事故」？——AI 与近未来危机<span class="act-meta">讲座 · 中间美术馆 · 2026.10.25</span>
+          <h3 class="act-title">明日的「事故」？——AI 与近未来危机<span class="act-meta">讲座 · 中间美术馆</span>
             <span class="ai-badge" aria-label="本文由AI生成">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M5 16l1 3 3-1-3-1-1 3z"/><path d="M19 16l-1 3-3-1 3-1 1 3z"/></svg>
               <span class="tooltip">本文由AI生成</span>
@@ -788,7 +761,7 @@
         <span class="act-arrow">→</span>
       </a>
       <a class="act-row" href="longtan-trilogy.html">
-        <span class="act-num">04</span>
+        <span class="act-date">2026</span>
         <div>
           <h3 class="act-title">龙潭 AI 十日谈 · AI 安全三部曲<span class="act-meta">讲座 · 福建屏南</span>
             <span class="ai-badge" aria-label="本文由AI生成">
@@ -800,11 +773,11 @@
         </div>
         <span class="act-arrow">→</span>
       </a>
-      <a class="act-row" href="https://github.com/jingedawang/introduction-to-digital-minds" target="_blank" rel="noopener">
-        <span class="act-num">05</span>
+      <a class="act-row" href="https://aisafety-cn.com/" target="_blank" rel="noopener">
+        <span class="act-date">2025</span>
         <div>
-          <h3 class="act-title">数字心智通识课<span class="act-meta">课程 · 开源</span></h3>
-          <p class="act-desc">一门关于数字心智的通识课：当心智可以在硅基上运行，我们该如何理解它。</p>
+          <h3 class="act-title">AI安全开放社区<span class="act-meta">社区 · 前创始人</span></h3>
+          <p class="act-desc">为了促进中国 AI 安全事业的发展而创办的开放社区。</p>
         </div>
         <span class="act-arrow">→</span>
       </a>
@@ -822,11 +795,11 @@
     </div>
     <div class="bento reveal">
       <a class="b-card b-lg" href="https://www.zhihu.com/people/jingewang" target="_blank" rel="noopener">
-        <span class="b-tag">写作 · 知乎专栏</span>
+        <span class="b-tag">写作 · 知乎</span>
         <h3 class="b-title">知乎 @王金戈</h3>
         <p class="b-stat">20,000+<small>关注</small></p>
         <p class="b-desc">深度表达的地方。AI 安全、科技与人文——工作和生活中更系统的思考，都写在这里。</p>
-        <span class="b-link">阅读专栏 →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+        <span class="b-link">知乎主页 →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
       </a>
 
       <a class="b-card b-tall" href="poems.html">
@@ -878,11 +851,12 @@
         <span class="b-link">查看 →</span>
       </a>
 
-      <div class="b-card b-soon">
-        <span class="b-tag">Next</span>
-        <h3 class="b-title">还有别的在酝酿……</h3>
-        <p class="b-desc"></p>
-      </div>
+      <a class="b-card b-wide" href="https://github.com/jingedawang/introduction-to-digital-minds" target="_blank" rel="noopener">
+        <span class="b-tag">专栏 · 课程</span>
+        <h3 class="b-title">数字心智通识课</h3>
+        <p class="b-desc">一门关于数字心智的通识课：当心智可以在硅基上运行，我们该如何理解它。</p>
+        <span class="b-link">开始学习 →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      </a>
     </div>
   </section>
 
@@ -987,7 +961,7 @@
       els.forEach(function (el) { io.observe(el); });
     })();
 
-    /* ── Hero：人 ⇄ 机 ⇄ 共生 粒子字形 ── */
+    /* ── Hero：人 → AI 挤入 → 融入地球 粒子动画 ── */
     (function () {
       var canvas = document.getElementById('morph');
       if (!canvas || !canvas.getContext) return;
@@ -995,36 +969,122 @@
       var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var C_HUMAN = [139, 101, 64];   /* 暖棕 · 人 */
       var C_MACHINE = [78, 122, 138]; /* 青蓝 · 机 */
-      var SHAPES = ['人', '机', '共生'];
-      var HOLD = 2800;
+      var SCENES = ['human', 'clash', 'earth'];
+      var HOLD = 3200;
       var SAMPLE = 300, STEP = 4, MAXPTS = 1600;
       var W = 0, H = 0, dpr = 1;
       var particles = [];
       var pointSets = {};
-      var shapeIdx = 0, lastSwitch = 0, started = false;
+      var sceneIdx = 0, lastSwitch = 0, started = false;
 
-      function sample(text) {
+      /* 三幕场景均为程序化绘制，再采样成带颜色标签的目标点（0=人 1=机 2=横向渐变） */
+      function drawHuman(c) {
+        c.fillStyle = '#000';
+        c.beginPath();
+        c.arc(150, 80, 30, 0, Math.PI * 2);      /* 头 */
+        c.fill();
+        c.beginPath();                            /* 身体：圆肩立柱 */
+        c.moveTo(118, 234);
+        c.lineTo(118, 152);
+        c.arc(150, 152, 32, Math.PI, 0);
+        c.lineTo(182, 234);
+        c.closePath();
+        c.fill();
+      }
+
+      function drawChip(c) {
+        var cx = 200, cy = 150, s = 44, r = 12, i, p;
+        c.fillStyle = '#000';
+        c.beginPath();                            /* 芯片本体：圆角方块 */
+        c.moveTo(cx - s + r, cy - s);
+        c.arcTo(cx + s, cy - s, cx + s, cy + s, r);
+        c.arcTo(cx + s, cy + s, cx - s, cy + s, r);
+        c.arcTo(cx - s, cy + s, cx - s, cy - s, r);
+        c.arcTo(cx - s, cy - s, cx + s, cy - s, r);
+        c.closePath();
+        for (i = -1; i <= 1; i++) {               /* 四边引脚 */
+          p = i * 26;
+          c.rect(cx + p - 4, cy - s - 15, 8, 15);
+          c.rect(cx + p - 4, cy + s, 8, 15);
+          c.rect(cx - s - 15, cy + p - 4, 15, 8);
+          c.rect(cx + s, cy + p - 4, 15, 8);
+        }
+        c.fill();
+        c.globalCompositeOperation = 'destination-out';  /* 镂空中心 */
+        c.fillRect(cx - 19, cy - 19, 38, 38);
+        c.globalCompositeOperation = 'source-over';
+      }
+
+      function drawEarth(c) {
+        c.strokeStyle = '#000';
+        c.lineWidth = 9;
+        c.beginPath();
+        c.arc(150, 150, 95, 0, Math.PI * 2);      /* 地球轮廓 */
+        c.stroke();
+        c.fillStyle = '#000';
+        var blobs = [                              /* 大陆块 */
+          [105, 125, 30, 20, -0.4],
+          [180, 102, 16, 11, 0.5],
+          [185, 168, 20, 13, 0.15],
+          [128, 192, 17, 10, -0.2],
+          [163, 207, 9, 6, 0.3]
+        ];
+        for (var i = 0; i < blobs.length; i++) {
+          var b = blobs[i];
+          c.beginPath();
+          c.ellipse(b[0], b[1], b[2], b[3], b[4], 0, Math.PI * 2);
+          c.fill();
+        }
+      }
+
+      function collect(off, tag, out) {
+        var data = off.getContext('2d', { willReadFrequently: true }).getImageData(0, 0, SAMPLE, SAMPLE).data;
+        for (var y = 0; y < SAMPLE; y += STEP) {
+          for (var x = 0; x < SAMPLE; x += STEP) {
+            if (data[(y * SAMPLE + x) * 4 + 3] > 110) out.push([x / SAMPLE, y / SAMPLE, tag]);
+          }
+        }
+      }
+
+      function sampleScene(name) {
+        var pts = [];
         var off = document.createElement('canvas');
         off.width = SAMPLE; off.height = SAMPLE;
         var o = off.getContext('2d', { willReadFrequently: true });
-        var fs = text.length === 1 ? 215 : 128;
-        o.font = '900 ' + fs + 'px "Noto Serif SC", serif';
-        o.textAlign = 'center';
-        o.textBaseline = 'middle';
-        o.fillStyle = '#000';
-        o.fillText(text, SAMPLE / 2, SAMPLE / 2 + fs * 0.06);
-        var data = o.getImageData(0, 0, SAMPLE, SAMPLE).data;
-        var pts = [];
-        for (var y = 0; y < SAMPLE; y += STEP) {
-          for (var x = 0; x < SAMPLE; x += STEP) {
-            if (data[(y * SAMPLE + x) * 4 + 3] > 110) pts.push([x / SAMPLE, y / SAMPLE]);
-          }
+        if (name === 'human') {
+          drawHuman(o);
+          collect(off, 0, pts);
+        } else if (name === 'clash') {
+          o.save();                                  /* 人形缩小让位 */
+          o.translate(112, 150);
+          o.scale(0.86, 0.86);
+          o.translate(-150, -150);
+          drawHuman(o);
+          o.restore();
+          collect(off, 0, pts);
+          o.clearRect(0, 0, SAMPLE, SAMPLE);
+          drawChip(o);                               /* AI 芯片挤进来 */
+          collect(off, 1, pts);
+        } else {
+          drawEarth(o);                              /* 一起融入地球 */
+          collect(off, 2, pts);
         }
         if (pts.length > MAXPTS) {
           var stride = Math.ceil(pts.length / MAXPTS);
           pts = pts.filter(function (_, i) { return i % stride === 0; });
         }
         return pts;
+      }
+
+      function colorFor(pt) {
+        if (pt[2] === 0) return C_HUMAN;
+        if (pt[2] === 1) return C_MACHINE;
+        var m = Math.max(0, Math.min(1, (pt[0] - 0.15) / 0.7));
+        return [
+          Math.round(C_HUMAN[0] + (C_MACHINE[0] - C_HUMAN[0]) * m),
+          Math.round(C_HUMAN[1] + (C_MACHINE[1] - C_HUMAN[1]) * m),
+          Math.round(C_HUMAN[2] + (C_MACHINE[2] - C_HUMAN[2]) * m)
+        ];
       }
 
       function resize() {
@@ -1039,8 +1099,8 @@
 
       function buildParticles() {
         var maxLen = 0;
-        SHAPES.forEach(function (s) {
-          pointSets[s] = sample(s);
+        SCENES.forEach(function (s) {
+          pointSets[s] = sampleScene(s);
           if (pointSets[s].length > maxLen) maxLen = pointSets[s].length;
         });
         for (var i = 0; i < maxLen; i++) {
@@ -1056,7 +1116,7 @@
       }
 
       function assignTargets(idx, first) {
-        var pts = pointSets[SHAPES[idx]];
+        var pts = pointSets[SCENES[idx]];
         if (!pts || !pts.length) return;
         var order = [];
         for (var i = 0; i < pts.length; i++) order.push(i);
@@ -1064,36 +1124,23 @@
           var j = Math.floor(Math.random() * (i + 1));
           var t = order[i]; order[i] = order[j]; order[j] = t;
         }
-        var name = SHAPES[idx];
-        var isSym = name === '共生';
-        var base = name === '人' ? C_HUMAN : C_MACHINE;
         particles.forEach(function (p, k) {
           var pt = pts[order[k % pts.length]];
           p.tx = pt[0] * W;
           p.ty = pt[1] * H;
-          if (isSym) {
-            /* 共生：按横向位置在人色与机色之间渐变 */
-            var m = pt[0];
-            p.tr = C_HUMAN[0] + (C_MACHINE[0] - C_HUMAN[0]) * m;
-            p.tg = C_HUMAN[1] + (C_MACHINE[1] - C_HUMAN[1]) * m;
-            p.tb = C_HUMAN[2] + (C_MACHINE[2] - C_HUMAN[2]) * m;
-          } else {
-            p.tr = base[0]; p.tg = base[1]; p.tb = base[2];
-          }
+          var c = colorFor(pt);
+          p.tr = c[0]; p.tg = c[1]; p.tb = c[2];
           if (first) { p.cr = p.tr; p.cg = p.tg; p.cb = p.tb; }
         });
       }
 
       function drawStatic() {
         ctx.clearRect(0, 0, W, H);
-        var pts = pointSets['共生'] || [];
+        var pts = pointSets['earth'] || [];
         var dot = 2 * dpr;
         pts.forEach(function (pt) {
-          var m = pt[0];
-          ctx.fillStyle = 'rgb(' +
-            Math.round(C_HUMAN[0] + (C_MACHINE[0] - C_HUMAN[0]) * m) + ',' +
-            Math.round(C_HUMAN[1] + (C_MACHINE[1] - C_HUMAN[1]) * m) + ',' +
-            Math.round(C_HUMAN[2] + (C_MACHINE[2] - C_HUMAN[2]) * m) + ')';
+          var c = colorFor(pt);
+          ctx.fillStyle = 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')';
           ctx.fillRect(pt[0] * W, pt[1] * H, dot, dot);
         });
       }
@@ -1101,8 +1148,8 @@
       function frame(t) {
         if (!lastSwitch) lastSwitch = t;
         if (t - lastSwitch > HOLD) {
-          shapeIdx = (shapeIdx + 1) % SHAPES.length;
-          assignTargets(shapeIdx);
+          sceneIdx = (sceneIdx + 1) % SCENES.length;
+          assignTargets(sceneIdx);
           lastSwitch = t;
         }
         ctx.clearRect(0, 0, W, H);
@@ -1124,9 +1171,9 @@
 
       function start() {
         if (started) return;
-        started = true;
         resize();
-        if (!W) return;
+        if (!W) { window.addEventListener('load', start); return; }
+        started = true;
         buildParticles();
         if (reduced) { drawStatic(); return; }
         requestAnimationFrame(frame);
@@ -1135,51 +1182,82 @@
           clearTimeout(rt);
           rt = setTimeout(function () {
             resize();
-            assignTargets(shapeIdx);
+            assignTargets(sceneIdx);
             if (reduced) drawStatic();
           }, 180);
         });
       }
 
-      if (document.fonts && document.fonts.load) {
-        Promise.race([
-          document.fonts.load('900 200px "Noto Serif SC"', '人机共生').then(function () { return document.fonts.ready; }),
-          new Promise(function (r) { setTimeout(r, 2600); })
-        ]).then(start, start);
-      } else if (document.readyState === 'complete') {
-        start();
-      } else {
-        window.addEventListener('load', start);
-      }
+      start();
     })();
 
-    /* ── 时间线拖动 ── */
+    /* ── 职业生涯：蜿蜒时间线（SVG 曲线串联节点） ── */
     (function () {
-      var track = document.getElementById('tlTrack');
-      if (!track) return;
-      var down = false, startX = 0, startLeft = 0;
-      track.addEventListener('pointerdown', function (e) {
-        if (e.pointerType !== 'mouse') return;
-        down = true;
-        startX = e.clientX;
-        startLeft = track.scrollLeft;
-      });
-      window.addEventListener('pointermove', function (e) {
-        if (!down) return;
-        var dx = e.clientX - startX;
-        if (!track.classList.contains('dragging')) {
-          if (Math.abs(dx) < 4) return;
-          track.classList.add('dragging');
-          try { track.setPointerCapture(e.pointerId); } catch (_) {}
-        }
-        track.scrollLeft = startLeft - dx;
-        e.preventDefault();
-      });
-      ['pointerup', 'pointercancel'].forEach(function (ev) {
-        window.addEventListener(ev, function () {
-          down = false;
-          track.classList.remove('dragging');
+      var list = document.getElementById('jList');
+      var svg = document.getElementById('jSvg');
+      var path = document.getElementById('jPath');
+      if (!list || !svg || !path) return;
+      var SVGNS = 'http://www.w3.org/2000/svg';
+      var narrow = window.matchMedia('(max-width: 640px)');
+
+      function build() {
+        var items = list.querySelectorAll('.j-item');
+        if (!items.length) return;
+        var lr = list.getBoundingClientRect();
+        if (!lr.width || !lr.height) return;
+        svg.setAttribute('viewBox', '0 0 ' + lr.width + ' ' + lr.height);
+        var isNarrow = narrow.matches;
+        var x = isNarrow ? 13 : lr.width / 2;
+        var pts = [];
+        items.forEach(function (it) {
+          var yEl = it.querySelector('.j-year') || it;
+          var r = yEl.getBoundingClientRect();
+          pts.push(r.top - lr.top + r.height / 2);
         });
+        var d = 'M ' + x.toFixed(1) + ' ' + pts[0].toFixed(1);
+        var amp = Math.min(44, lr.width * 0.08);
+        for (var i = 1; i < pts.length; i++) {
+          var y0 = pts[i - 1], y1 = pts[i];
+          if (isNarrow) {
+            d += ' L ' + x.toFixed(1) + ' ' + y1.toFixed(1);
+          } else {
+            var s = i % 2 === 1 ? 1 : -1;   /* 朝下一个节点所在的一侧弯曲 */
+            d += ' C ' + (x + s * amp).toFixed(1) + ' ' + (y0 + (y1 - y0) * 0.33).toFixed(1) +
+                 ', ' + (x + s * amp).toFixed(1) + ' ' + (y0 + (y1 - y0) * 0.67).toFixed(1) +
+                 ', ' + x.toFixed(1) + ' ' + y1.toFixed(1);
+          }
+        }
+        path.setAttribute('d', d);
+        svg.querySelectorAll('circle').forEach(function (c) { c.remove(); });
+        pts.forEach(function (y, i) {
+          var last = i === pts.length - 1;
+          if (last) {
+            var halo = document.createElementNS(SVGNS, 'circle');
+            halo.setAttribute('cx', x); halo.setAttribute('cy', y);
+            halo.setAttribute('r', '11');
+            halo.setAttribute('fill', 'none');
+            halo.setAttribute('stroke', '#4E7A8A');
+            halo.setAttribute('stroke-opacity', '0.3');
+            halo.setAttribute('stroke-width', '2.5');
+            svg.appendChild(halo);
+          }
+          var c = document.createElementNS(SVGNS, 'circle');
+          c.setAttribute('cx', x); c.setAttribute('cy', y);
+          c.setAttribute('r', '6.5');
+          c.setAttribute('fill', '#F7F4EF');
+          c.setAttribute('stroke', last ? '#4E7A8A' : '#8B6540');
+          c.setAttribute('stroke-width', '2.5');
+          svg.appendChild(c);
+        });
+      }
+
+      build();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
+      window.addEventListener('load', build);
+      var rt;
+      window.addEventListener('resize', function () {
+        clearTimeout(rt);
+        rt = setTimeout(build, 160);
       });
     })();
 

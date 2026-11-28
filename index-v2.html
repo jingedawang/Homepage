@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>王金戈 | 人本主义 × 机本主义 · 探索人机共生之路</title>
+  <meta name="description" content="王金戈，AI 安全研究者、写作者、探索者。关心 AI 时代的人能否独善其身，关心 AI 安全与 AI 福祉，探索一条人机共生的道路。" />
+  <link rel="icon" href="favicon.ico" />
+  <meta property="og:title" content="王金戈 | 人本主义 × 机本主义" />
+  <meta property="og:description" content="AI 安全研究者、写作者、探索者。探索一条人机共生的道路。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://wangjinge.me" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #100E0B;
+      --bg-soft:  #16130F;
+      --surface:  #1B1712;
+      --ink:      #EDE6DA;
+      --ink-soft: #9D9385;
+      --human:    #D9A05B;   /* 人 · 暖 */
+      --machine:  #7FB7C9;   /* 机 · 冷 */
+      --border:   rgba(237, 231, 221, 0.09);
+      --serif:    'Noto Serif SC', Georgia, serif;
+      --sans:     'Noto Sans SC', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.9;
+      -webkit-font-smoothing: antialiased;
+      text-autospace: normal;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: rgba(217, 160, 91, 0.35); color: #FFF6E8; }
+
+    /* ── Nav ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(16, 14, 11, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 6vw;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 58px;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+    }
+    .nav-logo em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--human), var(--machine));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink-soft);
+      font-size: 0.83rem;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--human); }
+
+    /* ── Hero ────────────────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 0 8vw;
+      overflow: hidden;
+    }
+
+    #helix {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .hero-inner { position: relative; z-index: 2; max-width: 46rem; }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.35em;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: riseIn 1s ease 0.2s forwards;
+    }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      line-height: 1.05;
+      margin-bottom: 2.2rem;
+      opacity: 0;
+      animation: riseIn 1s ease 0.45s forwards;
+    }
+
+    .hero-creed {
+      font-family: var(--serif);
+      font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+      font-weight: 400;
+      line-height: 2.1;
+      color: var(--ink);
+    }
+
+    .hero-creed .line {
+      display: block;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: riseIn 0.9s ease forwards;
+    }
+    .hero-creed .line:nth-child(1) { animation-delay: 0.9s; }
+    .hero-creed .line:nth-child(2) { animation-delay: 1.25s; }
+    .hero-creed .line:nth-child(3) { animation-delay: 1.6s; }
+    .hero-creed .line:nth-child(4) { animation-delay: 1.6s; }
+
+    .w-human  { color: var(--human); font-weight: 600; }
+    .w-machine{ color: var(--machine); font-weight: 600; }
+    .w-sym {
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--human), var(--machine));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @keyframes riseIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.6rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      color: var(--ink-soft);
+      animation: hintFloat 2.4s ease-in-out infinite;
+    }
+    @keyframes hintFloat {
+      0%, 100% { opacity: 0.35; transform: translateX(-50%) translateY(0); }
+      50%      { opacity: 0.9;  transform: translateX(-50%) translateY(-7px); }
+    }
+
+    /* ── Section base ────────────────────────────────────── */
+    section { padding: 8rem 8vw; position: relative; }
+
+    .section-head { margin-bottom: 4rem; }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--human);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .section-sub {
+      margin-top: 0.9rem;
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      max-width: 40em;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── Creed section ───────────────────────────────────── */
+    .creed-section { background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .creed-text {
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 400;
+      line-height: 2.2;
+      max-width: 34em;
+    }
+
+    .creed-text .u-sym {
+      background-image: linear-gradient(90deg, var(--human), var(--machine));
+      background-repeat: no-repeat;
+      background-size: 100% 2px;
+      background-position: 0 96%;
+      padding-bottom: 4px;
+      font-weight: 600;
+    }
+
+    /* ── Timeline（职业生涯） ────────────────────────────── */
+    .timeline { position: relative; max-width: 46rem; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--human), #B08A6A 55%, var(--machine));
+      opacity: 0.55;
+    }
+
+    .tl-item {
+      position: relative;
+      padding: 0 0 3.2rem 2.6rem;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--human);
+    }
+    .tl-item.now::before {
+      border-color: var(--machine);
+      box-shadow: 0 0 14px rgba(127, 183, 201, 0.65);
+    }
+
+    .tl-place {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    .tl-item.now .tl-place { color: var(--machine); }
+
+    .tl-role {
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      color: var(--human);
+      margin: 0.2rem 0 0.5rem;
+      text-transform: uppercase;
+    }
+    .tl-item.now .tl-role { color: var(--machine); }
+
+    .tl-desc { font-size: 0.92rem; color: var(--ink-soft); max-width: 34em; }
+
+    /* ── Cards grid ──────────────────────────────────────── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2.1rem 1.9rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--human), var(--machine));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(217, 160, 91, 0.35);
+      background: #211C16;
+    }
+    .card:hover::before { transform: scaleX(1); }
+
+    .card-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .card-title {
+      font-family: var(--serif);
+      font-size: 1.22rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      line-height: 1.8;
+      flex: 1;
+    }
+
+    .card-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--human);
+      letter-spacing: 0.06em;
+      margin-top: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .ai-badge { position: relative; display: inline-block; margin-left: 0.4em; cursor: help; vertical-align: middle; }
+    .ai-badge svg { width: 0.9em; height: 0.9em; color: var(--machine); opacity: 0.75; }
+    .ai-badge:hover svg { opacity: 1; }
+    .tooltip {
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.35rem 0.7rem;
+      background: var(--ink);
+      color: var(--bg);
+      font-size: 0.72rem;
+      font-family: var(--sans);
+      white-space: nowrap;
+      border-radius: 4px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s;
+      pointer-events: none;
+    }
+    .ai-badge:hover .tooltip { opacity: 1; visibility: visible; }
+
+    /* ── Guestbook（留言板） ─────────────────────────────── */
+    .guestbook-section { background: var(--bg-soft); border-top: 1px solid var(--border); }
+
+    .guestbook-hint {
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      margin-bottom: 2.2rem;
+      max-width: 42em;
+    }
+    .guestbook-hint kbd {
+      font-family: var(--sans);
+      font-size: 0.8em;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.1em 0.5em;
+      color: var(--human);
+    }
+
+    .giscus-frame { min-height: 220px; }
+
+    /* ── Highlight popover & marks ───────────────────────── */
+    mark.hl {
+      background: linear-gradient(180deg, transparent 62%, rgba(217, 160, 91, 0.4) 62%);
+      color: inherit;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+    mark.hl:hover { background: linear-gradient(180deg, transparent 55%, rgba(217, 160, 91, 0.6) 55%); }
+
+    #hl-pop {
+      position: absolute;
+      z-index: 200;
+      display: none;
+      background: #26211A;
+      border: 1px solid rgba(217, 160, 91, 0.4);
+      border-radius: 8px;
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.55);
+      padding: 4px;
+      gap: 2px;
+    }
+    #hl-pop.show { display: flex; }
+    #hl-pop button {
+      background: none;
+      border: none;
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      padding: 0.42rem 0.8rem;
+      border-radius: 5px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    #hl-pop button:hover { background: rgba(217, 160, 91, 0.18); color: var(--human); }
+
+    #toast {
+      position: fixed;
+      bottom: 2.4rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #26211A;
+      color: var(--ink);
+      border: 1px solid rgba(217, 160, 91, 0.4);
+      font-size: 0.85rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 300;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── Links ───────────────────────────────────────────── */
+    .links-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.4rem 2.8rem;
+      list-style: none;
+    }
+    .links-list a {
+      text-decoration: none;
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      transition: color 0.2s;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 1px;
+    }
+    .links-list a:hover { color: var(--human); border-bottom-color: var(--human); }
+    .links-list svg { opacity: 0.8; }
+
+    /* ── Footer ──────────────────────────────────────────── */
+    footer {
+      padding: 2.2rem 8vw;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .ext-icon { margin-left: 0.35em; opacity: 0.5; vertical-align: middle; transition: opacity 0.2s; }
+    a:hover .ext-icon { opacity: 1; }
+
+    /* ── Responsive ──────────────────────────────────────── */
+    @media (max-width: 720px) {
+      nav { padding: 0 5vw; }
+      .nav-links { gap: 1.05rem; }
+      .nav-links a { font-size: 0.75rem; letter-spacing: 0.04em; }
+      .hero { padding: 0 6vw; }
+      section { padding: 5.5rem 6vw; }
+      footer { padding: 2rem 6vw; }
+      .timeline::before { left: 6px; }
+      .tl-item { padding-left: 2.1rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-eyebrow, .hero-name, .hero-creed .line { animation-duration: 0.01s; animation-delay: 0s; }
+      .reveal { transition: none; opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8PB3QS33YB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8PB3QS33YB');
+  </script>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">王金戈<em> · 人机共生</em></a>
+      <ul class="nav-links">
+        <li><a href="#creed">理念</a></li>
+        <li><a href="#journey">历程</a></li>
+        <li><a href="#activities">活动</a></li>
+        <li><a href="#works">作品</a></li>
+        <li><a href="#guestbook">留言</a></li>
+        <li><a href="poems.html">诗</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <canvas id="helix" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <p class="hero-eyebrow">AI Safety · 写作 · 探索</p>
+      <h1 class="hero-name">王金戈</h1>
+      <div class="hero-creed">
+        <span class="line">我关心这个时代的<mark class="w-human">人</mark>——在 AI 的冲击下，能否独善其身，能否过上更好的生活。</span>
+        <span class="line">我关心 AI 安全，也关心 <mark class="w-machine">AI 福祉</mark>。</span>
+        <span class="line">未来十年，不只是<mark class="w-human">人本主义</mark>复兴的时代，也是<mark class="w-machine">机本主义</mark>崛起的时代。</span>
+        <span class="line">我希望探索一条<mark class="w-sym">人机共生</mark>的道路。</span>
+      </div>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
+        <path d="M8 1v14M2 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 理念 -->
+  <section id="creed" class="creed-section selectable">
+    <div class="section-head reveal">
+      <p class="section-label">理念 · Creed</p>
+    </div>
+    <p class="creed-text reveal">
+      我关心当下生活在这个时代的人们——在 AI 的冲击下，能否独善其身，能否过上更好的生活。我关心 <mark class="w-human">AI 安全</mark>，也关心 <mark class="w-machine">AI 福祉</mark>。未来十年，不只是<mark class="w-human">人本主义</mark>复兴的时代，也是<mark class="w-machine">机本主义</mark>崛起的时代。我希望探索一条<span class="u-sym">人机共生</span>的道路。
+    </p>
+  </section>
+
+  <!-- 职业生涯 -->
+  <section id="journey" class="selectable">
+    <div class="section-head reveal">
+      <p class="section-label">职业生涯 · Journey</p>
+      <h2 class="section-title">从平顶山到 AI 安全一线</h2>
+      <p class="section-sub">大厂待过，科研做过，也用一年时间做过数字游民。走过的弯路，最后都成了路。</p>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <p class="tl-place">河南 · 平顶山</p>
+        <p class="tl-role">1993 · 出发</p>
+        <p class="tl-desc">四线城市工薪家庭，爸妈在学校工作。安稳的成长环境，和一颗不安分的好奇心。</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-place">北京理工大学</p>
+        <p class="tl-role">本科</p>
+        <p class="tl-desc">在北京开始接触更大的世界，写诗、读书、写代码。</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-place">中国科学院</p>
+        <p class="tl-role">硕士</p>
+        <p class="tl-desc">科研训练，计算机视觉方向。</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-place">旷视科技</p>
+        <p class="tl-role">工程师</p>
+        <p class="tl-desc">AI 公司的一线工程经验。</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-place">微软</p>
+        <p class="tl-role">工程师</p>
+        <p class="tl-desc">大厂体系里的打磨。</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-place">西湖大学</p>
+        <p class="tl-role">研究</p>
+        <p class="tl-desc">回到研究环境，继续探索。</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-place">数字游民</p>
+        <p class="tl-role">Gap 一年</p>
+        <p class="tl-desc">一个人用一年时间把国内许多地方走了个遍，体验了自由职业是什么感觉，也更热爱这个地球。</p>
+      </div>
+      <div class="tl-item now">
+        <p class="tl-place">安远AI</p>
+        <p class="tl-role">现在 · AI 安全</p>
+        <p class="tl-desc">落脚北京，做近几年最在意的事——AI 安全。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 社会活动 -->
+  <section id="activities" class="selectable" style="background: var(--bg-soft); border-top: 1px solid var(--border);">
+    <div class="section-head reveal">
+      <p class="section-label">社会活动 · Activities</p>
+      <h2 class="section-title">在场，发声，组织</h2>
+      <p class="section-sub">社区、讲座、公共讨论——AI 安全不是一个人的事。</p>
+    </div>
+    <div class="cards-grid reveal">
+      <a class="card" href="https://aisafety-cn.com/" target="_blank" rel="noopener">
+        <span class="card-tag">社区 · 创始人 · 2025</span>
+        <h3 class="card-title">AI安全开放社区</h3>
+        <p class="card-desc">为了促进中国 AI 安全事业的发展，2025 年创办的开放社区。</p>
+        <span class="card-link">官网 →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      </a>
+
+      <a class="card" href="https://mp.weixin.qq.com/s?__biz=MzU5Mjg5MjQ5Ng==&mid=2247523317&idx=1&sn=c6ea612249537d44202022460eab68b1&chksm=ff0cd376a4e696ac98b11a8e0418ef409557b961a38fd74ca993eef49ba9f1afc405b0bb3bb0#rd" target="_blank" rel="noopener">
+        <span class="card-tag">荣誉 · 榜单 · 2026.11.20</span>
+        <h3 class="card-title">入选 2026 AI OPC 100</h3>
+        <p class="card-desc">我的 OPC 探索之路。入选非凡产研发布的「2026 AI OPC 100」榜单。</p>
+        <span class="card-link">查看报道 →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      </a>
+
+      <a class="card" href="tomorrows-crash.html">
+        <span class="card-tag">讲座 · 北京中间美术馆 · 2026.10.25</span>
+        <h3 class="card-title">明日的「事故」？——AI 与近未来危机
+          <span class="ai-badge" aria-label="本文由AI生成">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M5 16l1 3 3-1-3-1-1 3z"/><path d="M19 16l-1 3-3-1 3-1 1 3z"/></svg>
+            <span class="tooltip">本文由AI生成</span>
+          </span>
+        </h3>
+        <p class="card-desc">展览「事故」闭幕讲座。从 AI 安全研究的一线出发，谈 Crash（事故）与 Crush（迷恋），以及自动化之后人的价值。</p>
+        <span class="card-link">查看回顾 →</span>
+      </a>
+
+      <a class="card" href="longtan-trilogy.html">
+        <span class="card-tag">讲座 · 福建屏南龙潭村</span>
+        <h3 class="card-title">龙潭 AI 十日谈 · AI 安全三部曲
+          <span class="ai-badge" aria-label="本文由AI生成">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M5 16l1 3 3-1-3-1-1 3z"/><path d="M19 16l-1 3-3-1 3-1 1 3z"/></svg>
+            <span class="tooltip">本文由AI生成</span>
+          </span>
+        </h3>
+        <p class="card-desc">三夜围炉夜谈：从个人价值到文明风险，再到前沿治理——谁说了都不算，意味着每个人都算数。</p>
+        <span class="card-link">查看回顾 →</span>
+      </a>
+
+      <a class="card" href="https://github.com/jingedawang/introduction-to-digital-minds" target="_blank" rel="noopener">
+        <span class="card-tag">课程 · 开源</span>
+        <h3 class="card-title">数字心智通识课</h3>
+        <p class="card-desc">一门关于数字心智的通识课：当心智可以在硅基上运行，我们该如何理解它。</p>
+        <span class="card-link">前往GitHub →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 个人作品 -->
+  <section id="works" class="selectable">
+    <div class="section-head reveal">
+      <p class="section-label">个人作品 · Works</p>
+      <h2 class="section-title">写作、开源与自媒体</h2>
+      <p class="section-sub">深度表达在知乎，生活在小红书和 B 站，代码在 GitHub。</p>
+    </div>
+    <div class="cards-grid reveal">
+      <a class="card" href="https://www.zhihu.com/people/jingewang" target="_blank" rel="noopener">
+        <span class="card-tag">写作 · 知乎专栏</span>
+        <h3 class="card-title">知乎 @王金戈</h3>
+        <p class="card-desc">深度表达的地方。AI 安全、科技与人文，两万读者。</p>
+        <span class="card-link">阅读专栏 →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      </a>
+
+      <a class="card" href="poems.html">
+        <span class="card-tag">写作 · 诗</span>
+        <h3 class="card-title">诗</h3>
+        <p class="card-desc">五十首诗，从高三教室到 AI 时代，写于不同时期，不同心境。</p>
+        <span class="card-link">阅读 →</span>
+      </a>
+
+      <a class="card" href="first-crisis.html">
+        <span class="card-tag">写作 · 科幻短篇</span>
+        <h3 class="card-title">第一次危机</h3>
+        <p class="card-desc">如果 AI 真的拥有了自我意识，它会怎么选择？一个关于觉醒、自由与告别的故事。</p>
+        <span class="card-link">阅读全文 →</span>
+      </a>
+
+      <a class="card" href="https://github.com/jingedawang/TutorialLLM" target="_blank" rel="noopener">
+        <span class="card-tag">开源 · 教程</span>
+        <h3 class="card-title">TutorialLLM</h3>
+        <p class="card-desc">写给每个人的大模型教程。从预训练到微调再到对齐完整走一遍，小白也能理解 AI 的底层原理。</p>
+        <span class="card-link">前往GitHub →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      </a>
+
+      <a class="card" href="https://github.com/jingedawang" target="_blank" rel="noopener">
+        <span class="card-tag">开源 · 更多</span>
+        <h3 class="card-title">GitHub 仓库</h3>
+        <p class="card-desc">算法、视觉、AI 意识评估……这些年写过的东西，大多在这里。</p>
+        <span class="card-link">逛逛 →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      </a>
+
+      <a class="card" href="https://space.bilibili.com/69217382" target="_blank" rel="noopener">
+        <span class="card-tag">视频 · Bilibili</span>
+        <h3 class="card-title">B 站 @金戈大王</h3>
+        <p class="card-desc">视频形式的表达与记录。</p>
+        <span class="card-link">观看 →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      </a>
+
+      <a class="card" href="https://www.xiaohongshu.com/user/profile/604cf639000000000100bded" target="_blank" rel="noopener">
+        <span class="card-tag">自媒体 · 小红书</span>
+        <h3 class="card-title">小红书 @金戈</h3>
+        <p class="card-desc">简短但充满生活气息的内容。</p>
+        <span class="card-link">看看 →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      </a>
+
+      <a class="card" href="match.html">
+        <span class="card-tag">生活 · 相亲</span>
+        <h3 class="card-title">相亲档案</h3>
+        <p class="card-desc">93年生人，程序员，写作者，探索者。稍微偏离主流路线的人，正在寻找同路的你。</p>
+        <span class="card-link">查看 →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 留言板 -->
+  <section id="guestbook" class="guestbook-section">
+    <div class="section-head reveal">
+      <p class="section-label">留言板 · Guestbook</p>
+      <h2 class="section-title">说点什么</h2>
+    </div>
+    <p class="guestbook-hint reveal">
+      选中页面上任何一段文字，可以<kbd>划线</kbd>收藏（保存在你自己的浏览器里），或<kbd>引用留言</kbd>——它会自动复制引用并带你来这里。留言需要 GitHub 账号。
+    </p>
+    <!--
+      TODO(jinge): giscus 配置——需要你两步操作后把参数给我：
+      1. 在 GitHub 仓库 jingedawang/Homepage 的 Settings → Features 里开启 Discussions；
+      2. 打开 https://giscus.app/zh-CN ，仓库填 jingedawang/Homepage，分类选 General，
+         把生成的 data-repo-id 和 data-category-id 发我（或直接把整段 script 发我）。
+      填好后把下面的占位值替换掉即可生效。
+    -->
+    <div class="giscus-frame reveal">
+      <script src="https://giscus.app/client.js"
+        data-repo="jingedawang/Homepage"
+        data-repo-id="R_kgDO_REPLACE_ME"
+        data-category="General"
+        data-category-id="DIC_kwDO_REPLACE_ME"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+      </script>
+    </div>
+  </section>
+
+  <!-- 找到我 -->
+  <section id="links">
+    <div class="section-head reveal">
+      <p class="section-label">找到我 · Contact</p>
+    </div>
+    <ul class="links-list reveal">
+      <li>
+        <a href="https://www.zhihu.com/people/jingewang" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M5.721 0C2.251 0 0 2.25 0 5.719V18.28C0 21.751 2.252 24 5.721 24h12.56C21.751 24 24 21.75 24 18.281V5.72C24 2.249 21.75 0 18.281 0zm1.964 4.078c-.271.73-.5 1.434-.68 2.11h4.587c.545-.006.445 1.168.445 1.171H9.384a58.104 58.104 0 01-.112 3.797h2.712c.388.023.393 1.251.393 1.266H9.183a9.223 9.223 0 01-.408 2.102l.757-.604c.452.456 1.512 1.712 1.906 2.177.473.681.063 2.081.063 2.081l-2.794-3.382c-.653 2.518-1.845 3.607-1.845 3.607-.523.468-1.58.82-2.64.516 2.218-1.73 3.44-3.917 3.667-6.497H4.491c0-.015.197-1.243.806-1.266h2.71c.024-.32.086-3.254.086-3.797H6.598c-.136.406-.158.447-.268.753-.594 1.095-1.603 1.122-1.907 1.155.906-1.821 1.416-3.6 1.591-4.064.425-1.124 1.671-1.125 1.671-1.125zM13.078 6h6.377v11.33h-2.573l-2.184 1.373-.401-1.373h-1.219zm1.313 1.219v8.86h.623l.263.937 1.455-.938h1.456v-8.86z"/></svg>
+          知乎
+        </a>
+      </li>
+      <li>
+        <a href="https://www.xiaohongshu.com/user/profile/604cf639000000000100bded" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22.405 9.879c.002.016.01.02.07.019h.725a.797.797 0 0 0 .78-.972.794.794 0 0 0-.884-.618.795.795 0 0 0-.692.794c0 .101-.002.666.001.777zm-11.509 4.808c-.203.001-1.353.004-1.685.003a2.528 2.528 0 0 1-.766-.126.025.025 0 0 0-.03.014L7.7 16.127a.025.025 0 0 0 .01.032c.111.06.336.124.495.124.66.01 1.32.002 1.981 0 .01 0 .02-.006.023-.015l.712-1.545a.025.025 0 0 0-.024-.036zM.477 9.91c-.071 0-.076.002-.076.01a.834.834 0 0 0-.01.08c-.027.397-.038.495-.234 3.06-.012.24-.034.389-.135.607-.026.057-.033.042.003.112.046.092.681 1.523.787 1.74.008.015.011.02.017.02.008 0 .033-.026.047-.044.147-.187.268-.391.371-.606.306-.635.44-1.325.486-1.706.014-.11.021-.22.03-.33l.204-2.616.022-.293c.003-.029 0-.033-.03-.034zm7.203 3.757a1.427 1.427 0 0 1-.135-.607c-.004-.084-.031-.39-.235-3.06a.443.443 0 0 0-.01-.082c-.004-.011-.052-.008-.076-.008h-1.48c-.03.001-.034.005-.03.034l.021.293c.076.982.153 1.964.233 2.946c.05.4.186 1.085.487 1.706.103.215.223.419.37.606.015.018.037.051.048.049.02-.003.742-1.642.804-1.765.036-.07.03-.055.003-.112zm3.861-.913h-.872a.126.126 0 0 1-.116-.178l1.178-2.625a.025.025 0 0 0-.023-.035l-1.318-.003a.148.148 0 0 1-.135-.21l.876-1.954a.025.025 0 0 0-.023-.035h-1.56c-.01 0-.02.006-.024.015l-.926 2.068c-.085.169-.314.634-.399.938a.534.534 0 0 0-.02.191.46.46 0 0 0 .23.378.981.981 0 0 0 .46.119h.59c.041 0-.688 1.482-.834 1.972a.53.53 0 0 0-.023.172.465.465 0 0 0 .23.398c.15.092.342.12.475.12l1.66-.001c.01 0 .02-.006.023-.015l.575-1.28a.025.025 0 0 0-.024-.035zm-6.93-4.937H3.1a.032.032 0 0 0-.034.033c0 1.048-.01 2.795-.01 6.829 0 .288-.269.262-.28.262h-.74c-.04.001-.044.004-.04.047.001.037.465 1.064.555 1.263.01.02.03.033.051.033.157.003.767.009.938-.014.153-.02.3-.06.438-.132.3-.156.49-.419.595-.765.052-.172.075-.353.075-.533.002-2.33 0-4.66-.007-6.991a.032.032 0 0 0-.032-.032zm11.784 6.896c0-.014-.01-.021-.024-.022h-1.465c-.048-.001-.049-.002-.05-.049v-4.66c0-.072-.005-.07.07-.07h.863c.08 0 .075.004.075-.074V8.393c0-.082.006-.076-.08-.076h-3.5c-.064 0-.075-.006-.075.073v1.445c0 .083-.006.077.08.077h.854c.075 0 .07-.004.07.07v4.624c0 .095.008.084-.085.084-.37 0-1.11-.002-1.304 0-.048.001-.06.03-.06.03l-.697 1.519s-.014.025-.008.036c.006.01.013.008.058.008 1.748.003 3.495.002 5.243.002.03-.001.034-.006.035-.033v-1.539zm4.177-3.43c0 .013-.007.023-.02.024-.346.006-.692.004-1.037.004-.014-.002-.022-.01-.022-.024-.005-.434-.007-.869-.01-1.303 0-.072-.006-.071.07-.07l.733-.003c.041 0 .081.002.12.015.093.025.16.107.165.204.006.431.002 1.153.001 1.153zm2.67.244a1.953 1.953 0 0 0-.883-.222h-.18c-.04.001-.04-.003-.042-.04V10.21c0-.132-.007-.263-.025-.394a1.823 1.823 0 0 0-.153-.53 1.533 1.533 0 0 0-.677-.71 2.167 2.167 0 0 0-1-.258c-.153-.003-.567 0-.72 0-.07 0-.068.004-.068-.065V7.76c0-.031-.01-.041-.046-.039H17.93s-.016 0-.023.007c-.006.006-.008.012-.008.023v.546c-.008.036-.057.015-.082.022h-.95c-.022.002-.028.008-.03.032v1.481c0 .09-.004.082.082.082h.913c.082 0 .072.128.072.128V11.19s.003.117-.06.117h-1.482c-.068 0-.06.082-.06.082v1.445s-.01.068.064.068h1.457c.082 0 .076-.006.076.079v3.225c0 .088-.007.081.082.081h1.43c.09 0 .082.007.082-.08v-3.27c0-.029.006-.035.033-.035l2.323-.003c.098 0 .191.02.28.061a.46.46 0 0 1 .274.407.008.395.003.79.003 1.185 0 .259-.107.367-.33.367h-1.218c-.023.002-.029.008-.028.033.184.437.374.871.57 1.303a.045.045 0 0 0 .04.026c.17.005.34.002.51.003.15-.002.517.004.666-.01a2.03 2.03 0 0 0 .408-.075c.59-.18.975-.698.976-1.313v-1.981c0-.128-.01-.254-.034-.38 0 .078-.029-.641-.724-.998z"/></svg>
+          小红书
+        </a>
+      </li>
+      <li>
+        <a href="https://space.bilibili.com/69217382" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.789 1.894v7.52c.02.764.283 1.396.789 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.497.769-1.129.789-1.893v-7.52c-.02-.765-.283-1.396-.789-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373z"/></svg>
+          Bilibili
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/wangjinge" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+          LinkedIn
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/jingedawang" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+      </li>
+      <li>
+        <a href="https://scholar.google.com/citations?user=wF8_PgQAAAAJ&hl=zh-CN" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 10a8 8 0 0 1 7.162 3.44L24 9.5z"/></svg>
+          Google Scholar
+        </a>
+      </li>
+      <li>
+        <a href="https://x.com/JingeWang" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.213 5.567zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X (Twitter)
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>王金戈 · Jinge Wang</span>
+    <span>人本主义 × 机本主义 · 平顶山 · 北京 · 杭州 · 黄山 · 2026</span>
+  </footer>
+
+  <!-- Highlight popover & toast -->
+  <div id="hl-pop" role="menu">
+    <button data-act="mark">划线</button>
+    <button data-act="quote">引用留言</button>
+    <button data-act="copy">复制</button>
+  </div>
+  <div id="toast" role="status"></div>
+
+  <script>
+  /* ── 双螺旋：人（暖）与机（冷）交织上升 ─────────────────── */
+  (function () {
+    const canvas = document.getElementById('helix');
+    const ctx = canvas.getContext('2d');
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let W, H, dpr, raf, phase = 0, mx = 0, my = 0, stars = [];
+
+    function resize() {
+      dpr = Math.min(devicePixelRatio || 1, 2);
+      W = canvas.clientWidth; H = canvas.clientHeight;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      stars = Array.from({ length: Math.round(W * H / 26000) }, () => ({
+        x: Math.random() * W, y: Math.random() * H,
+        r: Math.random() * 1.1 + 0.3, a: Math.random() * 0.5 + 0.15
+      }));
+    }
+
+    const HUMAN = [217, 160, 91], MACHINE = [127, 183, 201];
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+
+      for (const s of stars) {
+        ctx.fillStyle = `rgba(237,230,218,${s.a * 0.5})`;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, 7);
+        ctx.fill();
+      }
+
+      const cx = W * (W > 900 ? 0.72 : 0.5) + mx * 22;
+      const cy = H * 0.5 + my * 14;
+      const span = Math.min(H * 0.82, 720);
+      const R = Math.min(W, H) * (W > 900 ? 0.16 : 0.21);
+      const N = 72, turns = 2.6;
+
+      for (let i = 0; i < N; i++) {
+        const t = (i / (N - 1)) * Math.PI * 2 * turns + phase;
+        const y = cy - span / 2 + (i / (N - 1)) * span;
+        const depth1 = (Math.cos(t) + 1) / 2;          // 0..1
+        const depth2 = (Math.cos(t + Math.PI) + 1) / 2;
+        const x1 = cx + Math.sin(t) * R;
+        const x2 = cx + Math.sin(t + Math.PI) * R;
+
+        if (i % 6 === 0) {                              // 横档：两股之间的连接
+          ctx.strokeStyle = `rgba(237,230,218,${0.05 + 0.08 * Math.min(depth1, depth2)})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(x1, y); ctx.lineTo(x2, y); ctx.stroke();
+        }
+        dot(x1, y, 1.1 + depth1 * 1.7, HUMAN, 0.25 + depth1 * 0.6);
+        dot(x2, y, 1.1 + depth2 * 1.7, MACHINE, 0.25 + depth2 * 0.6);
+      }
+
+      phase += reduceMotion ? 0 : 0.0038;
+      raf = requestAnimationFrame(draw);
+    }
+
+    function dot(x, y, r, [cr, cg, cb], a) {
+      ctx.fillStyle = `rgba(${cr},${cg},${cb},${a})`;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, 7);
+      ctx.fill();
+    }
+
+    addEventListener('mousemove', e => {
+      mx = (e.clientX / innerWidth - 0.5);
+      my = (e.clientY / innerHeight - 0.5);
+    }, { passive: true });
+
+    addEventListener('resize', resize, { passive: true });
+    resize();
+    draw();
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) cancelAnimationFrame(raf); else draw();
+    });
+  })();
+
+  /* ── 滚动显现 ──────────────────────────────────────────── */
+  (function () {
+    const io = new IntersectionObserver(entries => {
+      for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  })();
+
+  /* ── 划线 & 引用留言 ───────────────────────────────────── */
+  (function () {
+    const pop = document.getElementById('hl-pop');
+    const toast = document.getElementById('toast');
+    const STORE_KEY = 'wjk-highlights-v1';
+    let range = null;
+
+    const showToast = msg => {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(showToast.t);
+      showToast.t = setTimeout(() => toast.classList.remove('show'), 2400);
+    };
+
+    function inSelectable(node) {
+      return node && node.parentElement && node.parentElement.closest('.selectable');
+    }
+
+    document.addEventListener('selectionchange', () => {
+      const sel = getSelection();
+      if (sel.isCollapsed || !inSelectable(sel.anchorNode)) {
+        if (!pop.matches(':hover')) pop.classList.remove('show');
+        return;
+      }
+      range = sel.getRangeAt(0).cloneRange();
+      const r = range.getBoundingClientRect();
+      pop.style.left = (scrollX + r.left + r.width / 2 - pop.offsetWidth / 2) + 'px';
+      pop.style.top = (scrollY + r.top - 52) + 'px';
+      pop.classList.add('show');
+    });
+
+    document.addEventListener('mousedown', e => {
+      if (!pop.contains(e.target)) pop.classList.remove('show');
+    });
+
+    /* 划线：把选区里每个文本节点的相交部分包进 <mark class="hl"> */
+    function wrapRange(r) {
+      const root = range.commonAncestorContainer.nodeType === 1
+        ? range.commonAncestorContainer : range.commonAncestorContainer.parentElement;
+      const scope = root.closest('.selectable') || document.body;
+      const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT, {
+        acceptNode: n => range.intersectsNode(n) && n.textContent.trim()
+          ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT
+      });
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      for (const n of nodes) {
+        const s = n === range.startContainer ? range.startOffset : 0;
+        const e = n === range.endContainer ? range.endOffset : n.length;
+        if (s >= e) continue;
+        const mid = n.splitText(s);
+        mid.splitText(e - s);
+        const mark = document.createElement('mark');
+        mark.className = 'hl';
+        mid.replaceWith(mark);
+        mark.appendChild(mid);
+        mark.addEventListener('click', () => unmark(mark), { once: true });
+      }
+    }
+
+    function unmark(mark) {
+      const p = mark.parentNode;
+      mark.replaceWith(...mark.childNodes);
+      p.normalize();
+      save();
+      showToast('已取消划线');
+    }
+
+    function save() {
+      const texts = [...document.querySelectorAll('mark.hl')].map(m => m.textContent);
+      localStorage.setItem(STORE_KEY, JSON.stringify(texts));
+    }
+
+    function restore() {
+      let saved;
+      try { saved = JSON.parse(localStorage.getItem(STORE_KEY) || '[]'); } catch { return; }
+      for (const text of saved) {
+        if (!text || text.length < 2) continue;
+        for (const scope of document.querySelectorAll('.selectable')) {
+          const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT);
+          let n;
+          while ((n = walker.nextNode())) {
+            const i = n.textContent.indexOf(text);
+            if (i === -1 || n.parentElement.closest('mark.hl')) continue;
+            const r = document.createRange();
+            r.setStart(n, i); r.setEnd(n, i + text.length);
+            const mark = document.createElement('mark');
+            mark.className = 'hl';
+            try { r.surroundContents(mark); } catch { continue; }
+            mark.addEventListener('click', () => unmark(mark), { once: true });
+            break;
+          }
+        }
+      }
+    }
+
+    pop.addEventListener('click', async e => {
+      const act = e.target.dataset.act;
+      if (!act || !range) return;
+      const text = range.toString().trim();
+      pop.classList.remove('show');
+      if (act === 'mark') {
+        wrapRange(range);
+        save();
+        showToast('已划线 · 再次点击划线处可取消');
+      } else if (act === 'copy') {
+        await navigator.clipboard.writeText(text);
+        showToast('已复制');
+      } else if (act === 'quote') {
+        await navigator.clipboard.writeText('> ' + text.replace(/\n+/g, '\n> ') + '\n\n');
+        document.getElementById('guestbook').scrollIntoView({ behavior: 'smooth' });
+        showToast('引用已复制，粘贴到留言板即可');
+      }
+      getSelection().removeAllRanges();
+    });
+
+    restore();
+  })();
+  </script>
+</body>
+</html>

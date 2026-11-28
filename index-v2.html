@@ -513,9 +513,14 @@
     /* ── Responsive ──────────────────────────────────────── */
     @media (max-width: 720px) {
       nav { padding: 0 5vw; }
-      .nav-links { gap: 1.05rem; }
+      .nav-logo { white-space: nowrap; }
+      .nav-logo em { display: none; }
+      .nav-links { gap: 1.05rem; overflow-x: auto; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
       .nav-links a { font-size: 0.75rem; letter-spacing: 0.04em; }
       .hero { padding: 0 6vw; }
+      #helix { opacity: 0.45; }
+      .hero-inner { text-shadow: 0 1px 12px rgba(16, 14, 11, 0.9); }
       section { padding: 5.5rem 6vw; }
       footer { padding: 2rem 6vw; }
       .timeline::before { left: 6px; }

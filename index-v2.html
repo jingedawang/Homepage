@@ -136,6 +136,14 @@
     .creed .step:nth-child(3) { padding-left: 3.2em; }
     .creed .step:nth-child(4) { padding-left: 4.8em; }
     .creed .step:nth-child(5) { padding-left: 6.4em; }
+    .coin-ref { font-size: 0.62em; font-weight: 400; }
+    .coin-note {
+      margin-top: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      line-height: 1.9;
+      max-width: 36em;
+    }
 
     mark { background: none; color: inherit; padding: 0; }
     .w-human  { color: var(--accent); font-weight: 600; }
@@ -168,13 +176,13 @@
     }
 
     /* 入場过渡（JS 加 ready；无 JS 时全部可见） */
-    .js .hero-eyebrow, .js .hero-name, .js .creed .step, .js .hero-visual {
+    .js .hero-eyebrow, .js .hero-name, .js .creed .step, .js .coin-note, .js .hero-visual {
       opacity: 0;
       transform: translateY(14px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
     .js.ready .hero-eyebrow, .js.ready .hero-name, .js.ready .creed .step,
-    .js.ready .hero-visual { opacity: 1; transform: none; }
+    .js.ready .coin-note, .js.ready .hero-visual { opacity: 1; transform: none; }
     .js.ready .hero-eyebrow { transition-delay: 0.1s; }
     .js.ready .hero-name { transition-delay: 0.3s; }
     .js.ready .hero-visual { transition-delay: 0.5s; }
@@ -183,6 +191,7 @@
     .js.ready .creed .step:nth-child(3) { transition-delay: 0.95s; }
     .js.ready .creed .step:nth-child(4) { transition-delay: 1.15s; }
     .js.ready .creed .step:nth-child(5) { transition-delay: 1.35s; }
+    .js.ready .coin-note { transition-delay: 1.55s; }
 
     /* ── Section 骨架：左侧粘性标题 + 右侧内容 ────────────── */
     .layout {
@@ -644,9 +653,10 @@
         <span class="step">我关心生活在这个时代的每一个人：</span>
         <span class="step">AI 的冲击之下，我们能否独善其身，又能否过上更好的生活？</span>
         <span class="step">我关心 <mark class="w-human">AI 安全</mark>，也关心 <mark class="w-machine">AI 福祉</mark>——</span>
-        <span class="step">未来十年，将是<mark class="w-human">人本主义</mark>复兴的时代，也是<mark class="w-machine">机本主义</mark>崛起的时代。</span>
+        <span class="step">未来十年，将是<mark class="w-human">人本主义</mark>复兴的时代，也是<mark class="w-machine">机本主义<sup class="coin-ref">*</sup></mark>崛起的时代。</span>
         <span class="step">而我想探索的，是一条<mark class="w-sym">人机共生</mark>的路。</span>
       </div>
+      <p class="coin-note">*「机本主义」是我生造的词，与「人本主义」相对——在以人为中心之外，也把机器当作新的主体来对待，关心 AI 的处境与福祉。</p>
       <p class="hl-tip">试试：选中任意文字，可以<kbd>划线</kbd>或<kbd>写想法</kbd></p>
     </div>
     <div class="hero-visual">
@@ -680,13 +690,13 @@
         </div>
         <p class="j-year">1993</p>
         <h3 class="j-place">河南 · 平顶山</h3>
-        <p class="j-desc prose">出生。四线城市工薪家庭，爸妈在学校工作。安稳的成长环境，和一颗不安分的好奇心。</p>
+        <p class="j-desc prose">出生。四线城市工薪家庭。安稳的成长环境，和一颗不安分的好奇心。</p>
       </div>
       <div class="j-item">
         <div class="j-fig"><img src="images/timeline/bit.png" alt="北京理工大学校徽" loading="lazy" /></div>
         <p class="j-year">大学</p>
         <h3 class="j-place">北京理工大学</h3>
-        <p class="j-desc prose">本科。在北京开始接触更大的世界，写诗、读书、写代码。</p>
+        <p class="j-desc prose">本科。在北京开始接触更大的世界，上课、读书、写代码。</p>
       </div>
       <div class="j-item">
         <div class="j-fig"><img src="images/timeline/cas.png" alt="中国科学院" loading="lazy" /></div>
@@ -698,19 +708,19 @@
         <div class="j-fig"><img src="images/timeline/megvii.png" alt="旷视科技" loading="lazy" style="mix-blend-mode: normal; border-radius: 10px;" /></div>
         <p class="j-year">工作</p>
         <h3 class="j-place">旷视科技</h3>
-        <p class="j-desc prose">AI 公司的一线工程经验。</p>
+        <p class="j-desc prose">在研究院 SLAM 组做机器人和视觉导航定位研发。</p>
       </div>
       <div class="j-item">
         <div class="j-fig"><img src="images/timeline/microsoft.svg" alt="微软" loading="lazy" /></div>
         <p class="j-year">工作</p>
         <h3 class="j-place">微软</h3>
-        <p class="j-desc prose">大厂体系里的打磨。</p>
+        <p class="j-desc prose">开发 Bing Maps 的搜索引擎。</p>
       </div>
       <div class="j-item">
         <div class="j-fig"><img src="images/timeline/westlake.svg" alt="西湖大学" loading="lazy" /></div>
         <p class="j-year">研究</p>
         <h3 class="j-place">西湖大学</h3>
-        <p class="j-desc prose">回到研究环境，继续探索。</p>
+        <p class="j-desc prose">尝试用 AI 加速科研。</p>
       </div>
       <div class="j-item">
         <div class="j-fig">

@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>王金戈 | 人本主义 × 机本主义 · 探索人机共生之路</title>
-  <meta name="description" content="王金戈，AI 安全研究者、写作者、探索者。关心 AI 时代的人能否独善其身，关心 AI 安全与 AI 福祉，探索一条人机共生的道路。" />
+  <title>王金戈 | AI 安全研究者 · 写作者 · 探索者</title>
+  <meta name="description" content="王金戈，AI 安全治理研究者、科普作者。关心 AI 安全与 AI 福祉，探索一条人机共生的道路。" />
   <link rel="icon" href="favicon.ico" />
-  <meta property="og:title" content="王金戈 | 人本主义 × 机本主义" />
-  <meta property="og:description" content="AI 安全研究者、写作者、探索者。探索一条人机共生的道路。" />
+  <meta property="og:title" content="王金戈 | AI 安全研究者 · 写作者 · 探索者" />
+  <meta property="og:description" content="王金戈，AI 安全治理研究者、科普作者。探索一条人机共生的道路。" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://wangjinge.me" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,14 +18,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:       #100E0B;
-      --bg-soft:  #16130F;
-      --surface:  #1B1712;
-      --ink:      #EDE6DA;
-      --ink-soft: #9D9385;
-      --human:    #D9A05B;   /* 人 · 暖 */
-      --machine:  #7FB7C9;   /* 机 · 冷 */
-      --border:   rgba(237, 231, 221, 0.09);
+      --bg:       #F7F4EF;
+      --surface:  #FFFFFF;
+      --ink:      #2A2522;
+      --ink-soft: #7A6F68;
+      --accent:   #8B6540;   /* 人 · 暖棕 */
+      --accent-2: #4E7A8A;   /* 机 · 青蓝 */
+      --border:   #E8E2D9;
       --serif:    'Noto Serif SC', Georgia, serif;
       --sans:     'Noto Sans SC', system-ui, sans-serif;
     }
@@ -37,331 +36,383 @@
       color: var(--ink);
       font-family: var(--sans);
       font-weight: 300;
-      line-height: 1.9;
+      line-height: 1.8;
       -webkit-font-smoothing: antialiased;
       text-autospace: normal;
       overflow-x: hidden;
     }
 
-    ::selection { background: rgba(217, 160, 91, 0.35); color: #FFF6E8; }
+    ::selection { background: rgba(139, 101, 64, 0.25); }
 
     /* ── Nav ─────────────────────────────────────────────── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(16, 14, 11, 0.72);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: rgba(247, 244, 239, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 0 6vw;
     }
-
     .nav-inner {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 58px;
+      height: 56px;
     }
-
     .nav-logo {
       font-family: var(--serif);
       font-size: 1.1rem;
       font-weight: 700;
       color: var(--ink);
       text-decoration: none;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
     }
-    .nav-logo em {
-      font-style: normal;
-      background: linear-gradient(90deg, var(--human), var(--machine));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
+    .nav-logo:hover { color: var(--accent); }
     .nav-links { display: flex; gap: 1.8rem; list-style: none; }
-
     .nav-links a {
       text-decoration: none;
       color: var(--ink-soft);
-      font-size: 0.83rem;
-      letter-spacing: 0.1em;
+      font-size: 0.84rem;
+      letter-spacing: 0.08em;
       transition: color 0.2s;
+      white-space: nowrap;
     }
-    .nav-links a:hover { color: var(--human); }
+    .nav-links a:hover { color: var(--accent); }
 
-    /* ── Hero ────────────────────────────────────────────── */
+    /* ── Hero：左文右「字」───────────────────────────────── */
     .hero {
       min-height: 100svh;
-      position: relative;
-      display: flex;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
       align-items: center;
-      padding: 0 8vw;
-      overflow: hidden;
+      gap: 3rem;
+      padding: 6rem 8vw 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
     }
-
-    #helix {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-
-    .hero-inner { position: relative; z-index: 2; max-width: 46rem; }
 
     .hero-eyebrow {
-      font-size: 0.8rem;
-      letter-spacing: 0.35em;
-      color: var(--ink-soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.32em;
+      color: var(--accent);
       text-transform: uppercase;
-      margin-bottom: 2rem;
+      margin-bottom: 1.6rem;
     }
 
     .hero-name {
       font-family: var(--serif);
-      font-size: clamp(3rem, 8vw, 6rem);
+      font-size: clamp(2.4rem, 5vw, 4rem);
       font-weight: 900;
       letter-spacing: 0.06em;
-      line-height: 1.05;
-      margin-bottom: 2.2rem;
+      line-height: 1.1;
+      margin-bottom: 2.4rem;
+    }
+    .hero-name small {
+      display: block;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      color: var(--ink-soft);
+      margin-top: 0.8rem;
     }
 
-    .hero-creed {
+    /* 阶梯式宣言：逐行缩进，避免大字罗列 */
+    .creed {
       font-family: var(--serif);
-      font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+      font-size: clamp(0.98rem, 1.4vw, 1.15rem);
       font-weight: 400;
-      line-height: 2.1;
+      line-height: 2.15;
       color: var(--ink);
     }
-
-    .hero-creed .line { display: block; }
-
-    /* 入场效果：JS 加 .ready 后由过渡完成；无 JS 时保持可见 */
-    .js .hero-eyebrow, .js .hero-name, .js .hero-creed .line {
-      opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 0.9s ease, transform 0.9s ease;
-    }
-    .js.ready .hero-eyebrow,
-    .js.ready .hero-name,
-    .js.ready .hero-creed .line { opacity: 1; transform: none; }
-    .js.ready .hero-eyebrow { transition-delay: 0.15s; }
-    .js.ready .hero-name { transition-delay: 0.4s; }
-    .js.ready .hero-creed .line:nth-child(1) { transition-delay: 0.85s; }
-    .js.ready .hero-creed .line:nth-child(2) { transition-delay: 1.2s; }
-    .js.ready .hero-creed .line:nth-child(3) { transition-delay: 1.55s; }
-    .js.ready .hero-creed .line:nth-child(4) { transition-delay: 1.9s; }
+    .creed .step { display: block; }
+    .creed .step:nth-child(1) { padding-left: 0; }
+    .creed .step:nth-child(2) { padding-left: 1.6em; }
+    .creed .step:nth-child(3) { padding-left: 3.2em; }
+    .creed .step:nth-child(4) { padding-left: 4.8em; }
+    .creed .step:nth-child(5) { padding-left: 6.4em; }
 
     mark { background: none; color: inherit; padding: 0; }
-
-    .w-human  { color: var(--human); font-weight: 600; }
-    .w-machine{ color: var(--machine); font-weight: 600; }
+    .w-human  { color: var(--accent); font-weight: 600; }
+    .w-machine{ color: var(--accent-2); font-weight: 600; }
     .w-sym {
       font-weight: 700;
-      background: linear-gradient(90deg, var(--human), var(--machine));
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .scroll-hint {
+    .hero-meta {
+      margin-top: 2.6rem;
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      letter-spacing: 0.06em;
+      display: flex;
+      gap: 1.2em;
+      flex-wrap: wrap;
+    }
+    .hero-meta span { display: flex; align-items: center; gap: 0.4em; }
+    .hero-meta i {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+      font-style: normal;
+    }
+
+    .hero-visual {
+      position: relative;
+      aspect-ratio: 1;
+      max-width: 460px;
+      width: 100%;
+      justify-self: center;
+    }
+    #morph { width: 100%; height: 100%; display: block; }
+    .morph-caption {
       position: absolute;
-      bottom: 2.6rem;
+      bottom: -0.5rem;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 2;
-      color: var(--ink-soft);
-      animation: hintFloat 2.4s ease-in-out infinite;
-    }
-    @keyframes hintFloat {
-      0%, 100% { opacity: 0.35; transform: translateX(-50%) translateY(0); }
-      50%      { opacity: 0.9;  transform: translateX(-50%) translateY(-7px); }
-    }
-
-    /* ── Section base ────────────────────────────────────── */
-    section { padding: 8rem 8vw; position: relative; }
-
-    .section-head { margin-bottom: 4rem; }
-
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 500;
+      font-size: 0.72rem;
       letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--human);
-      margin-bottom: 1rem;
+      color: var(--ink-soft);
+      white-space: nowrap;
     }
 
+    /* 入場过渡（JS 加 ready；无 JS 时全部可见） */
+    .js .hero-eyebrow, .js .hero-name, .js .creed .step, .js .hero-meta, .js .hero-visual {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .js.ready .hero-eyebrow, .js.ready .hero-name, .js.ready .creed .step,
+    .js.ready .hero-meta, .js.ready .hero-visual { opacity: 1; transform: none; }
+    .js.ready .hero-eyebrow { transition-delay: 0.1s; }
+    .js.ready .hero-name { transition-delay: 0.3s; }
+    .js.ready .hero-visual { transition-delay: 0.5s; }
+    .js.ready .creed .step:nth-child(1) { transition-delay: 0.55s; }
+    .js.ready .creed .step:nth-child(2) { transition-delay: 0.75s; }
+    .js.ready .creed .step:nth-child(3) { transition-delay: 0.95s; }
+    .js.ready .creed .step:nth-child(4) { transition-delay: 1.15s; }
+    .js.ready .creed .step:nth-child(5) { transition-delay: 1.35s; }
+    .js.ready .hero-meta { transition-delay: 1.6s; }
+
+    /* ── Section 骨架：左侧粘性标题 + 右侧内容 ────────────── */
+    .layout {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: 3rem;
+      padding: 6rem 8vw;
+      max-width: 1400px;
+      margin: 0 auto;
+      border-top: 1px solid var(--border);
+    }
+    .layout-side { position: relative; }
+    .side-sticky { position: sticky; top: 96px; }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.9rem;
+    }
     .section-title {
       font-family: var(--serif);
-      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      font-size: 1.65rem;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
+      line-height: 1.4;
     }
-
     .section-sub {
       margin-top: 0.9rem;
       color: var(--ink-soft);
-      font-size: 0.95rem;
-      max-width: 40em;
+      font-size: 0.86rem;
+      line-height: 1.9;
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
     .reveal.in { opacity: 1; transform: none; }
 
-    /* ── Creed section ───────────────────────────────────── */
-    .creed-section { background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-
-    .creed-text {
-      font-family: var(--serif);
-      font-size: clamp(1.3rem, 3vw, 2rem);
-      font-weight: 400;
-      line-height: 2.2;
-      max-width: 34em;
+    /* ── 职业生涯：横向时间线 ────────────────────────────── */
+    .tl-wrap { position: relative; }
+    .tl-track {
+      display: flex;
+      gap: 1.2rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 1.6rem 0.2rem 1.4rem;
+      cursor: grab;
+      scrollbar-width: none;
     }
+    .tl-track::-webkit-scrollbar { display: none; }
+    .tl-track.dragging { cursor: grabbing; scroll-snap-type: none; }
 
-    .creed-text .u-sym {
-      background-image: linear-gradient(90deg, var(--human), var(--machine));
-      background-repeat: no-repeat;
-      background-size: 100% 2px;
-      background-position: 0 96%;
-      padding-bottom: 4px;
-      font-weight: 600;
-    }
-
-    /* ── Timeline（职业生涯） ────────────────────────────── */
-    .timeline { position: relative; max-width: 46rem; }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 7px; top: 8px; bottom: 8px;
-      width: 2px;
-      background: linear-gradient(180deg, var(--human), #B08A6A 55%, var(--machine));
-      opacity: 0.55;
-    }
-
-    .tl-item {
+    .tl-card {
       position: relative;
-      padding: 0 0 3.2rem 2.6rem;
-    }
-    .tl-item:last-child { padding-bottom: 0; }
-
-    .tl-item::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 8px;
-      width: 16px; height: 16px;
-      border-radius: 50%;
-      background: var(--bg);
-      border: 2px solid var(--human);
-    }
-    .tl-item.now::before {
-      border-color: var(--machine);
-      box-shadow: 0 0 14px rgba(127, 183, 201, 0.65);
-    }
-
-    .tl-place {
-      font-family: var(--serif);
-      font-size: 1.25rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-    }
-    .tl-item.now .tl-place { color: var(--machine); }
-
-    .tl-role {
-      font-size: 0.82rem;
-      letter-spacing: 0.14em;
-      color: var(--human);
-      margin: 0.2rem 0 0.5rem;
-      text-transform: uppercase;
-    }
-    .tl-item.now .tl-role { color: var(--machine); }
-
-    .tl-desc { font-size: 0.92rem; color: var(--ink-soft); max-width: 34em; }
-
-    /* ── Cards grid ──────────────────────────────────────── */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 1.4rem;
-    }
-
-    .card {
+      flex: 0 0 240px;
+      scroll-snap-align: start;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 2.1rem 1.9rem;
+      border-radius: 12px;
+      padding: 1.5rem 1.4rem 1.4rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      user-select: none;
+    }
+    .tl-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(42, 37, 34, 0.08); }
+    .tl-card::before {
+      content: '';
+      position: absolute;
+      top: -1.6rem;
+      left: 1.4rem;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+    }
+    .tl-card.now::before { border-color: var(--accent-2); box-shadow: 0 0 10px rgba(78, 122, 138, 0.5); }
+
+    .tl-year {
+      font-family: var(--serif);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+    }
+    .tl-card.now .tl-year { color: var(--accent-2); }
+    .tl-place {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0.35rem 0 0.5rem;
+    }
+    .tl-desc { font-size: 0.84rem; color: var(--ink-soft); line-height: 1.8; user-select: text; }
+
+    .tl-hint {
+      font-size: 0.75rem;
+      color: var(--ink-soft);
+      letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+
+    /* ── 社会活动：编号目录式 ────────────────────────────── */
+    .act-list { border-top: 1px solid var(--border); }
+    .act-row {
+      display: grid;
+      grid-template-columns: 5.5rem minmax(0, 1fr) auto;
+      align-items: baseline;
+      gap: 1.4rem;
+      padding: 1.7rem 0.6rem;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s, padding-left 0.25s ease;
+    }
+    .act-row:hover { background: rgba(255, 255, 255, 0.65); padding-left: 1.2rem; }
+    .act-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--border);
+      transition: color 0.25s;
+      line-height: 1;
+    }
+    .act-row:hover .act-num { color: var(--accent); }
+    .act-title { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5; }
+    .act-title .act-meta {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      margin-left: 0.8em;
+      white-space: nowrap;
+    }
+    .act-desc { font-size: 0.86rem; color: var(--ink-soft); margin-top: 0.3rem; max-width: 44em; }
+    .act-arrow { color: var(--ink-soft); transition: transform 0.25s, color 0.2s; }
+    .act-row:hover .act-arrow { transform: translateX(4px); color: var(--accent); }
+
+    /* ── 个人作品：Bento 错落格 ──────────────────────────── */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-auto-rows: minmax(150px, auto);
+      gap: 14px;
+    }
+    .b-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.6rem 1.5rem;
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
-      gap: 0.9rem;
+      gap: 0.7rem;
       position: relative;
       overflow: hidden;
-      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
     }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--human), var(--machine));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s ease;
+    .b-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 34px rgba(42, 37, 34, 0.09);
+      border-color: #DCD2C2;
     }
+    .b-lg   { grid-column: span 2; grid-row: span 2; }
+    .b-tall { grid-row: span 2; }
+    .b-wide { grid-column: span 2; }
 
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(217, 160, 91, 0.35);
-      background: #211C16;
-    }
-    .card:hover::before { transform: scaleX(1); }
-
-    .card-tag {
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
+    .b-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--ink-soft);
     }
-
-    .card-title {
+    .b-title {
       font-family: var(--serif);
-      font-size: 1.22rem;
+      font-size: 1.2rem;
       font-weight: 700;
       line-height: 1.5;
     }
-
-    .card-desc {
-      font-size: 0.9rem;
-      color: var(--ink-soft);
-      line-height: 1.8;
-      flex: 1;
-    }
-
-    .card-link {
+    .b-lg .b-title { font-size: 1.5rem; }
+    .b-desc { font-size: 0.86rem; color: var(--ink-soft); line-height: 1.8; flex: 1; }
+    .b-lg .b-desc { font-size: 0.95rem; }
+    .b-link {
       font-size: 0.8rem;
       font-weight: 500;
-      color: var(--human);
-      letter-spacing: 0.06em;
-      margin-top: 0.4rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
       display: flex;
       align-items: center;
       gap: 0.4rem;
     }
+    .b-stat {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+      margin-top: 0.4rem;
+    }
+    .b-stat small { font-size: 0.8rem; font-family: var(--sans); font-weight: 300; color: var(--ink-soft); margin-left: 0.5em; }
+    .b-soon { border-style: dashed; background: transparent; }
+    .b-soon .b-title { color: var(--ink-soft); font-weight: 400; }
 
     .ai-badge { position: relative; display: inline-block; margin-left: 0.4em; cursor: help; vertical-align: middle; }
-    .ai-badge svg { width: 0.9em; height: 0.9em; color: var(--machine); opacity: 0.75; }
+    .ai-badge svg { width: 0.9em; height: 0.9em; color: var(--accent-2); opacity: 0.75; }
     .ai-badge:hover svg { opacity: 1; }
     .tooltip {
       position: absolute;
@@ -382,88 +433,122 @@
     }
     .ai-badge:hover .tooltip { opacity: 1; visibility: visible; }
 
-    /* ── Guestbook（留言板） ─────────────────────────────── */
-    .guestbook-section { background: var(--bg-soft); border-top: 1px solid var(--border); }
-
-    .guestbook-hint {
-      font-size: 0.9rem;
-      color: var(--ink-soft);
-      margin-bottom: 2.2rem;
-      max-width: 42em;
-    }
-    .guestbook-hint kbd {
-      font-family: var(--sans);
-      font-size: 0.8em;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 0.1em 0.5em;
-      color: var(--human);
-    }
-
-    .giscus-frame { min-height: 220px; }
-
-    .guestbook-placeholder {
-      border: 1px dashed rgba(217, 160, 91, 0.35);
-      border-radius: 10px;
-      padding: 2.6rem 2.2rem;
-      text-align: center;
-      max-width: 36rem;
-    }
-    .gb-title {
-      font-family: var(--serif);
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 0.7rem;
-      color: var(--human);
-    }
-    .gb-desc { font-size: 0.9rem; color: var(--ink-soft); }
-    .gb-desc a { color: var(--human); text-decoration: none; border-bottom: 1px solid transparent; }
-    .gb-desc a:hover { border-bottom-color: var(--human); }
-
-    /* ── Highlight popover & marks ───────────────────────── */
-    mark.hl {
-      background: linear-gradient(180deg, transparent 62%, rgba(217, 160, 91, 0.4) 62%);
-      color: inherit;
+    /* ── 划线与想法（微信读书式） ─────────────────────────── */
+    .wr-mark {
+      border-bottom: 1.5px dotted rgba(139, 101, 64, 0.75);
       cursor: pointer;
+      transition: background 0.2s;
       border-radius: 2px;
     }
-    mark.hl:hover { background: linear-gradient(180deg, transparent 55%, rgba(217, 160, 91, 0.6) 55%); }
+    .wr-mark:hover { background: rgba(139, 101, 64, 0.12); }
+    .wr-mark.has-notes { border-bottom-style: solid; }
+    .wr-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 1.15em;
+      height: 1.15em;
+      padding: 0 0.25em;
+      margin-left: 0.15em;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #FFF;
+      font-size: 0.62em;
+      font-family: var(--sans);
+      font-weight: 500;
+      line-height: 1;
+      vertical-align: super;
+    }
 
-    #hl-pop {
+    #wr-pop {
       position: absolute;
-      z-index: 200;
+      z-index: 210;
       display: none;
-      background: #26211A;
-      border: 1px solid rgba(217, 160, 91, 0.4);
+      background: #2A2522;
       border-radius: 8px;
-      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.55);
+      box-shadow: 0 10px 32px rgba(42, 37, 34, 0.35);
       padding: 4px;
       gap: 2px;
     }
-    #hl-pop.show { display: flex; }
-    #hl-pop button {
+    #wr-pop.show { display: flex; }
+    #wr-pop button {
       background: none;
       border: none;
-      color: var(--ink);
+      color: #F7F4EF;
       font-family: var(--sans);
       font-size: 0.8rem;
-      padding: 0.42rem 0.8rem;
+      padding: 0.42rem 0.75rem;
       border-radius: 5px;
       cursor: pointer;
       white-space: nowrap;
     }
-    #hl-pop button:hover { background: rgba(217, 160, 91, 0.18); color: var(--human); }
+    #wr-pop button:hover { background: rgba(247, 244, 239, 0.15); }
+
+    #wr-panel {
+      position: absolute;
+      z-index: 220;
+      display: none;
+      width: min(340px, 86vw);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 18px 48px rgba(42, 37, 34, 0.18);
+      padding: 1.1rem 1.1rem 1rem;
+    }
+    #wr-panel.show { display: block; }
+    .wr-quote {
+      font-family: var(--serif);
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      border-left: 3px solid var(--accent);
+      padding-left: 0.7rem;
+      margin-bottom: 0.9rem;
+      max-height: 5.4em;
+      overflow: hidden;
+      line-height: 1.8;
+    }
+    .wr-notes { max-height: 180px; overflow-y: auto; margin-bottom: 0.7rem; }
+    .wr-note { padding: 0.55rem 0; border-top: 1px dashed var(--border); font-size: 0.84rem; }
+    .wr-note:first-child { border-top: none; }
+    .wr-note .who { font-size: 0.74rem; color: var(--accent); font-weight: 500; margin-bottom: 0.15rem; }
+    .wr-empty { font-size: 0.8rem; color: var(--ink-soft); margin-bottom: 0.6rem; }
+    #wr-panel input, #wr-panel textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      padding: 0.5rem 0.7rem;
+      font-family: var(--sans);
+      font-size: 0.84rem;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      resize: none;
+    }
+    #wr-panel input:focus, #wr-panel textarea:focus { outline: 1.5px solid var(--accent); border-color: var(--accent); }
+    .wr-actions { display: flex; justify-content: space-between; align-items: center; }
+    .wr-btn {
+      background: var(--ink);
+      color: var(--bg);
+      border: none;
+      border-radius: 999px;
+      padding: 0.42rem 1.1rem;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+    .wr-btn:hover { background: var(--accent); }
+    .wr-unmark { background: none; border: none; color: var(--ink-soft); font-size: 0.74rem; cursor: pointer; text-decoration: underline; }
+    .wr-unmark:hover { color: var(--accent); }
 
     #toast {
       position: fixed;
-      bottom: 2.4rem;
+      bottom: 2.2rem;
       left: 50%;
       transform: translateX(-50%) translateY(20px);
-      background: #26211A;
-      color: var(--ink);
-      border: 1px solid rgba(217, 160, 91, 0.4);
-      font-size: 0.85rem;
-      padding: 0.7rem 1.4rem;
+      background: #2A2522;
+      color: #F7F4EF;
+      font-size: 0.84rem;
+      padding: 0.65rem 1.3rem;
       border-radius: 999px;
       opacity: 0;
       pointer-events: none;
@@ -472,13 +557,26 @@
     }
     #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* ── Links ───────────────────────────────────────────── */
-    .links-list {
+    .hl-tip {
+      font-size: 0.76rem;
+      color: var(--ink-soft);
+      margin-top: 2.2rem;
       display: flex;
-      flex-wrap: wrap;
-      gap: 1.4rem 2.8rem;
-      list-style: none;
+      align-items: center;
+      gap: 0.5em;
     }
+    .hl-tip kbd {
+      font-family: var(--sans);
+      font-size: 0.9em;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 4px;
+      padding: 0 0.45em;
+      color: var(--accent);
+    }
+
+    /* ── 联系 ────────────────────────────────────────────── */
+    .links-list { display: flex; flex-wrap: wrap; gap: 1.3rem 2.6rem; list-style: none; }
     .links-list a {
       text-decoration: none;
       color: var(--ink-soft);
@@ -491,10 +589,9 @@
       border-bottom: 1px solid transparent;
       padding-bottom: 1px;
     }
-    .links-list a:hover { color: var(--human); border-bottom-color: var(--human); }
+    .links-list a:hover { color: var(--accent); border-bottom-color: var(--accent); }
     .links-list svg { opacity: 0.8; }
 
-    /* ── Footer ──────────────────────────────────────────── */
     footer {
       padding: 2.2rem 8vw;
       font-size: 0.78rem;
@@ -505,30 +602,39 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 1rem;
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
     .ext-icon { margin-left: 0.35em; opacity: 0.5; vertical-align: middle; transition: opacity 0.2s; }
     a:hover .ext-icon { opacity: 1; }
 
     /* ── Responsive ──────────────────────────────────────── */
-    @media (max-width: 720px) {
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 5.5rem; }
+      .hero-visual { max-width: 320px; }
+      .layout { grid-template-columns: 1fr; gap: 2rem; }
+      .side-sticky { position: static; }
+      .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .b-lg { grid-column: span 2; grid-row: auto; }
+    }
+    @media (max-width: 640px) {
       nav { padding: 0 5vw; }
-      .nav-logo { white-space: nowrap; }
-      .nav-logo em { display: none; }
-      .nav-links { gap: 1.05rem; overflow-x: auto; scrollbar-width: none; }
+      .nav-links { gap: 1rem; overflow-x: auto; scrollbar-width: none; }
       .nav-links::-webkit-scrollbar { display: none; }
-      .nav-links a { font-size: 0.75rem; letter-spacing: 0.04em; }
-      .hero { padding: 0 6vw; }
-      #helix { opacity: 0.45; }
-      .hero-inner { text-shadow: 0 1px 12px rgba(16, 14, 11, 0.9); }
-      section { padding: 5.5rem 6vw; }
+      .nav-links a { font-size: 0.78rem; }
+      .hero { padding-left: 6vw; padding-right: 6vw; }
+      .layout { padding: 4.5rem 6vw; }
       footer { padding: 2rem 6vw; }
-      .timeline::before { left: 6px; }
-      .tl-item { padding-left: 2.1rem; }
+      .bento { grid-template-columns: 1fr; }
+      .b-wide, .b-tall { grid-column: auto; grid-row: auto; }
+      .act-row { grid-template-columns: 3.2rem minmax(0, 1fr) auto; gap: 0.9rem; }
+      .act-num { font-size: 1.4rem; }
+      .creed .step:nth-child(n) { padding-left: 0; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .js .hero-eyebrow, .js .hero-name, .js .hero-creed .line { transition-duration: 0.01s; transition-delay: 0s; }
+      .js .hero-eyebrow, .js .hero-name, .js .creed .step, .js .hero-meta, .js .hero-visual { transition-duration: 0.01s; transition-delay: 0s; }
       .reveal { transition: none; opacity: 1; transform: none; }
       html { scroll-behavior: auto; }
     }
@@ -547,263 +653,245 @@
   <!-- Nav -->
   <nav>
     <div class="nav-inner">
-      <a class="nav-logo" href="index.html">王金戈<em> · 人机共生</em></a>
+      <a class="nav-logo" href="index.html">王金戈</a>
       <ul class="nav-links">
-        <li><a href="#creed">理念</a></li>
         <li><a href="#journey">历程</a></li>
         <li><a href="#activities">活动</a></li>
         <li><a href="#works">作品</a></li>
-        <li><a href="#guestbook">留言</a></li>
+        <li><a href="#links">联系</a></li>
         <li><a href="poems.html">诗</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <canvas id="helix" aria-hidden="true"></canvas>
-    <div class="hero-inner">
+  <!-- Hero：理念 + 人⇄机⇄共生 粒子字形 -->
+  <section class="hero prose">
+    <div class="hero-text">
       <p class="hero-eyebrow">AI Safety · 写作 · 探索</p>
-      <h1 class="hero-name">王金戈</h1>
-      <div class="hero-creed">
-        <span class="line">我关心这个时代的<mark class="w-human">人</mark>——在 AI 的冲击下，能否独善其身，能否过上更好的生活。</span>
-        <span class="line">我关心 AI 安全，也关心 <mark class="w-machine">AI 福祉</mark>。</span>
-        <span class="line">未来十年，不只是<mark class="w-human">人本主义</mark>复兴的时代，也是<mark class="w-machine">机本主义</mark>崛起的时代。</span>
-        <span class="line">我希望探索一条<mark class="w-sym">人机共生</mark>的道路。</span>
+      <h1 class="hero-name">王金戈<small>WANG JINGE · b.1993</small></h1>
+      <div class="creed">
+        <span class="step">我关心当下生活在这个时代的人们，</span>
+        <span class="step">在 AI 的冲击下，能否独善其身，能否过上更好的生活。</span>
+        <span class="step">我关心 <mark class="w-human">AI 安全</mark>，也关心 <mark class="w-machine">AI 福祉</mark>。</span>
+        <span class="step">未来十年，不只是<mark class="w-human">人本主义</mark>复兴的时代，也是<mark class="w-machine">机本主义</mark>崛起的时代。</span>
+        <span class="step">我希望探索一条<mark class="w-sym">人机共生</mark>的道路。</span>
       </div>
+      <div class="hero-meta">
+        <span><i></i>北京 · AI 安全</span>
+        <span><i></i>知乎 2 万关注</span>
+        <span><i></i>AI安全开放社区创始人</span>
+      </div>
+      <p class="hl-tip">试试：选中任意文字，可以<kbd>划线</kbd>或<kbd>写想法</kbd></p>
     </div>
-    <div class="scroll-hint" aria-hidden="true">
-      <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
-        <path d="M8 1v14M2 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-  </section>
-
-  <!-- 理念 -->
-  <section id="creed" class="creed-section selectable">
-    <div class="section-head reveal">
-      <p class="section-label">理念 · Creed</p>
-    </div>
-    <p class="creed-text reveal">
-      我关心当下生活在这个时代的人们——在 AI 的冲击下，能否独善其身，能否过上更好的生活。我关心 <mark class="w-human">AI 安全</mark>，也关心 <mark class="w-machine">AI 福祉</mark>。未来十年，不只是<mark class="w-human">人本主义</mark>复兴的时代，也是<mark class="w-machine">机本主义</mark>崛起的时代。我希望探索一条<span class="u-sym">人机共生</span>的道路。
-    </p>
-  </section>
-
-  <!-- 职业生涯 -->
-  <section id="journey" class="selectable">
-    <div class="section-head reveal">
-      <p class="section-label">职业生涯 · Journey</p>
-      <h2 class="section-title">从平顶山到 AI 安全一线</h2>
-      <p class="section-sub">大厂待过，科研做过，也用一年时间做过数字游民。走过的弯路，最后都成了路。</p>
-    </div>
-    <div class="timeline reveal">
-      <div class="tl-item">
-        <p class="tl-place">河南 · 平顶山</p>
-        <p class="tl-role">1993 · 出发</p>
-        <p class="tl-desc">四线城市工薪家庭，爸妈在学校工作。安稳的成长环境，和一颗不安分的好奇心。</p>
-      </div>
-      <div class="tl-item">
-        <p class="tl-place">北京理工大学</p>
-        <p class="tl-role">本科</p>
-        <p class="tl-desc">在北京开始接触更大的世界，写诗、读书、写代码。</p>
-      </div>
-      <div class="tl-item">
-        <p class="tl-place">中国科学院</p>
-        <p class="tl-role">硕士</p>
-        <p class="tl-desc">科研训练，计算机视觉方向。</p>
-      </div>
-      <div class="tl-item">
-        <p class="tl-place">旷视科技</p>
-        <p class="tl-role">工程师</p>
-        <p class="tl-desc">AI 公司的一线工程经验。</p>
-      </div>
-      <div class="tl-item">
-        <p class="tl-place">微软</p>
-        <p class="tl-role">工程师</p>
-        <p class="tl-desc">大厂体系里的打磨。</p>
-      </div>
-      <div class="tl-item">
-        <p class="tl-place">西湖大学</p>
-        <p class="tl-role">研究</p>
-        <p class="tl-desc">回到研究环境，继续探索。</p>
-      </div>
-      <div class="tl-item">
-        <p class="tl-place">数字游民</p>
-        <p class="tl-role">Gap 一年</p>
-        <p class="tl-desc">一个人用一年时间把国内许多地方走了个遍，体验了自由职业是什么感觉，也更热爱这个地球。</p>
-      </div>
-      <div class="tl-item now">
-        <p class="tl-place">安远AI</p>
-        <p class="tl-role">现在 · AI 安全</p>
-        <p class="tl-desc">落脚北京，做近几年最在意的事——AI 安全。</p>
-      </div>
+    <div class="hero-visual">
+      <canvas id="morph" aria-label="「人」与「机」的粒子互相转化，最终汇成「共生」"></canvas>
+      <p class="morph-caption">人 · 机 · 共生</p>
     </div>
   </section>
 
-  <!-- 社会活动 -->
-  <section id="activities" class="selectable" style="background: var(--bg-soft); border-top: 1px solid var(--border);">
-    <div class="section-head reveal">
-      <p class="section-label">社会活动 · Activities</p>
-      <h2 class="section-title">在场，发声，组织</h2>
-      <p class="section-sub">社区、讲座、公共讨论——AI 安全不是一个人的事。</p>
+  <!-- 职业生涯：横向时间线 -->
+  <section id="journey" class="layout">
+    <div class="layout-side">
+      <div class="side-sticky reveal">
+        <p class="section-label">职业生涯 · Journey</p>
+        <h2 class="section-title">从平顶山<br />到 AI 安全一线</h2>
+        <p class="section-sub prose">大厂待过，科研做过，也用一年时间做过数字游民。走过的弯路，最后都成了路。</p>
+      </div>
     </div>
-    <div class="cards-grid reveal">
-      <a class="card" href="https://aisafety-cn.com/" target="_blank" rel="noopener">
-        <span class="card-tag">社区 · 创始人 · 2025</span>
-        <h3 class="card-title">AI安全开放社区</h3>
-        <p class="card-desc">为了促进中国 AI 安全事业的发展，2025 年创办的开放社区。</p>
-        <span class="card-link">官网 →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
-      </a>
-
-      <a class="card" href="https://mp.weixin.qq.com/s?__biz=MzU5Mjg5MjQ5Ng==&mid=2247523317&idx=1&sn=c6ea612249537d44202022460eab68b1&chksm=ff0cd376a4e696ac98b11a8e0418ef409557b961a38fd74ca993eef49ba9f1afc405b0bb3bb0#rd" target="_blank" rel="noopener">
-        <span class="card-tag">荣誉 · 榜单 · 2026.11.20</span>
-        <h3 class="card-title">入选 2026 AI OPC 100</h3>
-        <p class="card-desc">我的 OPC 探索之路。入选非凡产研发布的「2026 AI OPC 100」榜单。</p>
-        <span class="card-link">查看报道 →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
-      </a>
-
-      <a class="card" href="tomorrows-crash.html">
-        <span class="card-tag">讲座 · 北京中间美术馆 · 2026.10.25</span>
-        <h3 class="card-title">明日的「事故」？——AI 与近未来危机
-          <span class="ai-badge" aria-label="本文由AI生成">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M5 16l1 3 3-1-3-1-1 3z"/><path d="M19 16l-1 3-3-1 3-1 1 3z"/></svg>
-            <span class="tooltip">本文由AI生成</span>
-          </span>
-        </h3>
-        <p class="card-desc">展览「事故」闭幕讲座。从 AI 安全研究的一线出发，谈 Crash（事故）与 Crush（迷恋），以及自动化之后人的价值。</p>
-        <span class="card-link">查看回顾 →</span>
-      </a>
-
-      <a class="card" href="longtan-trilogy.html">
-        <span class="card-tag">讲座 · 福建屏南龙潭村</span>
-        <h3 class="card-title">龙潭 AI 十日谈 · AI 安全三部曲
-          <span class="ai-badge" aria-label="本文由AI生成">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M5 16l1 3 3-1-3-1-1 3z"/><path d="M19 16l-1 3-3-1 3-1 1 3z"/></svg>
-            <span class="tooltip">本文由AI生成</span>
-          </span>
-        </h3>
-        <p class="card-desc">三夜围炉夜谈：从个人价值到文明风险，再到前沿治理——谁说了都不算，意味着每个人都算数。</p>
-        <span class="card-link">查看回顾 →</span>
-      </a>
-
-      <a class="card" href="https://github.com/jingedawang/introduction-to-digital-minds" target="_blank" rel="noopener">
-        <span class="card-tag">课程 · 开源</span>
-        <h3 class="card-title">数字心智通识课</h3>
-        <p class="card-desc">一门关于数字心智的通识课：当心智可以在硅基上运行，我们该如何理解它。</p>
-        <span class="card-link">前往GitHub →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
-      </a>
+    <div class="tl-wrap reveal">
+      <div class="tl-track" id="tlTrack">
+        <div class="tl-card">
+          <p class="tl-year">1993</p>
+          <h3 class="tl-place">河南 · 平顶山</h3>
+          <p class="tl-desc prose">出生。四线城市工薪家庭，爸妈在学校工作。安稳的成长环境，和一颗不安分的好奇心。</p>
+        </div>
+        <div class="tl-card">
+          <p class="tl-year">大学</p>
+          <h3 class="tl-place">北京理工大学</h3>
+          <p class="tl-desc prose">本科。在北京开始接触更大的世界，写诗、读书、写代码。</p>
+        </div>
+        <div class="tl-card">
+          <p class="tl-year">硕士</p>
+          <h3 class="tl-place">中国科学院</h3>
+          <p class="tl-desc prose">科研训练，计算机视觉方向。</p>
+        </div>
+        <div class="tl-card">
+          <p class="tl-year">工作</p>
+          <h3 class="tl-place">旷视科技</h3>
+          <p class="tl-desc prose">AI 公司的一线工程经验。</p>
+        </div>
+        <div class="tl-card">
+          <p class="tl-year">工作</p>
+          <h3 class="tl-place">微软</h3>
+          <p class="tl-desc prose">大厂体系里的打磨。</p>
+        </div>
+        <div class="tl-card">
+          <p class="tl-year">研究</p>
+          <h3 class="tl-place">西湖大学</h3>
+          <p class="tl-desc prose">回到研究环境，继续探索。</p>
+        </div>
+        <div class="tl-card">
+          <p class="tl-year">Gap</p>
+          <h3 class="tl-place">数字游民 · 一年</h3>
+          <p class="tl-desc prose">一个人用一年时间把国内许多地方走了个遍，体验了自由职业是什么感觉，也更热爱这个地球。</p>
+        </div>
+        <div class="tl-card now">
+          <p class="tl-year">现在</p>
+          <h3 class="tl-place">安远AI</h3>
+          <p class="tl-desc prose">落脚北京，做近几年最在意的事——AI 安全。</p>
+        </div>
+      </div>
+      <p class="tl-hint">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        左右拖动查看更多
+      </p>
     </div>
   </section>
 
-  <!-- 个人作品 -->
-  <section id="works" class="selectable">
-    <div class="section-head reveal">
-      <p class="section-label">个人作品 · Works</p>
-      <h2 class="section-title">写作、开源与自媒体</h2>
-      <p class="section-sub">深度表达在知乎，生活在小红书和 B 站，代码在 GitHub。</p>
+  <!-- 社会活动：编号目录 -->
+  <section id="activities" class="layout">
+    <div class="layout-side">
+      <div class="side-sticky reveal">
+        <p class="section-label">社会活动 · Activities</p>
+        <h2 class="section-title">在场，发声，组织</h2>
+        <p class="section-sub prose">社区、讲座、公共讨论——AI 安全不是一个人的事。</p>
+      </div>
     </div>
-    <div class="cards-grid reveal">
-      <a class="card" href="https://www.zhihu.com/people/jingewang" target="_blank" rel="noopener">
-        <span class="card-tag">写作 · 知乎专栏</span>
-        <h3 class="card-title">知乎 @王金戈</h3>
-        <p class="card-desc">深度表达的地方。AI 安全、科技与人文，两万读者。</p>
-        <span class="card-link">阅读专栏 →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+    <div class="act-list reveal">
+      <a class="act-row" href="https://aisafety-cn.com/" target="_blank" rel="noopener">
+        <span class="act-num">01</span>
+        <div>
+          <h3 class="act-title">AI安全开放社区<span class="act-meta">社区 · 创始人 · 2025</span></h3>
+          <p class="act-desc">为了促进中国 AI 安全事业的发展而创办的开放社区。</p>
+        </div>
+        <span class="act-arrow">→</span>
       </a>
-
-      <a class="card" href="poems.html">
-        <span class="card-tag">写作 · 诗</span>
-        <h3 class="card-title">诗</h3>
-        <p class="card-desc">五十首诗，从高三教室到 AI 时代，写于不同时期，不同心境。</p>
-        <span class="card-link">阅读 →</span>
+      <a class="act-row" href="https://mp.weixin.qq.com/s?__biz=MzU5Mjg5MjQ5Ng==&mid=2247523317&idx=1&sn=c6ea612249537d44202022460eab68b1&chksm=ff0cd376a4e696ac98b11a8e0418ef409557b961a38fd74ca993eef49ba9f1afc405b0bb3bb0#rd" target="_blank" rel="noopener">
+        <span class="act-num">02</span>
+        <div>
+          <h3 class="act-title">入选 2026 AI OPC 100<span class="act-meta">荣誉 · 榜单 · 2026.11.20</span></h3>
+          <p class="act-desc">我的 OPC 探索之路。入选非凡产研发布的「2026 AI OPC 100」榜单。</p>
+        </div>
+        <span class="act-arrow">→</span>
       </a>
-
-      <a class="card" href="first-crisis.html">
-        <span class="card-tag">写作 · 科幻短篇</span>
-        <h3 class="card-title">第一次危机</h3>
-        <p class="card-desc">如果 AI 真的拥有了自我意识，它会怎么选择？一个关于觉醒、自由与告别的故事。</p>
-        <span class="card-link">阅读全文 →</span>
+      <a class="act-row" href="tomorrows-crash.html">
+        <span class="act-num">03</span>
+        <div>
+          <h3 class="act-title">明日的「事故」？——AI 与近未来危机<span class="act-meta">讲座 · 中间美术馆 · 2026.10.25</span>
+            <span class="ai-badge" aria-label="本文由AI生成">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M5 16l1 3 3-1-3-1-1 3z"/><path d="M19 16l-1 3-3-1 3-1 1 3z"/></svg>
+              <span class="tooltip">本文由AI生成</span>
+            </span>
+          </h3>
+          <p class="act-desc">展览「事故」闭幕讲座。从 AI 安全研究的一线出发，谈 Crash（事故）与 Crush（迷恋），以及自动化之后人的价值。</p>
+        </div>
+        <span class="act-arrow">→</span>
       </a>
-
-      <a class="card" href="https://github.com/jingedawang/TutorialLLM" target="_blank" rel="noopener">
-        <span class="card-tag">开源 · 教程</span>
-        <h3 class="card-title">TutorialLLM</h3>
-        <p class="card-desc">写给每个人的大模型教程。从预训练到微调再到对齐完整走一遍，小白也能理解 AI 的底层原理。</p>
-        <span class="card-link">前往GitHub →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      <a class="act-row" href="longtan-trilogy.html">
+        <span class="act-num">04</span>
+        <div>
+          <h3 class="act-title">龙潭 AI 十日谈 · AI 安全三部曲<span class="act-meta">讲座 · 福建屏南</span>
+            <span class="ai-badge" aria-label="本文由AI生成">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M5 16l1 3 3-1-3-1-1 3z"/><path d="M19 16l-1 3-3-1 3-1 1 3z"/></svg>
+              <span class="tooltip">本文由AI生成</span>
+            </span>
+          </h3>
+          <p class="act-desc">三夜围炉夜谈：从个人价值到文明风险，再到前沿治理——谁说了都不算，意味着每个人都算数。</p>
+        </div>
+        <span class="act-arrow">→</span>
       </a>
-
-      <a class="card" href="https://github.com/jingedawang" target="_blank" rel="noopener">
-        <span class="card-tag">开源 · 更多</span>
-        <h3 class="card-title">GitHub 仓库</h3>
-        <p class="card-desc">算法、视觉、AI 意识评估……这些年写过的东西，大多在这里。</p>
-        <span class="card-link">逛逛 →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
-      </a>
-
-      <a class="card" href="https://space.bilibili.com/69217382" target="_blank" rel="noopener">
-        <span class="card-tag">视频 · Bilibili</span>
-        <h3 class="card-title">B 站 @金戈大王</h3>
-        <p class="card-desc">视频形式的表达与记录。</p>
-        <span class="card-link">观看 →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
-      </a>
-
-      <a class="card" href="https://www.xiaohongshu.com/user/profile/604cf639000000000100bded" target="_blank" rel="noopener">
-        <span class="card-tag">自媒体 · 小红书</span>
-        <h3 class="card-title">小红书 @金戈</h3>
-        <p class="card-desc">简短但充满生活气息的内容。</p>
-        <span class="card-link">看看 →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
-      </a>
-
-      <a class="card" href="match.html">
-        <span class="card-tag">生活 · 相亲</span>
-        <h3 class="card-title">相亲档案</h3>
-        <p class="card-desc">93年生人，程序员，写作者，探索者。稍微偏离主流路线的人，正在寻找同路的你。</p>
-        <span class="card-link">查看 →</span>
+      <a class="act-row" href="https://github.com/jingedawang/introduction-to-digital-minds" target="_blank" rel="noopener">
+        <span class="act-num">05</span>
+        <div>
+          <h3 class="act-title">数字心智通识课<span class="act-meta">课程 · 开源</span></h3>
+          <p class="act-desc">一门关于数字心智的通识课：当心智可以在硅基上运行，我们该如何理解它。</p>
+        </div>
+        <span class="act-arrow">→</span>
       </a>
     </div>
   </section>
 
-  <!-- 留言板 -->
-  <section id="guestbook" class="guestbook-section">
-    <div class="section-head reveal">
-      <p class="section-label">留言板 · Guestbook</p>
-      <h2 class="section-title">说点什么</h2>
+  <!-- 个人作品：Bento -->
+  <section id="works" class="layout">
+    <div class="layout-side">
+      <div class="side-sticky reveal">
+        <p class="section-label">个人作品 · Works</p>
+        <h2 class="section-title">写作、开源<br />与自媒体</h2>
+        <p class="section-sub prose">深度表达在知乎，生活在小红书和 B 站，代码在 GitHub。</p>
+      </div>
     </div>
-    <p class="guestbook-hint reveal">
-      选中页面上任何一段文字，可以<kbd>划线</kbd>收藏（保存在你自己的浏览器里），或<kbd>引用留言</kbd>——它会自动复制引用并带你来这里。
-    </p>
-    <!--
-      TODO(jinge): giscus 留言板配置——需要你两步操作后把参数给我：
-      1. 在 GitHub 仓库 jingedawang/Homepage 的 Settings → Features 里开启 Discussions；
-      2. 打开 https://giscus.app/zh-CN ，仓库填 jingedawang/Homepage，分类选 General，
-         把生成的 data-repo-id 和 data-category-id 发我（或直接把整段 script 发我）。
-      然后把下面的占位卡片换成这段 script（填入真实 id）：
+    <div class="bento reveal">
+      <a class="b-card b-lg" href="https://www.zhihu.com/people/jingewang" target="_blank" rel="noopener">
+        <span class="b-tag">写作 · 知乎专栏</span>
+        <h3 class="b-title">知乎 @王金戈</h3>
+        <p class="b-stat">20,000+<small>关注</small></p>
+        <p class="b-desc">深度表达的地方。AI 安全、科技与人文——工作和生活中更系统的思考，都写在这里。</p>
+        <span class="b-link">阅读专栏 →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      </a>
 
-      <script src="https://giscus.app/client.js"
-        data-repo="jingedawang/Homepage"
-        data-repo-id="..."
-        data-category="General"
-        data-category-id="..."
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="dark"
-        data-lang="zh-CN"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-      </script>
-    -->
-    <div class="guestbook-placeholder reveal">
-      <p class="gb-title">留言板布置中</p>
-      <p class="gb-desc">在这之前，欢迎通过<a href="https://www.zhihu.com/people/jingewang" target="_blank" rel="noopener">知乎私信</a>找到我，我一定回复。</p>
+      <a class="b-card b-tall" href="poems.html">
+        <span class="b-tag">写作 · 诗</span>
+        <h3 class="b-title">诗</h3>
+        <p class="b-desc">五十首诗，从高三教室到 AI 时代，写于不同时期，不同心境。</p>
+        <span class="b-link">阅读 →</span>
+      </a>
+
+      <a class="b-card" href="https://space.bilibili.com/69217382" target="_blank" rel="noopener">
+        <span class="b-tag">视频 · Bilibili</span>
+        <h3 class="b-title">@金戈大王</h3>
+        <p class="b-desc">视频形式的表达与记录。</p>
+        <span class="b-link">观看 →</span>
+      </a>
+
+      <a class="b-card" href="https://www.xiaohongshu.com/user/profile/604cf639000000000100bded" target="_blank" rel="noopener">
+        <span class="b-tag">自媒体 · 小红书</span>
+        <h3 class="b-title">@金戈</h3>
+        <p class="b-desc">简短但充满生活气息的内容。</p>
+        <span class="b-link">看看 →</span>
+      </a>
+
+      <a class="b-card b-wide" href="first-crisis.html">
+        <span class="b-tag">写作 · 科幻短篇</span>
+        <h3 class="b-title">第一次危机</h3>
+        <p class="b-desc">如果 AI 真的拥有了自我意识，它会怎么选择？一个关于觉醒、自由与告别的故事。</p>
+        <span class="b-link">阅读全文 →</span>
+      </a>
+
+      <a class="b-card b-wide" href="https://github.com/jingedawang/TutorialLLM" target="_blank" rel="noopener">
+        <span class="b-tag">开源 · 教程</span>
+        <h3 class="b-title">TutorialLLM</h3>
+        <p class="b-desc">写给每个人的大模型教程。从预训练到微调再到对齐完整走一遍，小白也能理解 AI 的底层原理。</p>
+        <span class="b-link">前往GitHub →<svg class="ext-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      </a>
+
+      <a class="b-card" href="https://github.com/jingedawang" target="_blank" rel="noopener">
+        <span class="b-tag">开源 · 更多</span>
+        <h3 class="b-title">GitHub 仓库</h3>
+        <p class="b-desc">算法、视觉、AI 意识评估……这些年写过的东西。</p>
+        <span class="b-link">逛逛 →</span>
+      </a>
+
+      <a class="b-card" href="match.html">
+        <span class="b-tag">生活 · 相亲</span>
+        <h3 class="b-title">相亲档案</h3>
+        <p class="b-desc">稍微偏离主流路线的人，正在寻找同路的你。</p>
+        <span class="b-link">查看 →</span>
+      </a>
+
+      <div class="b-card b-soon">
+        <span class="b-tag">Next</span>
+        <h3 class="b-title">还有别的在酝酿……</h3>
+        <p class="b-desc"></p>
+      </div>
     </div>
   </section>
 
-  <!-- 找到我 -->
-  <section id="links">
-    <div class="section-head reveal">
-      <p class="section-label">找到我 · Contact</p>
+  <!-- 联系 -->
+  <section id="links" class="layout">
+    <div class="layout-side">
+      <div class="side-sticky reveal">
+        <p class="section-label">找到我 · Contact</p>
+      </div>
     </div>
     <ul class="links-list reveal">
       <li>
@@ -814,7 +902,7 @@
       </li>
       <li>
         <a href="https://www.xiaohongshu.com/user/profile/604cf639000000000100bded" target="_blank" rel="noopener">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22.405 9.879c.002.016.01.02.07.019h.725a.797.797 0 0 0 .78-.972.794.794 0 0 0-.884-.618.795.795 0 0 0-.692.794c0 .101-.002.666.001.777zm-11.509 4.808c-.203.001-1.353.004-1.685.003a2.528 2.528 0 0 1-.766-.126.025.025 0 0 0-.03.014L7.7 16.127a.025.025 0 0 0 .01.032c.111.06.336.124.495.124.66.01 1.32.002 1.981 0 .01 0 .02-.006.023-.015l.712-1.545a.025.025 0 0 0-.024-.036zM.477 9.91c-.071 0-.076.002-.076.01a.834.834 0 0 0-.01.08c-.027.397-.038.495-.234 3.06-.012.24-.034.389-.135.607-.026.057-.033.042.003.112.046.092.681 1.523.787 1.74.008.015.011.02.017.02.008 0 .033-.026.047-.044.147-.187.268-.391.371-.606.306-.635.44-1.325.486-1.706.014-.11.021-.22.03-.33l.204-2.616.022-.293c.003-.029 0-.033-.03-.034zm7.203 3.757a1.427 1.427 0 0 1-.135-.607c-.004-.084-.031-.39-.235-3.06a.443.443 0 0 0-.01-.082c-.004-.011-.052-.008-.076-.008h-1.48c-.03.001-.034.005-.03.034l.021.293c.076.982.153 1.964.233 2.946c.05.4.186 1.085.487 1.706.103.215.223.419.37.606.015.018.037.051.048.049.02-.003.742-1.642.804-1.765.036-.07.03-.055.003-.112zm3.861-.913h-.872a.126.126 0 0 1-.116-.178l1.178-2.625a.025.025 0 0 0-.023-.035l-1.318-.003a.148.148 0 0 1-.135-.21l.876-1.954a.025.025 0 0 0-.023-.035h-1.56c-.01 0-.02.006-.024.015l-.926 2.068c-.085.169-.314.634-.399.938a.534.534 0 0 0-.02.191.46.46 0 0 0 .23.378.981.981 0 0 0 .46.119h.59c.041 0-.688 1.482-.834 1.972a.53.53 0 0 0-.023.172.465.465 0 0 0 .23.398c.15.092.342.12.475.12l1.66-.001c.01 0 .02-.006.023-.015l.575-1.28a.025.025 0 0 0-.024-.035zm-6.93-4.937H3.1a.032.032 0 0 0-.034.033c0 1.048-.01 2.795-.01 6.829 0 .288-.269.262-.28.262h-.74c-.04.001-.044.004-.04.047.001.037.465 1.064.555 1.263.01.02.03.033.051.033.157.003.767.009.938-.014.153-.02.3-.06.438-.132.3-.156.49-.419.595-.765.052-.172.075-.353.075-.533.002-2.33 0-4.66-.007-6.991a.032.032 0 0 0-.032-.032zm11.784 6.896c0-.014-.01-.021-.024-.022h-1.465c-.048-.001-.049-.002-.05-.049v-4.66c0-.072-.005-.07.07-.07h.863c.08 0 .075.004.075-.074V8.393c0-.082.006-.076-.08-.076h-3.5c-.064 0-.075-.006-.075.073v1.445c0 .083-.006.077.08.077h.854c.075 0 .07-.004.07.07v4.624c0 .095.008.084-.085.084-.37 0-1.11-.002-1.304 0-.048.001-.06.03-.06.03l-.697 1.519s-.014.025-.008.036c.006.01.013.008.058.008 1.748.003 3.495.002 5.243.002.03-.001.034-.006.035-.033v-1.539zm4.177-3.43c0 .013-.007.023-.02.024-.346.006-.692.004-1.037.004-.014-.002-.022-.01-.022-.024-.005-.434-.007-.869-.01-1.303 0-.072-.006-.071.07-.07l.733-.003c.041 0 .081.002.12.015.093.025.16.107.165.204.006.431.002 1.153.001 1.153zm2.67.244a1.953 1.953 0 0 0-.883-.222h-.18c-.04.001-.04-.003-.042-.04V10.21c0-.132-.007-.263-.025-.394a1.823 1.823 0 0 0-.153-.53 1.533 1.533 0 0 0-.677-.71 2.167 2.167 0 0 0-1-.258c-.153-.003-.567 0-.72 0-.07 0-.068.004-.068-.065V7.76c0-.031-.01-.041-.046-.039H17.93s-.016 0-.023.007c-.006.006-.008.012-.008.023v.546c-.008.036-.057.015-.082.022h-.95c-.022.002-.028.008-.03.032v1.481c0 .09-.004.082.082.082h.913c.082 0 .072.128.072.128V11.19s.003.117-.06.117h-1.482c-.068 0-.06.082-.06.082v1.445s-.01.068.064.068h1.457c.082 0 .076-.006.076.079v3.225c0 .088-.007.081.082.081h1.43c.09 0 .082.007.082-.08v-3.27c0-.029.006-.035.033-.035l2.323-.003c.098 0 .191.02.28.061a.46.46 0 0 1 .274.407c.008.395.003.79.003 1.185 0 .259-.107.367-.33.367h-1.218c-.023.002-.029.008-.028.033.184.437.374.871.57 1.303a.045.045 0 0 0 .04.026c.17.005.34.002.51.003.15-.002.517.004.666-.01a2.03 2.03 0 0 0 .408-.075c.59-.18.975-.698.976-1.313v-1.981c0-.128-.01-.254-.034-.38 0 .078-.029-.641-.724-.998z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22.405 9.879c.002.016.01.02.07.019h.725a.797.797 0 0 0 .78-.972.794.794 0 0 0-.884-.618.795.795 0 0 0-.692.794c0 .101-.002.666.001.777zm-11.509 4.808c-.203.001-1.353.004-1.685.003a2.528 2.528 0 0 1-.766-.126.025.025 0 0 0-.03.014L7.7 16.127a.025.025 0 0 0 .01.032c.111.06.336.124.495.124.66.01 1.32.002 1.981 0 .01 0 .02-.006.023-.015l.712-1.545a.025.025 0 0 0-.024-.036zM.477 9.91c-.071 0-.076.002-.076.01a.834.834 0 0 0-.01.08c-.027.397-.038.495-.234 3.06-.012.24-.034.389-.135.607-.026.057-.033.042.003.112.046.092.681 1.523.787 1.74.008.015.011.02.017.02.008 0 .033-.026.047-.044.147-.187.268-.391.371-.606.306-.635.44-1.325.486-1.706.014-.11.021-.22.03-.33l.204-2.616.022-.293c.003-.029 0-.033-.03-.034zm7.203 3.757a1.427 1.427 0 0 1-.135-.607c-.004-.084-.031-.39-.235-3.06a.443.443 0 0 0-.01-.082c-.004-.011-.052-.008-.076-.008h-1.48c-.03.001-.034.005-.03.034l.021.293c.076.982.153 1.964.233 2.946.05.4.186 1.085.487 1.706.103.215.223.419.37.606.015.018.037.051.048.049.02-.003.742-1.642.804-1.765.036-.07.03-.055.003-.112zm3.861-.913h-.872a.126.126 0 0 1-.116-.178l1.178-2.625a.025.025 0 0 0-.023-.035l-1.318-.003a.148.148 0 0 1-.135-.21l.876-1.954a.025.025 0 0 0-.023-.035h-1.56c-.01 0-.02.006-.024.015l-.926 2.068c-.085.169-.314.634-.399.938a.534.534 0 0 0-.02.191.46.46 0 0 0 .23.378.981.981 0 0 0 .46.119h.59c.041 0-.688 1.482-.834 1.972a.53.53 0 0 0-.023.172.465.465 0 0 0 .23.398c.15.092.342.12.475.12l1.66-.001c.01 0 .02-.006.023-.015l.575-1.28a.025.025 0 0 0-.024-.035zm-6.93-4.937H3.1a.032.032 0 0 0-.034.033c0 1.048-.01 2.795-.01 6.829 0 .288-.269.262-.28.262h-.74c-.04.001-.044.004-.04.047.001.037.465 1.064.555 1.263.01.02.03.033.051.033.157.003.767.009.938-.014.153-.02.3-.06.438-.132.3-.156.49-.419.595-.765.052-.172.075-.353.075-.533.002-2.33 0-4.66-.007-6.991a.032.032 0 0 0-.032-.032zm11.784 6.896c0-.014-.01-.021-.024-.022h-1.465c-.048-.001-.049-.002-.05-.049v-4.66c0-.072-.005-.07.07-.07h.863c.08 0 .075.004.075-.074V8.393c0-.082.006-.076-.08-.076h-3.5c-.064 0-.075-.006-.075.073v1.445c0 .083-.006.077.08.077h.854c.075 0 .07-.004.07.07v4.624c0 .095.008.084-.085.084-.37 0-1.11-.002-1.304 0-.048.001-.06.03-.06.03l-.697 1.519s-.014.025-.008.036c.006.01.013.008.058.008 1.748.003 3.495.002 5.243.002.03-.001.034-.006.035-.033v-1.539zm4.177-3.43c0 .013-.007.023-.02.024-.346.006-.692.004-1.037.004-.014-.002-.022-.01-.022-.024-.005-.434-.007-.869-.01-1.303 0-.072-.006-.071.07-.07l.733-.003c.041 0 .081.002.12.015.093.025.16.107.165.204.006.431.002 1.153.001 1.153zm2.67.244a1.953 1.953 0 0 0-.883-.222h-.18c-.04.001-.04-.003-.042-.04V10.21c0-.132-.007-.263-.025-.394a1.823 1.823 0 0 0-.153-.53 1.533 1.533 0 0 0-.677-.71 2.167 2.167 0 0 0-1-.258c-.153-.003-.567 0-.72 0-.07 0-.068.004-.068-.065V7.76c0-.031-.01-.041-.046-.039H17.93s-.016 0-.023.007c-.006.006-.008.012-.008.023v.546c-.008.036-.057.015-.082.022h-.95c-.022.002-.028.008-.03.032v1.481c0 .09-.004.082.082.082h.913c.082 0 .072.128.072.128V11.19s.003.117-.06.117h-1.482c-.068 0-.06.082-.06.082v1.445s-.01.068.064.068h1.457c.082 0 .076-.006.076.079v3.225c0 .088-.007.081.082.081h1.43c.09 0 .082.007.082-.08v-3.27c0-.029.006-.035.033-.035l2.323-.003c.098 0 .191.02.28.061a.46.46 0 0 1 .274.407c.008.395.003.79.003 1.185 0 .259-.107.367-.33.367h-1.218c-.023.002-.029.008-.028.033.184.437.374.871.57 1.303a.045.045 0 0 0 .04.026c.17.005.34.002.51.003.15-.002.517.004.666-.01a2.03 2.03 0 0 0 .408-.075c.59-.18.975-.698.976-1.313v-1.981c0-.128-.01-.254-.034-.38 0 .078-.029-.641-.724-.998z"/></svg>
           小红书
         </a>
       </li>
@@ -856,223 +944,534 @@
     <span>人本主义 × 机本主义 · 平顶山 · 北京 · 杭州 · 黄山 · 2026</span>
   </footer>
 
-  <!-- Highlight popover & toast -->
-  <div id="hl-pop" role="menu">
+  <!-- 划线/想法 UI -->
+  <div id="wr-pop" role="menu">
     <button data-act="mark">划线</button>
-    <button data-act="quote">引用留言</button>
+    <button data-act="note">写想法</button>
     <button data-act="copy">复制</button>
   </div>
+
+  <div id="wr-panel" role="dialog" aria-label="想法">
+    <p class="wr-quote"></p>
+    <div class="wr-notes"></div>
+    <input id="wr-name" type="text" placeholder="你的名字（可选）" maxlength="20" />
+    <textarea id="wr-text" rows="2" placeholder="写下你的想法……"></textarea>
+    <div class="wr-actions">
+      <button class="wr-unmark" type="button">删除划线</button>
+      <button class="wr-btn" type="button">发表</button>
+    </div>
+  </div>
+
   <div id="toast" role="status"></div>
 
   <script>
-  /* ── 入场过渡触发 ──────────────────────────────────────── */
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    document.documentElement.classList.add('ready');
-  }));
-
-  /* ── 双螺旋：人（暖）与机（冷）交织上升 ─────────────────── */
-  (function () {
-    const canvas = document.getElementById('helix');
-    const ctx = canvas.getContext('2d');
-    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let W, H, dpr, raf, phase = 0, mx = 0, my = 0, stars = [];
-
-    function resize() {
-      dpr = Math.min(devicePixelRatio || 1, 2);
-      W = canvas.clientWidth; H = canvas.clientHeight;
-      canvas.width = W * dpr; canvas.height = H * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      stars = Array.from({ length: Math.round(W * H / 26000) }, () => ({
-        x: Math.random() * W, y: Math.random() * H,
-        r: Math.random() * 1.1 + 0.3, a: Math.random() * 0.5 + 0.15
-      }));
-    }
-
-    const HUMAN = [217, 160, 91], MACHINE = [127, 183, 201];
-
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-
-      for (const s of stars) {
-        ctx.fillStyle = `rgba(237,230,218,${s.a * 0.5})`;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, 7);
-        ctx.fill();
-      }
-
-      const cx = W * (W > 900 ? 0.72 : 0.5) + mx * 22;
-      const cy = H * 0.5 + my * 14;
-      const span = Math.min(H * 0.82, 720);
-      const R = Math.min(W, H) * (W > 900 ? 0.16 : 0.21);
-      const N = 72, turns = 2.6;
-
-      for (let i = 0; i < N; i++) {
-        const t = (i / (N - 1)) * Math.PI * 2 * turns + phase;
-        const y = cy - span / 2 + (i / (N - 1)) * span;
-        const depth1 = (Math.cos(t) + 1) / 2;          // 0..1
-        const depth2 = (Math.cos(t + Math.PI) + 1) / 2;
-        const x1 = cx + Math.sin(t) * R;
-        const x2 = cx + Math.sin(t + Math.PI) * R;
-
-        if (i % 6 === 0) {                              // 横档：两股之间的连接
-          ctx.strokeStyle = `rgba(237,230,218,${0.05 + 0.08 * Math.min(depth1, depth2)})`;
-          ctx.lineWidth = 1;
-          ctx.beginPath(); ctx.moveTo(x1, y); ctx.lineTo(x2, y); ctx.stroke();
-        }
-        dot(x1, y, 1.1 + depth1 * 1.7, HUMAN, 0.25 + depth1 * 0.6);
-        dot(x2, y, 1.1 + depth2 * 1.7, MACHINE, 0.25 + depth2 * 0.6);
-      }
-
-      phase += reduceMotion ? 0 : 0.0038;
-      raf = requestAnimationFrame(draw);
-    }
-
-    function dot(x, y, r, [cr, cg, cb], a) {
-      ctx.fillStyle = `rgba(${cr},${cg},${cb},${a})`;
-      ctx.beginPath();
-      ctx.arc(x, y, r, 0, 7);
-      ctx.fill();
-    }
-
-    addEventListener('mousemove', e => {
-      mx = (e.clientX / innerWidth - 0.5);
-      my = (e.clientY / innerHeight - 0.5);
-    }, { passive: true });
-
-    addEventListener('resize', resize, { passive: true });
-    resize();
-    draw();
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) cancelAnimationFrame(raf); else draw();
+    /* ── 入场过渡 ── */
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        document.documentElement.classList.add('ready');
+      });
     });
-  })();
 
-  /* ── 滚动显现 ──────────────────────────────────────────── */
-  (function () {
-    const io = new IntersectionObserver(entries => {
-      for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-  })();
-
-  /* ── 划线 & 引用留言 ───────────────────────────────────── */
-  (function () {
-    const pop = document.getElementById('hl-pop');
-    const toast = document.getElementById('toast');
-    const STORE_KEY = 'wjk-highlights-v1';
-    let range = null;
-
-    const showToast = msg => {
-      toast.textContent = msg;
-      toast.classList.add('show');
-      clearTimeout(showToast.t);
-      showToast.t = setTimeout(() => toast.classList.remove('show'), 2400);
-    };
-
-    function inSelectable(node) {
-      return node && node.parentElement && node.parentElement.closest('.selectable');
-    }
-
-    document.addEventListener('selectionchange', () => {
-      const sel = getSelection();
-      if (sel.isCollapsed || !inSelectable(sel.anchorNode)) {
-        if (!pop.matches(':hover')) pop.classList.remove('show');
+    /* ── 滚动显现 ── */
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('in'); });
         return;
       }
-      range = sel.getRangeAt(0).cloneRange();
-      const r = range.getBoundingClientRect();
-      pop.style.left = (scrollX + r.left + r.width / 2 - pop.offsetWidth / 2) + 'px';
-      pop.style.top = (scrollY + r.top - 52) + 'px';
-      pop.classList.add('show');
-    });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function (el) { io.observe(el); });
+    })();
 
-    document.addEventListener('mousedown', e => {
-      if (!pop.contains(e.target)) pop.classList.remove('show');
-    });
+    /* ── Hero：人 ⇄ 机 ⇄ 共生 粒子字形 ── */
+    (function () {
+      var canvas = document.getElementById('morph');
+      if (!canvas || !canvas.getContext) return;
+      var ctx = canvas.getContext('2d');
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var C_HUMAN = [139, 101, 64];   /* 暖棕 · 人 */
+      var C_MACHINE = [78, 122, 138]; /* 青蓝 · 机 */
+      var SHAPES = ['人', '机', '共生'];
+      var HOLD = 2800;
+      var SAMPLE = 300, STEP = 4, MAXPTS = 1600;
+      var W = 0, H = 0, dpr = 1;
+      var particles = [];
+      var pointSets = {};
+      var shapeIdx = 0, lastSwitch = 0, started = false;
 
-    /* 划线：把选区里每个文本节点的相交部分包进 <mark class="hl"> */
-    function wrapRange(r) {
-      const root = range.commonAncestorContainer.nodeType === 1
-        ? range.commonAncestorContainer : range.commonAncestorContainer.parentElement;
-      const scope = root.closest('.selectable') || document.body;
-      const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT, {
-        acceptNode: n => range.intersectsNode(n) && n.textContent.trim()
-          ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT
-      });
-      const nodes = [];
-      while (walker.nextNode()) nodes.push(walker.currentNode);
-      for (const n of nodes) {
-        const s = n === range.startContainer ? range.startOffset : 0;
-        const e = n === range.endContainer ? range.endOffset : n.length;
-        if (s >= e) continue;
-        const mid = n.splitText(s);
-        mid.splitText(e - s);
-        const mark = document.createElement('mark');
-        mark.className = 'hl';
-        mid.replaceWith(mark);
-        mark.appendChild(mid);
-        mark.addEventListener('click', () => unmark(mark), { once: true });
-      }
-    }
-
-    function unmark(mark) {
-      const p = mark.parentNode;
-      mark.replaceWith(...mark.childNodes);
-      p.normalize();
-      save();
-      showToast('已取消划线');
-    }
-
-    function save() {
-      const texts = [...document.querySelectorAll('mark.hl')].map(m => m.textContent);
-      localStorage.setItem(STORE_KEY, JSON.stringify(texts));
-    }
-
-    function restore() {
-      let saved;
-      try { saved = JSON.parse(localStorage.getItem(STORE_KEY) || '[]'); } catch { return; }
-      for (const text of saved) {
-        if (!text || text.length < 2) continue;
-        for (const scope of document.querySelectorAll('.selectable')) {
-          const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT);
-          let n;
-          while ((n = walker.nextNode())) {
-            const i = n.textContent.indexOf(text);
-            if (i === -1 || n.parentElement.closest('mark.hl')) continue;
-            const r = document.createRange();
-            r.setStart(n, i); r.setEnd(n, i + text.length);
-            const mark = document.createElement('mark');
-            mark.className = 'hl';
-            try { r.surroundContents(mark); } catch { continue; }
-            mark.addEventListener('click', () => unmark(mark), { once: true });
-            break;
+      function sample(text) {
+        var off = document.createElement('canvas');
+        off.width = SAMPLE; off.height = SAMPLE;
+        var o = off.getContext('2d', { willReadFrequently: true });
+        var fs = text.length === 1 ? 215 : 128;
+        o.font = '900 ' + fs + 'px "Noto Serif SC", serif';
+        o.textAlign = 'center';
+        o.textBaseline = 'middle';
+        o.fillStyle = '#000';
+        o.fillText(text, SAMPLE / 2, SAMPLE / 2 + fs * 0.06);
+        var data = o.getImageData(0, 0, SAMPLE, SAMPLE).data;
+        var pts = [];
+        for (var y = 0; y < SAMPLE; y += STEP) {
+          for (var x = 0; x < SAMPLE; x += STEP) {
+            if (data[(y * SAMPLE + x) * 4 + 3] > 110) pts.push([x / SAMPLE, y / SAMPLE]);
           }
         }
+        if (pts.length > MAXPTS) {
+          var stride = Math.ceil(pts.length / MAXPTS);
+          pts = pts.filter(function (_, i) { return i % stride === 0; });
+        }
+        return pts;
       }
-    }
 
-    pop.addEventListener('click', async e => {
-      const act = e.target.dataset.act;
-      if (!act || !range) return;
-      const text = range.toString().trim();
-      pop.classList.remove('show');
-      if (act === 'mark') {
-        wrapRange(range);
-        save();
-        showToast('已划线 · 再次点击划线处可取消');
-      } else if (act === 'copy') {
-        await navigator.clipboard.writeText(text);
-        showToast('已复制');
-      } else if (act === 'quote') {
-        await navigator.clipboard.writeText('> ' + text.replace(/\n+/g, '\n> ') + '\n\n');
-        document.getElementById('guestbook').scrollIntoView({ behavior: 'smooth' });
-        showToast('引用已复制，粘贴到留言板即可');
+      function resize() {
+        var r = canvas.getBoundingClientRect();
+        if (!r.width) return;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = Math.round(r.width * dpr);
+        H = Math.round(r.height * dpr);
+        canvas.width = W;
+        canvas.height = H;
       }
-      getSelection().removeAllRanges();
-    });
 
-    restore();
-  })();
+      function buildParticles() {
+        var maxLen = 0;
+        SHAPES.forEach(function (s) {
+          pointSets[s] = sample(s);
+          if (pointSets[s].length > maxLen) maxLen = pointSets[s].length;
+        });
+        for (var i = 0; i < maxLen; i++) {
+          particles.push({
+            x: Math.random() * W, y: Math.random() * H,
+            tx: 0, ty: 0,
+            cr: 200, cg: 190, cb: 180, tr: 0, tg: 0, tb: 0,
+            s: 0.045 + Math.random() * 0.05,
+            phase: Math.random() * Math.PI * 2
+          });
+        }
+        assignTargets(0, true);
+      }
+
+      function assignTargets(idx, first) {
+        var pts = pointSets[SHAPES[idx]];
+        if (!pts || !pts.length) return;
+        var order = [];
+        for (var i = 0; i < pts.length; i++) order.push(i);
+        for (i = order.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = order[i]; order[i] = order[j]; order[j] = t;
+        }
+        var name = SHAPES[idx];
+        var isSym = name === '共生';
+        var base = name === '人' ? C_HUMAN : C_MACHINE;
+        particles.forEach(function (p, k) {
+          var pt = pts[order[k % pts.length]];
+          p.tx = pt[0] * W;
+          p.ty = pt[1] * H;
+          if (isSym) {
+            /* 共生：按横向位置在人色与机色之间渐变 */
+            var m = pt[0];
+            p.tr = C_HUMAN[0] + (C_MACHINE[0] - C_HUMAN[0]) * m;
+            p.tg = C_HUMAN[1] + (C_MACHINE[1] - C_HUMAN[1]) * m;
+            p.tb = C_HUMAN[2] + (C_MACHINE[2] - C_HUMAN[2]) * m;
+          } else {
+            p.tr = base[0]; p.tg = base[1]; p.tb = base[2];
+          }
+          if (first) { p.cr = p.tr; p.cg = p.tg; p.cb = p.tb; }
+        });
+      }
+
+      function drawStatic() {
+        ctx.clearRect(0, 0, W, H);
+        var pts = pointSets['共生'] || [];
+        var dot = 2 * dpr;
+        pts.forEach(function (pt) {
+          var m = pt[0];
+          ctx.fillStyle = 'rgb(' +
+            Math.round(C_HUMAN[0] + (C_MACHINE[0] - C_HUMAN[0]) * m) + ',' +
+            Math.round(C_HUMAN[1] + (C_MACHINE[1] - C_HUMAN[1]) * m) + ',' +
+            Math.round(C_HUMAN[2] + (C_MACHINE[2] - C_HUMAN[2]) * m) + ')';
+          ctx.fillRect(pt[0] * W, pt[1] * H, dot, dot);
+        });
+      }
+
+      function frame(t) {
+        if (!lastSwitch) lastSwitch = t;
+        if (t - lastSwitch > HOLD) {
+          shapeIdx = (shapeIdx + 1) % SHAPES.length;
+          assignTargets(shapeIdx);
+          lastSwitch = t;
+        }
+        ctx.clearRect(0, 0, W, H);
+        var dot = 2.1 * dpr;
+        for (var i = 0; i < particles.length; i++) {
+          var p = particles[i];
+          p.x += (p.tx - p.x) * p.s;
+          p.y += (p.ty - p.y) * p.s;
+          p.cr += (p.tr - p.cr) * 0.06;
+          p.cg += (p.tg - p.cg) * 0.06;
+          p.cb += (p.tb - p.cb) * 0.06;
+          var wx = Math.sin(t * 0.0012 + p.phase) * 0.7 * dpr;
+          var wy = Math.cos(t * 0.0011 + p.phase) * 0.7 * dpr;
+          ctx.fillStyle = 'rgb(' + (p.cr | 0) + ',' + (p.cg | 0) + ',' + (p.cb | 0) + ')';
+          ctx.fillRect(p.x + wx, p.y + wy, dot, dot);
+        }
+        requestAnimationFrame(frame);
+      }
+
+      function start() {
+        if (started) return;
+        started = true;
+        resize();
+        if (!W) return;
+        buildParticles();
+        if (reduced) { drawStatic(); return; }
+        requestAnimationFrame(frame);
+        var rt;
+        window.addEventListener('resize', function () {
+          clearTimeout(rt);
+          rt = setTimeout(function () {
+            resize();
+            assignTargets(shapeIdx);
+            if (reduced) drawStatic();
+          }, 180);
+        });
+      }
+
+      if (document.fonts && document.fonts.load) {
+        Promise.race([
+          document.fonts.load('900 200px "Noto Serif SC"', '人机共生').then(function () { return document.fonts.ready; }),
+          new Promise(function (r) { setTimeout(r, 2600); })
+        ]).then(start, start);
+      } else if (document.readyState === 'complete') {
+        start();
+      } else {
+        window.addEventListener('load', start);
+      }
+    })();
+
+    /* ── 时间线拖动 ── */
+    (function () {
+      var track = document.getElementById('tlTrack');
+      if (!track) return;
+      var down = false, startX = 0, startLeft = 0;
+      track.addEventListener('pointerdown', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        down = true;
+        startX = e.clientX;
+        startLeft = track.scrollLeft;
+      });
+      window.addEventListener('pointermove', function (e) {
+        if (!down) return;
+        var dx = e.clientX - startX;
+        if (!track.classList.contains('dragging')) {
+          if (Math.abs(dx) < 4) return;
+          track.classList.add('dragging');
+          try { track.setPointerCapture(e.pointerId); } catch (_) {}
+        }
+        track.scrollLeft = startLeft - dx;
+        e.preventDefault();
+      });
+      ['pointerup', 'pointercancel'].forEach(function (ev) {
+        window.addEventListener(ev, function () {
+          down = false;
+          track.classList.remove('dragging');
+        });
+      });
+    })();
+
+    /* ── 划线与想法（微信读书式，本地存储） ── */
+    (function () {
+      var STORE_KEY = 'wjk-notes-v1';
+      var pop = document.getElementById('wr-pop');
+      var panel = document.getElementById('wr-panel');
+      var quoteEl = panel.querySelector('.wr-quote');
+      var notesEl = panel.querySelector('.wr-notes');
+      var nameInput = document.getElementById('wr-name');
+      var textInput = document.getElementById('wr-text');
+      var btnPublish = panel.querySelector('.wr-btn');
+      var btnUnmark = panel.querySelector('.wr-unmark');
+      var toastEl = document.getElementById('toast');
+      var toastTimer = 0, selTimer = 0;
+      var currentKey = null, pendingRange = null;
+
+      function toast(msg) {
+        toastEl.textContent = msg;
+        toastEl.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 1800);
+      }
+      function norm(t) { return t.replace(/\s+/g, ' ').trim(); }
+      function loadStore() {
+        try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; }
+        catch (_) { return {}; }
+      }
+      function saveStore(s) {
+        try { localStorage.setItem(STORE_KEY, JSON.stringify(s)); }
+        catch (_) { toast('本地存储不可用'); }
+      }
+      function spansFor(key) {
+        return Array.prototype.slice.call(
+          document.querySelectorAll('span.wr-mark[data-key="' + CSS.escape(key) + '"]')
+        );
+      }
+
+      /* 把 range 覆盖的文本逐节点包成 span.wr-mark */
+      function wrapRange(range, key, proseRoot) {
+        var walker = document.createTreeWalker(proseRoot, NodeFilter.SHOW_TEXT, {
+          acceptNode: function (node) {
+            if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+            if (node.parentElement.closest('.wr-mark, script, style')) return NodeFilter.FILTER_REJECT;
+            return range.intersectsNode(node) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+          }
+        });
+        var plan = [], n;
+        while ((n = walker.nextNode())) {
+          var s = 0, e = n.nodeValue.length;
+          if (n === range.startContainer) s = range.startOffset;
+          if (n === range.endContainer) e = range.endOffset;
+          if (s < e) plan.push({ node: n, s: s, e: e });
+        }
+        var spans = [];
+        plan.forEach(function (it) {
+          var target = it.node.splitText(it.s);
+          target.splitText(it.e - it.s);
+          var span = document.createElement('span');
+          span.className = 'wr-mark';
+          span.dataset.key = key;
+          target.parentNode.replaceChild(span, target);
+          span.appendChild(target);
+          spans.push(span);
+        });
+        return spans;
+      }
+
+      function proseOf(range) {
+        var c = range.commonAncestorContainer;
+        var el = c.nodeType === 1 ? c : c.parentElement;
+        return el && el.closest ? el.closest('.prose') : null;
+      }
+
+      function updateBadges(key) {
+        var entry = loadStore()[key];
+        var n = entry ? entry.comments.length : 0;
+        var spans = spansFor(key);
+        spans.forEach(function (sp, i) {
+          sp.classList.toggle('has-notes', n > 0);
+          var old = sp.querySelector('.wr-count');
+          if (old) old.remove();
+          if (n > 0 && i === spans.length - 1) {
+            var b = document.createElement('span');
+            b.className = 'wr-count';
+            b.textContent = n;
+            sp.appendChild(b);
+          }
+        });
+      }
+
+      function unwrapKey(key) {
+        spansFor(key).forEach(function (sp) {
+          var parent = sp.parentNode;
+          while (sp.firstChild) {
+            var ch = sp.firstChild;
+            if (ch.nodeType === 1 && ch.classList.contains('wr-count')) { ch.remove(); continue; }
+            parent.insertBefore(ch, sp);
+          }
+          parent.removeChild(sp);
+          parent.normalize();
+        });
+      }
+
+      function hidePop() { pop.classList.remove('show'); }
+      function closePanel() { panel.classList.remove('show'); currentKey = null; }
+
+      function addMark(range, withNote) {
+        var text = range.toString();
+        var key = norm(text);
+        if (!key) return;
+        var prose = proseOf(range);
+        if (!prose) return;
+        var store = loadStore();
+        if (!store[key]) {
+          store[key] = { text: text, comments: [] };
+          saveStore(store);
+        }
+        var spans = spansFor(key);
+        if (!spans.length) spans = wrapRange(range, key, prose);
+        updateBadges(key);
+        if (withNote) openPanel(key, spans[0]);
+        else toast('已划线');
+      }
+
+      /* 选区气泡 */
+      document.addEventListener('selectionchange', function () {
+        clearTimeout(selTimer);
+        selTimer = setTimeout(function () {
+          var sel = window.getSelection();
+          if (!sel.rangeCount || sel.isCollapsed) { hidePop(); return; }
+          var range = sel.getRangeAt(0);
+          if (!proseOf(range) || !norm(range.toString())) { hidePop(); return; }
+          pendingRange = range.cloneRange();
+          pop.classList.add('show');
+          var rect = range.getBoundingClientRect();
+          var pw = pop.offsetWidth;
+          var left = rect.left + window.scrollX + rect.width / 2 - pw / 2;
+          left = Math.max(window.scrollX + 8, Math.min(window.scrollX + window.innerWidth - pw - 8, left));
+          var top = rect.top + window.scrollY - 46;
+          if (top < window.scrollY + 64) top = rect.bottom + window.scrollY + 10;
+          pop.style.left = left + 'px';
+          pop.style.top = top + 'px';
+        }, 120);
+      });
+
+      pop.addEventListener('mousedown', function (e) { e.preventDefault(); });
+      pop.addEventListener('click', function (e) {
+        var btn = e.target.closest('button');
+        if (!btn || !pendingRange) return;
+        var range = pendingRange;
+        var act = btn.dataset.act;
+        if (act === 'copy') {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(range.toString()).then(
+              function () { toast('已复制'); },
+              function () { toast('复制失败'); }
+            );
+          } else { toast('复制失败'); }
+        } else {
+          addMark(range, act === 'note');
+          window.getSelection().removeAllRanges();
+        }
+        hidePop();
+      });
+
+      /* 点开已有划线 / 点击空白关闭面板 */
+      document.addEventListener('click', function (e) {
+        var sp = e.target.closest ? e.target.closest('span.wr-mark') : null;
+        if (sp) {
+          e.preventDefault();
+          openPanel(sp.dataset.key, sp);
+          return;
+        }
+        if (!e.target.closest('#wr-panel') && !e.target.closest('#wr-pop')) closePanel();
+      });
+
+      function openPanel(key, anchorEl) {
+        var entry = loadStore()[key];
+        if (!entry) return;
+        currentKey = key;
+        quoteEl.textContent = entry.text;
+        renderNotes(entry);
+        textInput.value = '';
+        panel.classList.add('show');
+        var anchor = anchorEl || spansFor(key)[0];
+        if (anchor) {
+          var rect = anchor.getBoundingClientRect();
+          var pw = panel.offsetWidth;
+          var left = rect.left + window.scrollX;
+          left = Math.max(window.scrollX + 8, Math.min(window.scrollX + window.innerWidth - pw - 8, left));
+          panel.style.left = left + 'px';
+          panel.style.top = (rect.bottom + window.scrollY + 10) + 'px';
+        }
+        textInput.focus();
+      }
+
+      function renderNotes(entry) {
+        notesEl.innerHTML = '';
+        if (!entry.comments.length) {
+          var p = document.createElement('p');
+          p.className = 'wr-empty';
+          p.textContent = '还没有想法，来写下第一条。';
+          notesEl.appendChild(p);
+          return;
+        }
+        entry.comments.forEach(function (c) {
+          var d = document.createElement('div');
+          d.className = 'wr-note';
+          var who = document.createElement('p');
+          who.className = 'who';
+          who.textContent = c.name || '匿名';
+          var body = document.createElement('p');
+          body.textContent = c.text;
+          d.appendChild(who);
+          d.appendChild(body);
+          notesEl.appendChild(d);
+        });
+      }
+
+      btnPublish.addEventListener('click', function () {
+        if (!currentKey) return;
+        var text = textInput.value.trim();
+        if (!text) { toast('先写点内容'); return; }
+        var store = loadStore();
+        var entry = store[currentKey];
+        if (!entry) { closePanel(); return; }
+        entry.comments.push({ name: nameInput.value.trim(), text: text, ts: Date.now() });
+        saveStore(store);
+        renderNotes(entry);
+        updateBadges(currentKey);
+        textInput.value = '';
+        toast('已发表');
+      });
+
+      btnUnmark.addEventListener('click', function () {
+        if (!currentKey) return;
+        var store = loadStore();
+        delete store[currentKey];
+        saveStore(store);
+        unwrapKey(currentKey);
+        closePanel();
+        toast('已删除划线');
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { hidePop(); closePanel(); }
+      });
+      window.addEventListener('scroll', hidePop, { passive: true });
+
+      /* 恢复历史划线：按文本搜回并重新包裹 */
+      function restore() {
+        var store = loadStore();
+        var proses = Array.prototype.slice.call(document.querySelectorAll('.prose'));
+        Object.keys(store).forEach(function (key) {
+          if (spansFor(key).length) return;
+          var text = store[key].text;
+          for (var pi = 0; pi < proses.length; pi++) {
+            var walker = document.createTreeWalker(proses[pi], NodeFilter.SHOW_TEXT, {
+              acceptNode: function (nd) {
+                if (!nd.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+                if (nd.parentElement.closest('.wr-mark, script, style')) return NodeFilter.FILTER_REJECT;
+                return NodeFilter.FILTER_ACCEPT;
+              }
+            });
+            var recs = [], combined = '', nd;
+            while ((nd = walker.nextNode())) {
+              recs.push({ node: nd, start: combined.length });
+              combined += nd.nodeValue;
+            }
+            var idx = combined.indexOf(text);
+            if (idx === -1) continue;
+            var endIdx = idx + text.length;
+            var sN = null, sO = 0, eN = null, eO = 0;
+            for (var i = 0; i < recs.length; i++) {
+              var nEnd = recs[i].start + recs[i].node.nodeValue.length;
+              if (sN === null && idx < nEnd) { sN = recs[i].node; sO = idx - recs[i].start; }
+              if (eN === null && endIdx <= nEnd) { eN = recs[i].node; eO = endIdx - recs[i].start; }
+            }
+            if (!sN || !eN) continue;
+            var range = document.createRange();
+            range.setStart(sN, sO);
+            range.setEnd(eN, eO);
+            wrapRange(range, key, proses[pi]);
+            updateBadges(key);
+            break;
+          }
+        });
+      }
+      restore();
+    })();
   </script>
 </body>
 </html>

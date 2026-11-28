@@ -318,6 +318,14 @@
     .act-desc { font-size: 0.86rem; color: var(--ink-soft); margin-top: 0.3rem; max-width: 44em; }
     .act-arrow { color: var(--ink-soft); transition: transform 0.25s, color 0.2s; }
     .act-row:hover .act-arrow { transform: translateX(4px); color: var(--accent); }
+    .act-row.has-thumb { grid-template-columns: 7.2rem minmax(0, 1fr) auto auto; }
+    .act-thumb {
+      width: 108px;
+      height: 64px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
 
     /* ── 个人作品：Bento 错落格 ──────────────────────────── */
     .bento {
@@ -601,6 +609,8 @@
       .bento { grid-template-columns: 1fr; }
       .b-lg, .b-wide, .b-tall { grid-column: auto; grid-row: auto; }
       .act-row { grid-template-columns: 5.2rem minmax(0, 1fr) auto; gap: 0.9rem; }
+      .act-row.has-thumb { grid-template-columns: 5.2rem minmax(0, 1fr) auto; }
+      .act-thumb { display: none; }
       .act-date { font-size: 0.95rem; }
       .creed .step:nth-child(n) { padding-left: 0; }
       .j-list::before { left: 13px; }
@@ -694,31 +704,31 @@
       </div>
       <div class="j-item">
         <div class="j-fig"><img src="images/timeline/bit.png" alt="北京理工大学校徽" loading="lazy" /></div>
-        <p class="j-year">大学</p>
+        <p class="j-year">2011–2015</p>
         <h3 class="j-place">北京理工大学</h3>
         <p class="j-desc prose">本科。在北京开始接触更大的世界，上课、读书、写代码。</p>
       </div>
       <div class="j-item">
         <div class="j-fig"><img src="images/timeline/cas.png" alt="中国科学院" loading="lazy" /></div>
-        <p class="j-year">硕士</p>
+        <p class="j-year">2015–2018</p>
         <h3 class="j-place">中国科学院</h3>
         <p class="j-desc prose">科研训练，计算机视觉方向。</p>
       </div>
       <div class="j-item">
         <div class="j-fig"><img src="images/timeline/megvii.png" alt="旷视科技" loading="lazy" style="mix-blend-mode: normal; border-radius: 10px;" /></div>
-        <p class="j-year">工作</p>
+        <p class="j-year">2018–2020</p>
         <h3 class="j-place">旷视科技</h3>
         <p class="j-desc prose">在研究院 SLAM 组做机器人和视觉导航定位研发。</p>
       </div>
       <div class="j-item">
         <div class="j-fig"><img src="images/timeline/microsoft.svg" alt="微软" loading="lazy" /></div>
-        <p class="j-year">工作</p>
+        <p class="j-year">2021–2024</p>
         <h3 class="j-place">微软</h3>
         <p class="j-desc prose">开发 Bing Maps 的搜索引擎。</p>
       </div>
       <div class="j-item">
         <div class="j-fig"><img src="images/timeline/westlake.svg" alt="西湖大学" loading="lazy" /></div>
-        <p class="j-year">研究</p>
+        <p class="j-year">2024</p>
         <h3 class="j-place">西湖大学</h3>
         <p class="j-desc prose">尝试用 AI 加速科研。</p>
       </div>
@@ -726,13 +736,13 @@
         <div class="j-fig">
           <svg viewBox="0 0 24 24" fill="none" stroke="#4E7A8A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg>
         </div>
-        <p class="j-year">Gap</p>
+        <p class="j-year">2025</p>
         <h3 class="j-place">数字游民 · 一年</h3>
         <p class="j-desc prose">一个人用一年时间把国内许多地方走了个遍，体验了自由职业是什么感觉，也更热爱这个地球。</p>
       </div>
       <div class="j-item">
         <div class="j-fig"><img src="images/timeline/concordia.png" alt="安远AI" loading="lazy" style="filter: invert(0.88);" /></div>
-        <p class="j-year">现在</p>
+        <p class="j-year">2026 至今</p>
         <h3 class="j-place">安远AI</h3>
         <p class="j-desc prose">落脚北京，做近几年最在意的事——AI 安全。</p>
       </div>
@@ -755,6 +765,15 @@
           <h3 class="act-title">入选 2026 AI OPC 100<span class="act-meta">荣誉 · 榜单</span></h3>
           <p class="act-desc">我的 OPC 探索之路。入选非凡产研发布的「2026 AI OPC 100」榜单。</p>
         </div>
+        <span class="act-arrow">→</span>
+      </a>
+      <a class="act-row has-thumb" href="https://docs.google.com/presentation/d/1QpUMTHD8ix9a38G21_Qs9rdTfAEEvEXwtxnas6Tue8I/edit" target="_blank" rel="noopener">
+        <span class="act-date">2026.11.17</span>
+        <div>
+          <h3 class="act-title">Monitoring the Frontier<span class="act-meta">讲座 · SASH · 新加坡</span></h3>
+          <p class="act-desc">在 Singapore AI Safety Hub 的客座分享：前沿 AI 风险监测平台、安远 AI 近期工作，以及中国的 AI 安全生态。</p>
+        </div>
+        <img class="act-thumb" src="images/activities/sash-talk.jpg" alt="SASH 分享现场" loading="lazy" />
         <span class="act-arrow">→</span>
       </a>
       <a class="act-row" href="tomorrows-crash.html">

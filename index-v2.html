@@ -318,14 +318,6 @@
     .act-desc { font-size: 0.86rem; color: var(--ink-soft); margin-top: 0.3rem; max-width: 44em; }
     .act-arrow { color: var(--ink-soft); transition: transform 0.25s, color 0.2s; }
     .act-row:hover .act-arrow { transform: translateX(4px); color: var(--accent); }
-    .act-row.has-thumb { grid-template-columns: 7.2rem minmax(0, 1fr) auto auto; }
-    .act-thumb {
-      width: 108px;
-      height: 64px;
-      object-fit: cover;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-    }
 
     /* ── 个人作品：Bento 错落格 ──────────────────────────── */
     .bento {
@@ -609,8 +601,6 @@
       .bento { grid-template-columns: 1fr; }
       .b-lg, .b-wide, .b-tall { grid-column: auto; grid-row: auto; }
       .act-row { grid-template-columns: 5.2rem minmax(0, 1fr) auto; gap: 0.9rem; }
-      .act-row.has-thumb { grid-template-columns: 5.2rem minmax(0, 1fr) auto; }
-      .act-thumb { display: none; }
       .act-date { font-size: 0.95rem; }
       .creed .step:nth-child(n) { padding-left: 0; }
       .j-list::before { left: 13px; }
@@ -767,13 +757,12 @@
         </div>
         <span class="act-arrow">→</span>
       </a>
-      <a class="act-row has-thumb" href="https://docs.google.com/presentation/d/1QpUMTHD8ix9a38G21_Qs9rdTfAEEvEXwtxnas6Tue8I/edit" target="_blank" rel="noopener">
+      <a class="act-row" href="https://docs.google.com/presentation/d/1QpUMTHD8ix9a38G21_Qs9rdTfAEEvEXwtxnas6Tue8I/edit" target="_blank" rel="noopener">
         <span class="act-date">2026.11.17</span>
         <div>
           <h3 class="act-title">Monitoring the Frontier<span class="act-meta">讲座 · SASH · 新加坡</span></h3>
           <p class="act-desc">在 Singapore AI Safety Hub 的客座分享：前沿 AI 风险监测平台、安远 AI 近期工作，以及中国的 AI 安全生态。</p>
         </div>
-        <img class="act-thumb" src="images/activities/sash-talk.jpg" alt="SASH 分享现场" loading="lazy" />
         <span class="act-arrow">→</span>
       </a>
       <a class="act-row" href="tomorrows-crash.html">
